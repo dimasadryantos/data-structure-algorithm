@@ -7,12 +7,12 @@ public class Main {
 
         int[] intArray = {20, 35, 15, 7, 55, 1, 14};
 
-        for (int lastUnsortedIndex = intArray.length - 1; lastUnsortedIndex > 0; lastUnsortedIndex--) {
+        for (int lastUnsortedIndex = 0;lastUnsortedIndex < intArray.length; lastUnsortedIndex++) {
 
-            for (int i = 0; i < lastUnsortedIndex; i++) {
+            for (int i = intArray.length -1; i > lastUnsortedIndex; i--) {
 
-                if (intArray[i] > intArray[i + 1]) {
-                    swap(intArray, i, i + 1);
+                if (intArray[i] > intArray[i - 1]) {
+                    swap(intArray, i, i - 1);
                 }
             }
         }
@@ -35,6 +35,6 @@ public class Main {
         array[j] = temp;
     }
 
-    //OUTPUT SHOULD BE : 1 7 14 15 20 35 55
+    //OUTPUT SHOULD BE :  55 35 20 15 14 7 1
 
 }
