@@ -3,7 +3,29 @@ package com.main;
 public class Main {
 
     public static void main(String[] args) {
-        insertionSortsAscending();
+    }
+
+
+    /**
+     * Shell sort is variation to optimise Insertion sort with reduce the shifting
+     */
+    private static void shellSort() {
+        int[] intArray = {20, 35, -15, 7, 55, 1, -22};
+        for (int gobs = intArray.length / 2; gobs > 0; gobs /= 2) {
+            for (int i = gobs; i < intArray.length; i++) {
+
+                int newElement = intArray[i];
+                int j = i;
+                while (j >= gobs && intArray[j - gobs] > newElement) {
+                    intArray[j] = intArray[j - gobs];
+                    j -= gobs;
+                }
+                intArray[j] = newElement;
+            }
+        }
+        for (int i = 0; i < intArray.length; i++) {
+            System.out.println(intArray[i]);
+        }
     }
 
 
