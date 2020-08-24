@@ -3,6 +3,136 @@ package com.main;
 public class Main {
 
     public static void main(String[] args) {
+
+    }
+
+    /**
+     * Merge Sort Recursive
+     * { 20, 35, -15, 7, 55, 1, -22 }
+     *
+     * @param input
+     * @param start
+     * @param end
+     */
+    public static void mergeSort(int[] input, int start, int end) {
+
+        if (end - start < 2) {
+            return;
+        }
+
+        int mid = (start + end) / 2;
+
+        mergeSort(input, start, mid);
+        mergeSort(input, mid, end);
+
+        merge(input, start, mid, end);
+    }
+
+    /**
+     * Merging from merge sort
+     * { 20, 35, -15, 7, 55, 1, -22 }
+     *
+     * @param input
+     * @param start
+     * @param mid
+     * @param end
+     */
+    public static void merge(int[] input, int start, int mid, int end) {
+
+        if (input[mid - 1] <= input[mid]) {
+            return;
+        }
+
+        int i = start;
+        int k = mid;
+        int tempIndex = 0;
+
+        int[] temp = new int[end - start];
+
+        while (i < mid && k < end) {
+            temp[tempIndex++] = input[i] <= input[k] ? input[i++] : input[k++];
+        }
+
+        System.arraycopy(input, i, input, start + tempIndex, mid - i);
+        System.arraycopy(temp, 0, input, start, tempIndex);
+    }
+
+
+    /**
+     * Basic arrayCopy()
+     */
+    public static void arrayCopy() {
+        int[] array1 = {1, 2, 3, 4, 5};
+        int[] array2 = {11, 12, 13, 14, 15};
+
+        System.arraycopy(array2, 0, array1, 0, 1);
+
+        for (int i = 0; i < array1.length; i++) {
+            System.out.println(array1[i]);
+        }
+    }
+
+
+    /**
+     * Recursive reduceByOne
+     *
+     * @param n
+     * @return
+     */
+    public static int reduceByOne(int n) {
+        if (n > 0) {
+            reduceByOne(n - 1);
+        }
+        System.out.println("Completed call " + n);
+        return n;
+    }
+
+    /**
+     * Recursive sumTwoNum
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    public static int sumTwoNum(int start, int end) {
+        if (end > start) {
+            return end + sumTwoNum(start, end - 1);
+        } else {
+            return end;
+        }
+    }
+
+
+    private static int recursiveSum(int number) {
+        if (number > 0) {
+            int result = number + recursiveSum(number - 1);
+            return result;
+        } else {
+            return 0;
+        }
+    }
+
+
+    private static int recursiveFactorial(int num) {
+        if (num == 0) {
+            return 1;
+        }
+        return num * recursiveFactorial(num - 1);
+    }
+
+    private static int iterativeFactorial(int num) {
+
+        if (num == 0) {
+            return 1;
+        }
+
+        int factorial = 1;
+        for (int i = 1; i <= num; i++) {
+            factorial *= i;
+            System.out.println(factorial);
+        }
+
+        return factorial;
     }
 
 
