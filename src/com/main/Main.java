@@ -3,8 +3,61 @@ package com.main;
 public class Main {
 
     public static void main(String[] args) {
-        int[] intArray1 = {20, 35, -15, 7, 55, 1, -22};
 
+    }
+
+    public static void radixSort(int[] input, int radix, int width) {
+        for (int i = 0; i < width; i++) {
+            radixSingleSort(input, i, radix);
+        }
+    }
+
+
+    public static void radixSingleSort(int[] input, int position, int radix) {
+
+        int numItems = input.length;
+        int[] countArray = new int[radix];
+
+        for (int value : input) {
+            countArray[getDigit(value, position, radix)]++;
+        }
+
+        for (int j = 1; j < radix; j++) {
+            countArray[j] += countArray[j - 1];
+        }
+
+        int[] temp = new int[numItems];
+
+        for (int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--) {
+            temp[--countArray[getDigit(input[tempIndex], position, radix)]] = input[tempIndex];
+        }
+
+        for (int tempIndex = 0; tempIndex < numItems; tempIndex++) {
+            input[tempIndex] = temp[tempIndex];
+        }
+
+    }
+
+    public static int getDigit(int value, int position, int radix) {
+        return (int) (value / Math.pow(radix, position) % radix);
+    }
+
+
+    public static void countingSort(int[] input, int min, int max) {
+        int[] countingArr = new int[max - min + 1];
+
+        for (int i = 0; i < input.length; i++) {
+            countingArr[input[i] - min]++;
+        }
+
+        int j = 0;
+
+        for (int i = min; i < max; i++) {
+            while (countingArr[i - min] > 0) {
+                input[j++] = i;
+                countingArr[i - min]--;
+            }
+        }
 
     }
 
