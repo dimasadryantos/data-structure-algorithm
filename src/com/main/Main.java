@@ -4,7 +4,29 @@ public class Main {
 
     public static void main(String[] args) {
 
+
     }
+
+
+    public static void bubbleSortString() {
+        String[] input = {"e", "b", "a", "d", "c"};
+        String temp;
+
+        for (int i = 0; i < input.length; i++) {
+            for (int j = i + 1; j < input.length; j++) {
+                if(input[i].compareTo(input[j]) > 0){
+                    temp = input[j];
+                    input[j] = input[i];
+                    input[i] = temp;
+                }
+            }
+        }
+
+        for (int k = 0; k < input.length; k++) {
+            System.out.print(" " + input[k]);
+        }
+    }
+
 
     public static void radixSort(int[] input, int radix, int width) {
         for (int i = 0; i < width; i++) {
