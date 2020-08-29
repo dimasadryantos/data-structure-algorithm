@@ -3,8 +3,7 @@ package com.main;
 public class Main {
 
     public static void main(String[] args) {
-
-
+        System.out.println(searchSmalestNum());
     }
 
 
@@ -14,7 +13,7 @@ public class Main {
 
         for (int i = 0; i < input.length; i++) {
             for (int j = i + 1; j < input.length; j++) {
-                if(input[i].compareTo(input[j]) > 0){
+                if (input[i].compareTo(input[j]) > 0) {
                     temp = input[j];
                     input[j] = input[i];
                     input[i] = temp;
@@ -308,6 +307,34 @@ public class Main {
             System.out.println(intArray[i]);
         }
     }
+
+
+    public static int searchBiggerNum() {
+        int[] input = {4, 2, 5, 3, 7, 9};
+        int largest = 0;
+        for (int i = input.length; i > 0; i--) {
+            for (int j = 1; j < i; j++) {
+                if (input[j] > input[largest]) {
+                    largest = j;
+                }
+            }
+        }
+        return input[largest];
+    }
+
+    public static int searchSmalestNum() {
+        int[] input = {8, 9, 6, 7, 1};
+        int smalest = 0;
+        for (int i = input.length-1; i > 0; i--) {
+            for (int j = 1; j <= i; j++) {
+                if (input[j] < input[smalest]) {
+                    smalest = j;
+                }
+            }
+        }
+        return input[smalest];
+    }
+
 
     /**
      * bubble sorting bigger to small
