@@ -3,10 +3,22 @@ package com.main;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(searchSmalestNum());
+
     }
 
 
+    public static void rotateArray(int[] input) {
+        int[] temp = {input[1], input[2], input[0]};
+        for (int i = 0; i < temp.length; i++) {
+            System.out.println(temp[i]);
+        }
+    }
+
+    /**
+     * using compareTo()=if value equal return 0,
+     * if value less than 0 the left is less than the other
+     * if value bigger than 0 the left is bigger than the other
+     */
     public static void bubbleSortString() {
         String[] input = {"e", "b", "a", "d", "c"};
         String temp;
@@ -325,7 +337,7 @@ public class Main {
     public static int searchSmalestNum() {
         int[] input = {8, 9, 6, 7, 1};
         int smalest = 0;
-        for (int i = input.length-1; i > 0; i--) {
+        for (int i = input.length - 1; i > 0; i--) {
             for (int j = 1; j <= i; j++) {
                 if (input[j] < input[smalest]) {
                     smalest = j;
