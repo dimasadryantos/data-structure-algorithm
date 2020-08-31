@@ -4,10 +4,88 @@ public class Main {
 
     public static void main(String[] args) {
 
+        String[] stringsArray = {"bcdef", "dbaqc", "abcde", "omadd", "bbbbb"};
+
+        radixSortStr(stringsArray, 26, 5);
+
+        for (int i = 0; i < stringsArray.length; i++) {
+            System.out.println(stringsArray[i]);
+        }
+
     }
+
+
+    public static void radixSort(int[] input, int radix, int width) {
+        for (int i = 0; i < width; i++) {
+            radixSingleSort(input, i, radix);
+        }
+    }
+
+
+    public static void radixSortStr(String[] input, int radix, int width) {
+        for (int i = width - 1; i >= 0; i--) {
+            radixSingleSortStr(input, i, radix);
+        }
+    }
+
+
+    public static void radixSingleSortStr(String[] input, int position, int radix) {
+        int numItems = input.length;
+        int[] countArray = new int[radix];
+
+        for (String value : input) {
+            countArray[getIndex(position, value)]++;
+        }
+
+        for (int j = 1; j < radix; j++) {
+            countArray[j] += countArray[j - 1];
+        }
+
+        String[] temp = new String[numItems];
+
+        for (int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--) {
+            temp[--countArray[getIndex(position, input[tempIndex])]] = input[tempIndex];
+        }
+
+        for (int tempIndex = 0; tempIndex < numItems; tempIndex++) {
+            input[tempIndex] = temp[tempIndex];
+        }
+
+    }
+
+    public static int getIndex(int position, String value) {
+        return value.charAt(position) - 'a';
+    }
+
+    public static void radixSingleSort(int[] input, int position, int radix) {
+
+        int numItems = input.length;
+        int[] countArray = new int[radix];
+
+        for (int value : input) {
+            countArray[getDigit(value, position, radix)]++;
+        }
+
+        for (int j = 1; j < radix; j++) {
+            countArray[j] += countArray[j - 1];
+        }
+
+        int[] temp = new int[numItems];
+
+        for (int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--) {
+            temp[--countArray[getDigit(input[tempIndex], position, radix)]] = input[tempIndex];
+        }
+
+        for (int tempIndex = 0; tempIndex < numItems; tempIndex++) {
+            input[tempIndex] = temp[tempIndex];
+        }
+
+    }
+
 
     /**
      * Challange 2 change inertion to recursive
+     *
      * @param input
      * @param numItems = input.length
      */
@@ -70,38 +148,6 @@ public class Main {
         }
     }
 
-
-    public static void radixSort(int[] input, int radix, int width) {
-        for (int i = 0; i < width; i++) {
-            radixSingleSort(input, i, radix);
-        }
-    }
-
-
-    public static void radixSingleSort(int[] input, int position, int radix) {
-
-        int numItems = input.length;
-        int[] countArray = new int[radix];
-
-        for (int value : input) {
-            countArray[getDigit(value, position, radix)]++;
-        }
-
-        for (int j = 1; j < radix; j++) {
-            countArray[j] += countArray[j - 1];
-        }
-
-        int[] temp = new int[numItems];
-
-        for (int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--) {
-            temp[--countArray[getDigit(input[tempIndex], position, radix)]] = input[tempIndex];
-        }
-
-        for (int tempIndex = 0; tempIndex < numItems; tempIndex++) {
-            input[tempIndex] = temp[tempIndex];
-        }
-
-    }
 
     public static int getDigit(int value, int position, int radix) {
         return (int) (value / Math.pow(radix, position) % radix);
