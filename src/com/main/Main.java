@@ -6,6 +6,38 @@ public class Main {
 
     }
 
+    /**
+     * Challange 2 change inertion to recursive
+     * @param input
+     * @param numItems = input.length
+     */
+    public static void recursiveInsertionSort(int[] input, int numItems) {
+
+        if (numItems < 2) {
+            return;
+        }
+
+        recursiveInsertionSort(input, numItems - 1);
+
+        int newElement = input[numItems - 1];
+
+        int i;
+
+        for (i = numItems - 1; i > 0 && input[i - 1] >= newElement; i--) {
+            input[i] = input[i - 1];
+        }
+
+        input[i] = newElement;
+
+        System.out.println("Result of call when numItems = " + numItems);
+        for (i = 0; i < input.length; i++) {
+            System.out.print(input[i]);
+            System.out.print(", ");
+        }
+        System.out.println("");
+        System.out.println("---------------------");
+    }
+
 
     public static void rotateArray(int[] input) {
         int[] temp = {input[1], input[2], input[0]};
