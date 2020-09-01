@@ -1,17 +1,55 @@
 package com.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
+    }
 
-        String[] stringsArray = {"bcdef", "dbaqc", "abcde", "omadd", "bbbbb"};
 
-        radixSortStr(stringsArray, 26, 5);
+    /**
+     * simple method for practice
+     * move char to front and back
+     * @param input
+     * @return
+     */
+    public static String moveChar(String input) {
+        char temp = input.charAt(input.length() - 1);
+        return temp + input + temp;
+    }
 
-        for (int i = 0; i < stringsArray.length; i++) {
-            System.out.println(stringsArray[i]);
+    public static void arrayListPractice() {
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList.add(new Employee("Jane", "Jones", 123));
+        employeeList.add(new Employee("John", "Doe", 4567));
+        employeeList.add(new Employee("Marry", "Smith", 22));
+        employeeList.add(new Employee("Mike", "Wilson", 3245));
+
+        employeeList.forEach(employee -> System.out.println(employee));
+        System.out.println(employeeList.get(1));
+        System.out.println(employeeList.isEmpty());
+
+        employeeList.set(1, new Employee("John", "Adams", 4568));
+        employeeList.forEach(employee -> System.out.println(employee));
+
+        System.out.println(employeeList.size());
+
+        employeeList.add(3, new Employee("John", "Doe", 4567));
+        employeeList.forEach(employee -> System.out.println(employee));
+
+        Employee[] employeeArray = employeeList.toArray(new Employee[employeeList.size()]);
+
+        for (Employee employee : employeeArray) {
+            System.out.println(employee);
         }
 
+        System.out.println(employeeList.contains(new Employee("Marry", "Smith", 22)));
+        System.out.println(employeeList.indexOf(new Employee("John", "Doe", 4567)));
+
+        employeeList.remove(2);
+        employeeList.forEach(employee -> System.out.println(employee));
     }
 
 
@@ -22,6 +60,14 @@ public class Main {
     }
 
 
+    /**
+     * input : {"bcdef", "dbaqc", "abcde", "omadd", "bbbbb"}
+     * radix= alphabet 26 width 5
+     *
+     * @param input
+     * @param radix
+     * @param width
+     */
     public static void radixSortStr(String[] input, int radix, int width) {
         for (int i = width - 1; i >= 0; i--) {
             radixSingleSortStr(input, i, radix);
@@ -53,6 +99,14 @@ public class Main {
 
     }
 
+    /**
+     * method to get index for count Arr
+     * a=97 ASCII A=65
+     *
+     * @param position
+     * @param value
+     * @return
+     */
     public static int getIndex(int position, String value) {
         return value.charAt(position) - 'a';
     }
