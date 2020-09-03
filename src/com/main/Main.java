@@ -6,12 +6,73 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+
+
+    }
+
+
+    public static void doublyLinkedList() {
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+
+        EmployeeLinkedList list = new EmployeeLinkedList();
+
+        list.addFront(janeJones);
+        list.addFront(johnDoe);
+        list.addFront(marrySmith);
+        list.addFront(mikeWilson);
+
+        list.printList();
+        System.out.print(list.getSize());
+
+        Employee billEnd = new Employee("Bill", "End", 78);
+        list.addToEnd(billEnd);
+
+        list.printList();
+        System.out.println(list.getSize());
+
+        list.removeFromFront();
+        list.printList();
+        System.out.println(list.getSize());
+
+
+        list.removeFromEnd();
+        list.printList();
+        System.out.println(list.getSize());
+    }
+
+
+    public static void singlyLinkedList() {
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+
+        EmployeeLinkedList list = new EmployeeLinkedList();
+
+        System.out.println(list.isEmpty());
+
+        list.addFront(janeJones);
+        list.addFront(johnDoe);
+        list.addFront(marrySmith);
+        list.addFront(mikeWilson);
+        System.out.print(list.getSize());
+
+
+        list.printList();
+
+        list.removeFromFront();
+        System.out.println(list.getSize());
+        list.printList();
     }
 
 
     /**
      * simple method for practice
      * move char to front and back
+     *
      * @param input
      * @return
      */
