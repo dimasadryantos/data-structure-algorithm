@@ -1,6 +1,8 @@
 package com.main;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
@@ -8,6 +10,104 @@ public class Main {
     public static void main(String[] args) {
 
 
+    }
+
+
+    /**
+     * Sorting integer values using singly LinkedList
+     */
+    public static void sortIntegerValues(){
+        Integer one = 1;
+        Integer two = 2;
+        Integer three = 3;
+        Integer four = 4;
+
+        IntegerLinkedList list = new IntegerLinkedList();
+        list.insertSorted(three);
+        list.printList();
+        list.insertSorted(two);
+        list.printList();
+        list.insertSorted(one);
+        list.printList();
+        list.insertSorted(four);
+        list.printList();
+    }
+
+
+    public static void addBefore(){
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+        Employee billEnd = new Employee("Bill", "End", 78);
+
+        EmployeeLinkedList list = new EmployeeLinkedList();
+
+        list.addFront(janeJones);
+        list.addFront(johnDoe);
+        list.addFront(marrySmith);
+        list.addFront(mikeWilson);
+
+        list.addBefore(billEnd, mikeWilson);
+        list.printList();
+    }
+
+    public static void LinkedListJDK() {
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+        Employee billEnd = new Employee("Bill", "End", 78);
+
+        LinkedList<Employee> list = new LinkedList<>();
+
+        list.addFirst(janeJones);
+        list.addFirst(johnDoe);
+        list.addFirst(marrySmith);
+        list.addFirst(mikeWilson);
+
+        Iterator iterator = list.iterator();
+
+        System.out.print("HEAD -> ");
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next());
+            System.out.print(" <=> ");
+        }
+        System.out.println(" NULL");
+
+       /* for (Employee employee : list) {
+            System.out.println(employee);
+        }*/
+
+        list.add(billEnd);
+        iterator = list.iterator();
+        System.out.print("HEAD -> ");
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next());
+            System.out.print(" <=> ");
+        }
+        System.out.println(" NULL");
+
+
+        list.add(billEnd);
+        list.removeFirst();
+        iterator = list.iterator();
+        System.out.print("HEAD -> ");
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next());
+            System.out.print(" <=> ");
+        }
+        System.out.println(" NULL");
+
+
+        list.removeLast();
+        iterator = list.iterator();
+        System.out.print("HEAD -> ");
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next());
+            System.out.print(" <=> ");
+        }
+        System.out.println(" NULL");
     }
 
 

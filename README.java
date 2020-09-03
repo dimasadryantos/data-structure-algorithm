@@ -1065,6 +1065,24 @@ list is not concrete data structure its an abstract data type ?
 				*if you want to work at the middle we have same problem with singly linked list,youre gonna have treverse
 				*if work on linked list you mainnly focus on front of the list (HEAD),or Double linked list at the tail of the list
 
+-Linked List JDK :
+	LinkedList is not Synchronise if you want to use LinkedList Instance from multiple threads,you will have to synchronise
+				the calls to any of LinkedList Methods
+
+				NOTES :
+				-LinkedList add method adds an item to the end of the list(it adds at the tail) or you can use addLast (same add item at the end/tail)
+				-If you want to add to the front use addFirst method
+				-If you call remove() it will remove the first
+
+				Important Point Here :
+				is that if you wanna use a Linkedlist in java,you can use LinkedList class as long as you don't mind the extra memory overhead
+				due to the next previous field
+				LinkedList at the jdk is data structure its not backed anything different with ArrayList its backed with array
+				if you're going to need lot of nodes and memory is tight,you might want to consider another type data structure
+
+		Another Type Of LinkedList called Circular LinkedList and this is a variation on the Singly LinkedList
+		and in this variation the last node doesn't point to NULL Instead ,it loops back and points to the head of the list
+		and One Advantage to this : is that you can traverse the entire list starting at any node
 
 New English Vocabulary :
 
@@ -1081,6 +1099,9 @@ New English Vocabulary :
 
 
 english teacher : https://www.italki.com/teacher/3245298#readmore
+
+
+Intellij hot key : https://www.jetbrains.com/help/rider/Keymaps_Comparison_Mac.html#top
 
 
 
