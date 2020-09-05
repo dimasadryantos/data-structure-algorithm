@@ -10,7 +10,31 @@ public class Main {
     public static void main(String[] args) {
 
 
+
+
+
+
     }
+
+    public static void stackWithLinkedList(){
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+        Employee billEnd = new Employee("Bill", "End", 78);
+
+        LinkedStack stack = new LinkedStack();
+        stack.push(janeJones);
+        stack.push(johnDoe);
+        stack.push(marrySmith);
+        stack.push(mikeWilson);
+        stack.push(billEnd);
+
+        System.out.println("POOP " + stack.pop());
+        System.out.println(stack.peek());
+        //stack.printStack();
+    }
+
 
     public static void stackWithArray() {
         ArrayStack stack = new ArrayStack(10);

@@ -1125,6 +1125,19 @@ Time Complexity :
 		we should use a class that implements the Deque interface
 		-Deque can back with Array but we have to worry about resize the array then better to use
 		 LinkedList because LinkedList implement Deques
+		-If we use the LinkedList directly as a stack,somebody might come along
+				perhaps a new developer,whos not familiar what we doing and start calling other method
+				like add,indexOf stuff like that and we don't want that happen
+				we want a class behave like a stack so you can only call push,pop and peek
+		-ListIterator : this iterator traverses the list from head to tail and LinkedList
+				implementation of stack the top item is always at the head
+		-Time Complexity pop,push and peek is 0(1) Constant
+
+Stacks Challange
+
+	-Whats Palindrome ? palindrome is string that reads the sameway backwards as it does forwards
+				for example "RaceCar" is palindrome (Bisa di baca di depan dbisa di baca di belakang)
+
 
 
 
