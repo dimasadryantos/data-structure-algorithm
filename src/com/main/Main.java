@@ -12,11 +12,37 @@ public class Main {
 
     }
 
+    public static void stackWithArray() {
+        ArrayStack stack = new ArrayStack(10);
+
+        stack.push(new Employee("Jane", "Jones", 123));
+        stack.push(new Employee("John", "Doe", 4567));
+        stack.push(new Employee("Marry", "Smith", 22));
+        stack.push(new Employee("Mike", "Wilson", 3245));
+        stack.push(new Employee("Bill", "End", 48));
+
+        // stack.printStack();
+
+        System.out.println(stack.peek());
+
+        System.out.println("POOP " + stack.pop());
+
+        System.out.println(stack.peek());
+    }
+
+
+    public static int[] makeLast(int[] input) {
+        int lengthInput = input.length;
+        int[] intArray = new int[2 * lengthInput];
+        intArray[intArray.length - 1] = input[lengthInput - 1];
+        return intArray;
+    }
+
 
     /**
      * Sorting integer values using singly LinkedList
      */
-    public static void sortIntegerValues(){
+    public static void sortIntegerValues() {
         Integer one = 1;
         Integer two = 2;
         Integer three = 3;
@@ -34,7 +60,7 @@ public class Main {
     }
 
 
-    public static void addBefore(){
+    public static void addBefore() {
         Employee janeJones = new Employee("Jane", "Jones", 123);
         Employee johnDoe = new Employee("John", "Doe", 4567);
         Employee marrySmith = new Employee("Marry", "Smith", 22);

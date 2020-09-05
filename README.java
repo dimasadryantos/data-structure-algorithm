@@ -1084,6 +1084,59 @@ list is not concrete data structure its an abstract data type ?
 		and in this variation the last node doesn't point to NULL Instead ,it loops back and points to the head of the list
 		and One Advantage to this : is that you can traverse the entire list starting at any node
 
+
+
+
+-Stack
+
+	Instead of dictating how we store the items stacks dictate what operations we can do on the items,
+		Stack is known as an abstract data type
+
+1.Stack Abstract Data Type
+2.LIFO ,last in firsy out
+3.Push - adds an item as the top item on the stack
+4.Pop - Removes the top item on the stack
+5.Peek - Gets the top item on the stack without popping it(We can get the items without remove it)
+6.Ideal backing data structure = LinkedList
+
+	The last item element that you add to a stack , is always first item that you can remove from the stack
+		and so thats known as LIFO (That means no Random Acces,Because you only ever allowed to removed last item)
+Time Complexity :
+1.O(1) for push pop and peek when using a linked list
+2.If you use an array,then push is O(n) ,becaused the array may have to be resized
+3.If you know maximum number of items that will ever be on the stack,an array can be good choice
+4.If memory tight array might be good choice
+5.Linked list is ideal
+
+-Implementing Stack with Array
+		-Arrays are great for random access,Do we need random access for stack ?
+		Well No! because we are only working with top item in the stack
+		-The other things about array,they are fixed size
+		they are not dynamic.
+		-So for using array for the back we are going to initialize size for the array
+		-If we try to push something on the stack when the array is full then
+		that obviously not going to work
+		-Remember Top Is alaways contains the index of the next available position
+		in the array
+
+
+-Stack in JDK
+ 		-in the documentation is saying that instead of using the stack class
+		we should use a class that implements the Deque interface
+		-Deque can back with Array but we have to worry about resize the array then better to use
+		 LinkedList because LinkedList implement Deques
+
+
+
+
+
+
+
+
+
+
+
+
 New English Vocabulary :
 
 1.Discrete = berlainan
