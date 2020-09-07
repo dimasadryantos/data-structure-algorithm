@@ -756,21 +756,6 @@ sebelah kiri akan ke temp array paling pertama ,karna itu ketika ada duplicate i
 
 
 
-
- =====Java Notes======
-
- when to use for loop and while loop?
-
- -you used use for loop when you know how many times the loop should run
- -if you want to break the loop based on condition other than number its time it runs you should use while loop
-
- -stack is memory to maintain method in app
- -stacks are lifo (last in Firts Out) Objects meaning that the last item that was added to the top of the stack is the first one to be removed
- from the stack
- -Characters are actualy are numeric values
- -ASCII a=97 b=98 ber urut sampai dengan Z , A=65 B=66  ber urut sampai Z
-
-
 ====System.copyArray====
 System.copyArray() method copies an array from the specified source array
 
@@ -1168,6 +1153,26 @@ english teacher : https://www.italki.com/teacher/3245298#readmore
 
 
 Intellij hot key : https://www.jetbrains.com/help/rider/Keymaps_Comparison_Mac.html#top
+
+
+=====Java Notes======
+
+when to use for loop and while loop?
+
+-you used use for loop when you know how many times the loop should run
+-if you want to break the loop based on condition other than number its time it runs you should use while loop
+
+-stack is memory to maintain method in app
+-stacks are lifo (last in Firts Out) Objects meaning that the last item that was added to the top of the stack is the first one to be removed
+from the stack
+-Characters are actualy are numeric values
+-ASCII a=97 b=98 ber urut sampai dengan Z , A=65 B=66  ber urut sampai Z
+-charAt() returns the character at the specified index in String
+ example :
+				String hello ="Hello";
+				char c=hello.charAt(0);
+				resutl : H
+
 
 
 
