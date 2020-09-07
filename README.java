@@ -1124,8 +1124,18 @@ Stacks Challange
 				for example "RaceCar" is palindrome (Bisa di baca di depan dbisa di baca di belakang)
 
 
+-Queues
+	Queues are abstract data type just like stacks,so they don't dicate you how to store
+		the data,but they do decribe the way that you can access the data
 
+		1.Queues ,Abstract data type
+		2.Queues , Fist In First Out
+		3.Queues , Add an also called ENQUEUE - ADD Item to the end of the queue
+		4.Queues , Remove also called DEQUEUE - Remove the item at the front of the queue
+		5.Queues , Peek get the item at the front of the queue, but don't remove it
 
+		Notes :
+		Just like stacks we use other data structures to implemenet them
 
 
 
