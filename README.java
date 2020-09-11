@@ -1140,8 +1140,119 @@ Stacks Challange
 
 
 
+-Queues Circular
+		What is the difference linear queue and circular queue ?
+		the main difference between linear queue and circular queue is that :
+		-Linear queue arranges data in sequential order one after the other
+		-Circular Queue arranges data similiar to circle by conecting the last element back to the first element
+
+Example :
+		Case we add two employee and then we remove one
+		we add one we remove one add one remove one, and we keep alternating like that
+		because in that case we never have more than two employees on the queue
+		and so if we've created a queue of length 10 the queue should never need to be resized
+		because we alaways have fewer employees,will that be the case ?
+
+		ketika kita melakukan case delete add di atas
+		memang hanya 2 employees saja yg di tampung di queue
+		namun ketika kita add baru namun length sudah di 4 maka employee baru akan
+		menambah length jadi 5 se hingga membutuh kan resize pada array
+		namun masih ada space ksong pada array yg di atas length 4, seperti 1,2,3
+		bayangkan jika array kita banyak maka akan men resize
+		solusi nya gunakan queue circle  seperti contoh di bawah
 
 
+	0.Jane
+	1.John
+	2.     (back)
+	3.mike (front)
+	4.bill
+
+		then copy like this :
+
+    0.Mike
+	1.Bill
+	2.Jane
+	3.John
+	4.     (Back)
+
+-Queues JDK
+
+	-ArrayBlockingQueue = this is bounded blocking queue does'nt resize the array, if thread tries to add an element
+		into this queue it will block until some other thread has come along taken an element out of the queue
+		oftern this type of queue is used in producer consumer scenario
+		Example :
+		-Message are being passed over network from a producer to consumer the producer or the sender adds message
+		to the queue and the consumer or reciever will remove messages to the queue
+		-If the producer,the sender tries to add message to queue and the queue was full its gonna block,until the reciever removed a message
+		from the queue
+	-Deque : Support insertion and removal at both end
+
+
+
+
+===============Hash Table
+		-Hash table is abstract data type like stack and queues
+
+		Hash Tables :
+		1.Abstract data type
+		2.Provide access to data using keys
+		3.Key doesn't have to be integer
+		4.Consist of key/value pairs-data types don't have to match
+		5.Optimized for retrieval(When you know the key)
+		6.Associative array is one type of hash table
+
+		Hashing
+		1.Maps keys of any data type to an Integer
+		2.Hash function map key to int
+		3.in java , hash function is Object.hashCode()
+		4.Collision occurs when more than one value has the same hashed value
+
+		Notes :
+		under the covers those keys are being converted to Integers
+		One common way of backing hash table to use an array
+		-to convert the keys to integers you hash the key and this is a process known as hashing
+		-now in java hash function is hash cove and the object class has a hash code method
+		-now it's possible that the hasing method may produce the same integer for more than one value
+				and when that happens,it's known as Collision
+
+		Load Factor
+		1.Tell us how full a hash table is
+		2.Load factor = # total items / capacity = size / capacity
+		3.Load factor use to decide when to resize the array backing tha hash table
+		4.Don't want load factor too low (lots of empty space)
+		5.Don't want load factor too high (will increase the likelihood of collisions)
+		6.Can play a role in determaining the time complexity for retrieval
+
+		Explaination :
+
+				-So lets say we are backing the hash table with an array the load factor will tell us how full the array is
+				and we can get that by dividing the number of items by the capacity which is essentially,the size over capacity
+				so if we had an array of 10 backing our hash table
+				and we have five employees currently in hash table
+				the load factor would be 0.5 so that tell us that our array is half full
+
+				-So load factor is used to decide , when to resize the array backing the hashtable (Array as example)
+
+				-we don't want load factor is too low because that means there's lots of empty space right
+				i mean ,if your load factor is point 1 it means that only 10% of our array is occupied
+
+				-but we don't want to be too high,because that will increase the likelihood collisions
+				if most of the array is full,and you keep adding items your going to get collisions eventualy
+				becasue you basically hasing the keys to a range of values
+
+
+		-Add to hash table backed by an array
+				1.Provide a key / value pair
+				2.Use Hash function to hash the key to an int value
+				3.Store the value at the hashed key value - this is the index into the array
+		-Retrieve a value from hash table
+				1.Provide the key
+				2.Use the same hash function to hash the key to an int value
+				3.Retrieve the value stored at the hashed keuy value
+
+-Hash Table Array Implementation
+				Hash table exist to provide speedy retrieval of data and we acomplish that by taking key
 
 
 

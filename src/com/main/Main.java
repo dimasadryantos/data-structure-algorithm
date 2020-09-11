@@ -1,24 +1,112 @@
 package com.main;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
-
-
-
     }
 
 
     /**
+     * Simple explanation of hashtable
+     */
+    public static void hashTable() {
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+        Employee billEnd = new Employee("Bill", "End", 78);
+
+
+        SimpleHashTable ht = new SimpleHashTable();
+
+        ht.put("Jones", janeJones);
+        ht.put("Doe", johnDoe);
+        ht.put("Wilson", mikeWilson);
+        ht.put("Smith", marrySmith);
+
+        // ht.printHashTable();
+
+        System.out.println("Retrieve key Wilson" + ht.get("Wilson"));
+    }
+
+    /**
+     * check String polindrom using stack and queue
+     *
+     * @param input
+     * @return
+     */
+    public static boolean checkPolindromStackQueue(String input) {
+        LinkedList<Character> stack = new LinkedList<Character>();
+        LinkedList<Character> queue = new LinkedList<Character>();
+        String lowerCase = input.toLowerCase();
+
+        for (int i = 0; i < lowerCase.length(); i++) {
+            char inputChar = lowerCase.charAt(i);
+            if (inputChar >= 'a' && inputChar <= 'z') {
+                queue.addLast(inputChar);
+                stack.push(inputChar);
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            if (!stack.pop().equals(queue.removeFirst())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public static void arrayQueueCircular() {
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+        Employee billEnd = new Employee("Bill", "End", 78);
+
+
+        ArrayQueueCircular queue = new ArrayQueueCircular(5);
+
+        queue.add(janeJones);
+        queue.add(johnDoe);
+        queue.remove();
+        queue.add(marrySmith);
+        queue.remove();
+        queue.add(mikeWilson);
+        queue.remove();
+        queue.add(billEnd);
+        queue.remove();
+        queue.add(janeJones);
+
+        queue.printQueue();
+
+
+        /*queue.add(janeJones);
+        queue.add(johnDoe);
+        queue.add(marrySmith);
+        queue.add(mikeWilson);
+        queue.add(billEnd);*/
+
+       /* queue.remove();
+        queue.remove();
+        queue.remove();
+        queue.remove();
+        queue.remove();
+*/
+
+        //  System.out.println(queue.peek());
+        queue.printQueue();
+
+
+    }
+
+    /**
      * this is Queues with array implementation
      */
-    public static void arrayQueue(){
+    public static void arrayQueue() {
         Employee janeJones = new Employee("Jane", "Jones", 123);
         Employee johnDoe = new Employee("John", "Doe", 4567);
         Employee marrySmith = new Employee("Marry", "Smith", 22);
