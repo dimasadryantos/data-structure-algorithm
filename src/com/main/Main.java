@@ -6,7 +6,43 @@ public class Main {
 
     public static void main(String[] args) {
 
+    }
 
+
+    public static void hashMapChallange2() {
+        LinkedList<Employee> employees = new LinkedList<>();
+        Map<Integer, Employee> employeeMap = new HashMap<>();
+
+        employees.add(new Employee("Jane", "Jones", 123));
+        employees.add(new Employee("John", "Doe", 5678));
+        employees.add(new Employee("Mike", "Wilson", 45));
+        employees.add(new Employee("Mary", "Smith", 5555));
+        employees.add(new Employee("John", "Doe", 5678));
+        employees.add(new Employee("Bill", "End", 3948));
+        employees.add(new Employee("Jane", "Jones", 123));
+
+        employees.forEach(e -> System.out.println(e));
+
+
+        ListIterator<Employee> iterator = employees.listIterator();
+        List<Employee> remove = new ArrayList<>();
+
+        while (iterator.hasNext()) {
+            Employee employee = iterator.next();
+            if (employeeMap.containsKey(employee.getId())) {
+                remove.add(employee);
+            } else {
+                employeeMap.put(employee.getId(), employee);
+            }
+        }
+
+        for (Employee employee : remove) {
+            employees.remove(employee);
+        }
+
+        System.out.println("=====================After Deleted==========================");
+
+        employees.forEach(e -> System.out.println(e));
     }
 
 
