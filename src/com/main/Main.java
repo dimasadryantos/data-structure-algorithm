@@ -6,6 +6,161 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+    }
+
+
+    public static void hashChallange1() {
+        int[] nums = new int[10];
+        int[] numsToAdd = {59382, 43, 6894, 500, 99, -58};
+
+        for (int i = 0; i < numsToAdd.length; i++) {
+            nums[hashChallange(numsToAdd[i])] = numsToAdd[i];
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            System.out.println(nums[i]);
+        }
+    }
+
+
+    public static int hashChallange(int values) {
+        return Math.abs(values % 10);
+    }
+
+    public static void bucketSort(int[] intArray) {
+        List<Integer>[] buckets = new List[10];
+
+        for (int i = 0; i < buckets.length; i++) {
+            buckets[i] = new ArrayList<Integer>();
+        }
+
+        for (int i = 0; i < intArray.length; i++) {
+            buckets[hash(intArray[i])].add(intArray[i]);
+        }
+
+        for (List bucket : buckets) {
+            Collections.sort(bucket);
+        }
+
+        int j = 0;
+        for (int i = 0; i < buckets.length; i++) {
+            for (int value : buckets[i]) {
+                intArray[j++] = value;
+            }
+        }
+
+
+        //main method
+        int[] intArray1 = {54, 46, 83, 66, 95, 92, 43};
+
+        bucketSort(intArray1);
+
+        for (int i = 0; i < intArray1.length; i++) {
+            System.out.println(intArray1[i]);
+        }
+
+    }
+
+
+    public static int hash(int input) {
+        return input / 10;
+    }
+
+
+    /**
+     * hashMap implementation
+     */
+    public static void mapJDK() {
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+
+        Map<String, Employee> hashMap = new HashMap<String, Employee>();
+
+        StringBuilder str = new StringBuilder();
+        hashMap.put("Jones", janeJones);
+        hashMap.put("Doe", johnDoe);
+        String str1 = hashMap.get("Jones").toString();
+
+
+        //Employee employee = hashMap.put("Doe", mikeWilson);
+
+        hashMap.putIfAbsent("Doe", mikeWilson);
+
+        System.out.println(hashMap.getOrDefault("annisa", marrySmith));
+
+        System.out.println(hashMap.remove("Doe"));
+
+        // System.out.println(employee);
+        /*Iterator iterator = hashMap.values().iterator();
+
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }*/
+
+        /*System.out.println("Key= " + hashMap.containsKey("Jones"));
+        System.out.println(hashMap.containsValue(janeJones));*/
+
+        hashMap.forEach((k, v) -> System.out.println("Key = " + k + " , Employee = " + v));
+    }
+
+
+    public static void chaining() {
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+
+        ChainHashTable ht = new ChainHashTable();
+
+        ht.put("Jones", janeJones);
+        ht.put("Doe", johnDoe);
+        ht.put("Wilson", mikeWilson);
+        ht.put("Smith", marrySmith);
+
+        ht.printHashTable();
+
+       /*  System.out.println("Retrieve key smith "+ht.get("Smith"));
+         System.out.println("=====================================");
+
+         ht.remove("Doe");
+         ht.remove("Jones");
+         ht.printHashTable();
+        System.out.println("Retrieve key smith "+ht.get("Smith"));*/
+    }
+
+
+    /**
+     * Implementation linear Probing
+     */
+    public static void linearProbing() {
+        Employee janeJones = new Employee("Jane", "Jones", 123);
+        Employee johnDoe = new Employee("John", "Doe", 4567);
+        Employee marrySmith = new Employee("Marry", "Smith", 22);
+        Employee mikeWilson = new Employee("Mike", "Wilson", 3245);
+        Employee billEnd = new Employee("Bill", "End", 78);
+
+
+        SimpleHashTable ht = new SimpleHashTable();
+
+        ht.put("Jones", janeJones);
+        ht.put("Doe", johnDoe);
+        ht.put("Wilson", mikeWilson);
+        ht.put("Smith", marrySmith);
+
+        ht.printHashTable();
+        System.out.println("Retrieve key Smith" + ht.get("Smith"));
+
+        ht.remove("Wilson");
+        ht.remove("Jones");
+
+        System.out.println("----------------------------");
+        ht.printHashTable();
+        System.out.println("Retrieve key Smith" + ht.get("Smith"));
+        System.out.println("Retrieve key Smith" + ht.get("Doe"));
     }
 
 
@@ -27,9 +182,9 @@ public class Main {
         ht.put("Wilson", mikeWilson);
         ht.put("Smith", marrySmith);
 
-        // ht.printHashTable();
+        ht.printHashTable();
 
-        System.out.println("Retrieve key Wilson" + ht.get("Wilson"));
+        //System.out.println("Retrieve key Wilson" + ht.get("Wilson"));
     }
 
     /**

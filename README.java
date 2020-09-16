@@ -1254,6 +1254,162 @@ Example :
 -Hash Table Array Implementation
 				Hash table exist to provide speedy retrieval of data and we acomplish that by taking key
 
+-Strategy to handle collisions
+	1.the first one is called open addressing so with open addressing what we do , is if we put an employee into the table
+		and we found out that there's already an employee at the slot where we wanna put the new employee
+		then we look for another position in the array
+
+		we are going to use whats called Linear Probing with Linear probing when we discover that a position
+		for a hash key value that already occupied we increment hash value by one and then we check
+		the resulting index
+
+		so its called Linear Probing because each time we increment the index we're doing it in a linear fashion
+		and every increment of the index is called probe
+
+		Probing works if the position at the hashed value for the key
+		is already occupied you keep incremental the index until you find empty spot
+
+		and as you can see handling collisions,complicated things and it also affects performance
+		if we have to use probing if there is a collisions then adding an item into
+		the hash table is no longer constant time the worst case is linear,because its
+		posible that we might have to search the entire table before we hit the last empty spot
+
+Notes Linear Probing :
+
+		When we use linear probing which mean we're incrementing the index we are checking by one
+		we always end up putting the item in the first available position after the hashedkey value
+		so lets say our hashkey value is five and we find out five is full
+		so increment five to one and we got six if six full seven increment to eight and eight is
+		empty "If any of those position five,six," +
+		"seven had been empty then we would have put the employee into that position we would't have made" +
+		"into position eight" so when we use linear probing we always end up putting the item in the first
+		available position, so when get the item back so providing the key we are going tu use linear Probing
+		again if we hit null value before we have found the item we are looking for
+		we can be certain that the item is not in the table
+
+
+-One variation is quadratic probing when you use quadratic probing instead
+		of incrementing the hashed value by one , you increment it by some
+		constant squared
+		for example you start out by incrementing the hash value by one squared
+		and then you increment it by two squared and then three squared et cetera.
+
+=======Chaining
+		we looked second strategy for dealing with collisions
+		when we use chaining instead of storing the value directly
+		into the array , each array position contains a LinkedList
+		and so for our example, instead of storing the employees or stored Employee Instances
+		we would store LinkedList and if we go add an Employee and the key that we use
+		has hashed value that collides with the hashed value for another key well thats ok
+		because at that position in the array theres a linked list and linked list don't have
+		any boundaries they're  not bounded by size and we can just go ahead and add that
+		second employee into the linked list at that array position so we never have the concept
+		of oops ,sorry this array position is already filled and so we don't  have to worry
+		about incrementing indices and all that stuff
+
+		now of cource the drawback is there linkedlist at every position and so when you go to retrieve
+		or delete an item you have to search the linkedList to find the item with the key
+		you're interested in
+
+		but if you have good hashing function and you have good load factor then these linkedlist
+		will typically be short
+
+		Using linkedlist makes the implementation easier because there's always room at the hashed
+		location,but does't mean that chaining is better than Linear Probing
+		in fact on average ,linear probing perform better than chaining does
+		it just means that the implementation is little bit simpler
+
+
+		so what do you think the time complexcity ?
+		in the worst case all the instances would have the same hashed value
+		and so lets say you had this really bad hashing function and it didnt matter
+		what you gave it every single key hashed the value three that means every single item
+		is going to be put in linkedlist at position three and so you want to retrieve something
+		you potentially have to traverse every single item in hash table and so
+		the worst case of chaining is linear time when you go to retrieve something but the key here
+		no puh itending is the hashing algorithm
+
+=======Hashtable and the JDK
+		Explanation Map: now it says here a map cannot contain duplicate keys
+		each key can map at most to one value now what this means is , it does not mean that there cannot
+		be collisions,it's not talking about the hash values in our case, if we were to add
+		an employee with key smith and then we added another employee and we also use the key smith
+		the first employee that we added would be replaced by the second employee
+		and hash table did not handle that kind of collisions
+		-But our implementations, the two that we did for linear probing and chaining in the simple one
+		they are not robust implementations , i mean if you were going to use those hashtable in real world
+		application , then we would have a lot more work a lot to do i mean we are not handling resizing
+		or anything like that,that's what this mean here "a map cannot contain duplicate keys"
+
+		Explanation Hashmap :
+		Hashmap implementation permits null values in the null key ? it says that is provides constant time
+		for the basic operations.
+		if it has to resize the array and do rehashing then you are not gonna get constant time
+		the initial capacity and the load factor in Hashmap ,you can set the load factor you want ?
+		that means when the load factor is exceeded the hashtable is resized the default 75
+		the implementations is not synchronised ,what is synchronised? so if you wanna use for multiple threads
+		they suggest that you wrap it using the collections.synchronizedMap method
+
+		-putIfAbsent method = the putIfAbsent method will only insert new value if the value before has not been used
+		-getOrDefault = method that lets you specify default value ,getOrdefault method returns if its null return this value
+
+		-One of the Subclass of hashmap is linkedHashMap = Hash table and linked list implementation of the map interface
+			now this does not mean that this implementation is backed by linkedlist
+		-hashmap is array implementation
+		-HashTable ,this is different with hashMap first of all you can't add null key or values hashMap allow null key and null
+		values,so if you use hashtable everything got to be non null
+		the second different is this is scynchronised
+
+
+=======Bucket Sort
+		Bucket Sort :
+		1.Uses Hashing
+		2.Make Assumptions about the data,like radix and counting sort
+		3.Because it makes assumptions ,can sort in O(n) time
+		4.Perform best when hashed values of items being sorted are evenly distributed, so there are not many collisions
+
+		so when it comes in bucket sort we are hashing the values that we are sorting so there is no concept of keys and values
+		the important thing when it becomes to bucket sort is the values that we are sorting are hashed
+		how does it work?
+		1.Distribute the items into buckets based on their hashed values(scatterring phase)
+		2.Sort the item in each bucket
+		3.Merge the buckets - can just concatenate them (gathering phase)
+
+
+		A generalization of counting sort ,because if you remember counting sort we went through the values and then we distributed the values
+		into the counting array and then in the final phase we just traversed the counting array and for ach value we copied how many we had back
+		into the original array
+
+		and so bucket sort is doing something similiar execept its distributing the items based on their hashed values and then it has to sort
+		the items each bucket but then it goes over the buckets and copies them back into original array
+
+		one important thing here :
+
+		the values in the bucket x must be greater than the values in bucket x-1 and less than the values in bucket X +1
+
+		this means that the hash function we use must meet this requirement
+
+		===Bucket Sort Time Complexity
+		1.Not in place Algorithm
+		2.Stability will depend sort algorithm use to sort buckets - ideally,you want stable sort
+		3.To achive O(n) must have only one item per bucket
+		4.Insertion Sort is often used to sort the buckets,because it is fast when the number of item is small
+
+
+		=====Bucket sort=====
+		1.Create Bucket
+		2.Hashed the value scattering phase
+		3.Sort
+		4.Copy value
+
+
+		Remember to this to work values in buckets in that are in lower position in the array have to be smaller than values in higher in bucket position
+		in the array
+
+
+
+
+
 
 
 New English Vocabulary :
@@ -1268,6 +1424,8 @@ New English Vocabulary :
 8.Occupy = Menempati
 9.Contiguouse = Berdekatan
 10.Dictate = Mendikte
+11.Oblivious = Terlupa
+12.Examine = Memeriksa,Menguji,Membahas
 
 
 english teacher : https://www.italki.com/teacher/3245298#readmore
