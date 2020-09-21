@@ -1408,8 +1408,178 @@ Notes Linear Probing :
 
 
 
+==========Search Algorithm=========
+		Well search algorithm will find a value in a data structure
+		you can use them to search linked list and other data structure
+		the is one search algorithm that perform really well and so we are going to
+		look at lenear search algorithm and then we are going to look at binary search algorithm
+
+		Linear search = Incrementing index by one (you're basically just incrementing the index by one in lenear fashion you go from the beginning
+		of the array to the end of the array and you're gonna either find the item you're looking for or you're going to hit the end of array)
+
+		Time Complexity O(n),the worst case is that we are going to be looking for the very last item in the array
+		which means we have to traverse the entire array which means it's going to take us in steps to get to that last item
 
 
+===================Binary Search=================
+		Binary search is pretty much the standard search algorithm but and there is a huge but, this is really important
+		it Requires that data that it's searching be sorted ,and so you can only use Binary Search Algorithm on data has been sorted
+		so if you want to use a search in array and an array has not been sorted then you're gonna have to sort this array first
+		then you can use any of the sort algorithms that we have looked at the sort array and then you run the binary search
+		on the sorted array.
+
+		and that goes for any data structure,i mean if you wanna use Binary Search on linkedList then you have to sort
+		the values in that link list.
+
+		now if you know your application is going to be using binary search to do alot of searches
+		then what you might consider doing is inserting items into whatever data structure you are using
+		so that they are always in sorted order,so rather than sorting the array or whatever you are using
+		every single time you wanna run a binary search if  you know you are going to be lot of searches
+		then it might be better to just always make sure that the values in the data structure are always sorted
+
+		ok what is Binary Search ?
+		Well the way it works and we will use an array as example is that it chooses the element in the midle of the array
+		and it compares it against the search value,Now if the element in the middle of the the array equals we are done right?
+		because we found the value we looking for !
+		now if it does not equal the search value then we have more work to do!
+		So if the element is greater than the search value then we are gonna search the left half of the array
+		and the reason for that is that the values are sorted
+		and lets say the middle of the array is at index five and so we compare the value against the elemented
+		index five well if that element is greater than search value then we know that the value we are searching for
+		has to be in indeces zero to four,because the data is sorted
+		and so the value at index five is greater than the value we are searching for that means that the values
+		from indexes six up to the end of the array are gonna be greater than the one we are looking for
+		so we need to search the left half of the array ,that where the values that are less than the middle element are located
+		on the other hand if the middle element is less than the value that we are looking for then we wanna search the right half
+		of the array
+
+		and so thats binary search it basically starts out by dividing the array down the middle and then it always
+		looks at the middle element and then depending on what the comparison result is less than greater than or equal to
+		we have either finished or we are then only gonna focus on the right side or left side and then we run some repeat
+		so middle element , and then only left side
+
+		Conclusion :
+		1.At Some point there will be only one element in partition you are checking,but it does not have to get that point
+		2.Can be implemented recursively
+		3.O(log n) keep dividing the array in half
+
+========================Trees
+		-now some people say trees are data structure and others say they are abstract data types
+		-Trees dictate how organise the data
+		-Unlike Arrays,LinkedList,stack and queues which are linear data structures trees are hierarhical data structre
+		-top most node is called root of the tree
+		-the elements that are directly un-der an element are called its children
+		-the elements with no children are called leaves
+
+		what is a tree ?
+		well a tree is a hierarchical data structure
+		every circle in the tree called a Node
+		node can have children
+		each node can have one and only one parent
+		there is special node in every tree called the root (the root Node does not have a parent)
+		every tree can have one and only root node
+
+		why tree ?
+		trees are ideal when things can contain other things
+		-when you have a situation where items can contain other items or there is hierarchical relationship
+		such that items can descend from other items trees are a good data structure to use
+		-a leaf node has no children
+		-if you have a tree with only one node in it ,its called singleton tree and of course in that case
+		the only node would be the root
+		-the arrow pointing to the child called Edge
+		-A Path is the sequence of nodes required to go from one node to another
+		-One important characteristic of trees is that you can not have cyclic paths
+		and so we can not have a path the crosses a node more than ones
+		-Now the depth of a node is the number of edges from the node to the root
+		and so the root will always have a depth of zero because there are no edges on the path from the root to the root obviously
+		-the height of node is the number of edges on the longest path from the node to a leaf
+		-so when we figuring out Depth we start at the node and we work up to the root,and we say how many edges does it take
+		-but when we talking about the height ,we are looking at what is the longest path from the node down to e leaf
+		-depth calculating up the tree and counting the number of edges to the root
+		-height we start at the node try figure out how many child (leaf)
+
+		example of tree
+		-java class extend
+		-root file on the computer
+
+========Binary Tree ===========
+	So a Binary Tree is a tree in which every node has zero,one or two children and thats why its called binary tree
+		because the maximum number of children a node can have it two
+
+		-Binary tree is complete if every level execept the last level,has two children (Complete tree)
+		-Full binary tree is complate tree as well but with full binary tree every node other than the leaves has to have two children
+
+		* Binary Search Tree *
+		1.Can perform insertions,deletions and retrievals in O(logn) Time
+		2.The left child always has a smaller value than its parent
+		3.The Right child always has a larger value than its parent
+		4.This means everyhitng to the left of the root is less than the value of the root
+			and everything to the right of the root is greater than the value of the root
+		5.Because of that we can do binary search
+
+		How about duplicate values in binary Search tree?
+		-well there are a couple of approaches to this,some implementations just say they are not allowed
+		-if you want to allow them one way to handle them is to always store duplicates either in the left subtree
+		or the right subtree you have to choose one and stick with it!
+		-a third approach is to have counter with each node ? and so rather than adding a separate node for duplicate value
+
+		how would we build this tree?
+		what insertion did we do to get this tree?
+		now the order in which you insert the nodes is gonna influence how the tree ultimately looks
+
+		important characteristic of to note for binary tree is you can get minimun value in the tree
+		just by following the left edges
+		if you want the maximum edges you do the same thing with the edges on the right
+
+		ideally when you building binary search tree you try to keep the tree as balanced as posible
+		that means that the heights of the left subtree and the right subtree do not difference by much
+
+		AVL Trees ?
+		red-black Trees ?
+
+		to build a binary tree we are going to need to insert nodes
+		and the we are gonna do it :
+		if you come to insert a node if the tree is empty then the node
+		becomes the root and we are done, if the tree is not empty
+		we gonna compare the value we are inserting agains the root node
+		if its less than the root node we are going to go to the left
+		if its greater than the root node we are going to the right
+
+	=====	traversal tree
+		-Level - visit node on each level
+		-Pre-order - visit the root of every sub tree first
+		-Post-Order - visit the root of every sub tree last
+		-In-Order - visit left child then root then right child
+
+
+		-Level Traversal(this not used very often) start to level zero and then level one we move from left to right
+		and then we go to level two and we move from left to right and we go to three
+		and we move from left to right
+
+		-Pre Order Traversal we always visit the root of a subtree first
+		and then go to child from the left if there is no child go back to root last visited and go visit to the right (always start from the smallest)
+
+		-in Order Traversal we completely visit the left side and start from the bottom left (smalest value) left child comes first
+		in order data sorted
+
+		-post order in post order the root goes last and so you visit the entire left subtree for a node and then the entire right sub tree for the node
+
+
+
+
+
+
+
+
+
+
+Interview Review from the internet (Shopee)
+		https://forthright48.com/interview-with-shopee-garena/
+		https://www.glassdoor.sg/Interview/Shopee-Interview-Questions-E1263091.htm?filter.jobTitleExact=Software+Engineer%2C+Backend
+		SEO : interview software engineer at shopee
+
+		white board interview use : https://codebunk.com/b/7661100151143/
+		https://beginnersbook.com/2017/09/java-program-to-reverse-words-in-a-string/#:~:text=Example%3A%20Program%20to%20reverse%20every,using%20a%20reverse%20for%20loop.
 
 
 New English Vocabulary :
@@ -1426,6 +1596,9 @@ New English Vocabulary :
 10.Dictate = Mendikte
 11.Oblivious = Terlupa
 12.Examine = Memeriksa,Menguji,Membahas
+13.Descend = Turun,Menuruni
+
+
 
 
 english teacher : https://www.italki.com/teacher/3245298#readmore
