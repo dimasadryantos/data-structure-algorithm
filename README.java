@@ -1564,6 +1564,8 @@ Notes Linear Probing :
 
 		-post order in post order the root goes last and so you visit the entire left subtree for a node and then the entire right sub tree for the node
 
+		-so to get the min once again we start at the root and we travel all the way down the left edges if this node does not have left child
+		then we have found the minimum value
 
 
 
