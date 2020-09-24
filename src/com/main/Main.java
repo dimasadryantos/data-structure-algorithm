@@ -6,29 +6,73 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Heap heap = new Heap(10);
+
+        heap.insert(80);
+        heap.insert(75);
+        heap.insert(60);
+        heap.insert(68);
+        heap.insert(55);
+        heap.insert(40);
+        heap.insert(52);
+        heap.insert(67);
+
+        heap.printHeap();
+
+        heap.delete(1);
+        heap.printHeap();
+
+        System.out.println(heap.peek());
+
+
+    }
+
+
+    public static void binaryTree() {
         Tree tree = new Tree();
 
         tree.insert(25);
         tree.insert(20);
         tree.insert(15);
         tree.insert(27);
+        tree.insert(28);
         tree.insert(30);
         tree.insert(29);
         tree.insert(26);
         tree.insert(22);
         tree.insert(32);
+        tree.insert(17);
 
-       /*tree.traverseInOrder();
 
+        tree.traverseInOrder();
         System.out.println();
 
-        System.out.println(tree.get(22));
-        System.out.println(tree.get(32));*/
+        tree.delete(25);
+        tree.traverseInOrder();
+        System.out.println();
+
+       /* System.out.println(tree.get(22));
+        System.out.println(tree.get(32));
 
         System.out.println(tree.min());
-        System.out.println(tree.max());
+        System.out.println(tree.max());*/
+    }
 
 
+    public static String subsTest(String input) {
+        String subbed = input.substring(0, 5);
+        return subbed;
+    }
+
+
+    private static String front22(String str) {
+        int take = 2;
+
+        if (take > str.length()) {
+            take = str.length();
+        }
+        String front = str.substring(0, take);
+        return front + str + front;
     }
 
 
@@ -1220,6 +1264,24 @@ public class Main {
         for (int i = 0; i < intArray.length; i++) {
             System.out.print(" " + intArray[i]);
         }
+    }
+
+
+    public static void removeDuplicate() {
+        int[] intArray = {1, 1, 2};
+        // int count = 0;
+
+        for (int j = 0; j <= intArray.length - 1; j++) {
+            System.out.println(intArray[j]);
+         /*   for (int k = j + 1; k < intArray.length; k++) {
+                if (j != k && intArray[j] == intArray[k]) {
+                    count++;
+                }
+            }*/
+
+        }
+
+
     }
 
     private static void selectionShortAscending() {

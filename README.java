@@ -1569,8 +1569,174 @@ Notes Linear Probing :
 
 
 
+		======Binary Tree Delete ==========
+		Delete
+		1.Node is a leaf
+		2.Node Has one child
+		3.Node has two children
+
+		-The first case will be really easy,if a node does not have any children and we wanna delete it we can just remove it
+		from the tree we have no children to worry about.
+		-The Second case,when there is one child,if a node only has one child and we delete it,the child
+		basically replaces the node we are deleting
+		-The Third case is complex :
+			*Delete Node with Two Children
+		1.Need to figure out what the replacement node will be
+		2.Want minimal disruption to the existing tree structure
+		3.Can take the replacement node from the deleted nodes left subtree or right subtree
+		4.If taking it from the left subtreee,we have to take the largest value in the left subtree
+		5.If taking it from the right subtree,we have to take the smalest value in the right subtree
+		6.choose one and stick to it
+
+		Example if we wanna delete 20(parent) and then we are gonna select a node from its subtree and put
+		that node in place 20 noted that we want look for the largest subtree(left) to replace 20
+
+		=================Trees and JDK=====================
+		-Tree map class based Red black tree based NaivAbleMap implementation they are self balancing tree
+		and so what they do is,after every insertion or deletion they check the tree how balance it is
+		now a Red Black Tree Does not perfectly balance the tree but its good enough
+
+		this implementation provides guaranteed log(n) cost for the containsKey,get,put and remove and that because
+		a Red Black Tree is Binary Search Tree and so as we know with binary search tree
+		as long as they are not too out of balance you can do insert ,deletes and retrievals in all a log n time
+		-this is not synchronise so if you wanted to use it for multiple threads,they suggest that you wrap this class
+		by calling the collection.synchronizedMapMethod
+
+		====Tree set====
+		tree set basicaly a set just means that the data structure cannot contain duplicate element
+		Tree set Abstract Data Type
 
 
+		====================Heap==========================
+		A heap is special tree-Based data structure in which the tree is a complete binary tree
+
+		Heaps :
+
+		1.A complete binary tree
+		2.must satisfy the heap property
+		3.Max heap : Every parent is greater than or equal to its children
+		4.Min Heap : Every parent is less than or equal to its children
+
+
+		Explaination :
+
+		for binary tree every node in the tree can have zero one or two children and it has to be complete tree for heap
+		requirement.
+
+		-Because of the heap property the maximum or minimum value will always be at the root
+		of the tree and thats why heap exist
+
+		-complete trees that satisfy the heap property its because the maximum value in the case of max heap
+		or the minimum value in the case of a min heap will always be at the root and so you can
+		get the minimum or maximum value in constant time,because accesing the root is constant time operation
+
+		-now when we insert a node into a tree we generally add it to the bottom level
+		because as i have said when you are building a tree you start at the top and then you move to the next level
+		and add notes left to right ,and so we add a node to an already existing tree we add it at the first available spot at bottom level
+		but of course onec we have done that the tree might no longer meet the heap property ,and so we have to fix the tree
+		and thats a process known as heapify
+
+		No required ordering between siblings ?
+		so when you have nodes at the same level they dont have to be in ascending or descending order
+
+		the important relationship when it comes to heaps is the relative values between parent and children
+		in a max heap the parent has to be greater or equal to its children
+		in min heao the parent has to be smaller or equal to its children
+
+
+
+		Heaps =
+		1.A binary heap must be a complete tree
+		2.Children are added at each level from left to right
+		3.usually implemented as arrays
+		4.The maximum or minimum value will always be at the root of the tree - (The advantage of using heap)
+		5.Heapify: process of converting a binary tree into heap -
+		this often has to be done after an insertion or deletion
+		6.No required ordering between siblings
+
+
+		============Heap Array===================
+		How to store heap as an array?
+
+		1.We can store heap as binary array
+		2.We put the root at array 0
+		3.we then traverse each level from left to right and so the left child of the root would go into
+		array[1] , its right child would go into array[2]
+
+
+		how store complete binary tree :
+
+		for the node at array[i]
+		left child = 2*i + 1
+		right child 2*i +2
+
+		parent :
+		floor((i-1)/2)
+
+
+		-Inserting into heap :
+		1.Always add new items to the end of array
+		2.then we have to fix the heap (Heapfy)
+		3.We compare the new item against its parent
+		4.If the item is greater than its parent,we swap it with its parent
+		5.we then repeat
+
+		-Heap delete
+		1.must choose a replacement value
+		2.will take the rightmost value,so that the tree remains complete
+		3.then we must heapify the heap
+		4.when the replacement value is greater than parent,fix heap above .otherwise fix heap
+		below
+
+		1.Fix heap above - same as insert .swap replacement value with parent
+		2.Fix heap below - swap the replacement value with the larger of its two children
+		3.Rinse and repeat in both cases until the replacement value is is correct position
+		4.will only need to fix up or down not both
+
+		note : Replacement its always gonna be the rightmost leaf at the bottom level
+		because if we took the replacement value from somewhere else
+			we no longer have complete tree
+
+
+=====Heap Peek ============
+		1.in computer science peek is an operation on certain abstract data type,specificaly
+		sequential collection such as stacks and queues which return the value the top of front of the collection
+		without removing the element from the collection.
+
+		peek method when we call the peek method we are basically saying we want to look at whats at the root
+
+
+
+		Time Complexity :
+		when we insert an item it takes constant but if we have to do heapify time complexity is  of O log N time
+
+		delete ,the worst case is O of Log N
+
+		Note :
+		when we use heaps we usually only want to work with root,because we are generally using heap
+		because we are only interested in the minimum value or maximum value in the data set
+		if you are interested in doing random access operations then heap
+		is not going to be your dats structure of choice
+
+
+
+
+
+
+
+=============Big O notation==================
+		Big O notation introduction to Big O notation and time complexity
+		time it takes to run your function
+		grows as the size of the input(to your function)
+
+		time complexity : a way of showing how the runtime of function increases
+
+
+		Linear Time : when the input grow the time complexity grow
+		Constant Time : the time stays constant but the input increases
+		Quadratic Time
+
+		https://medium.com/@StueyGK/algorithm-time-complexity-and-big-o-notation-51502e612b4d#:~:text=Big%20O%20notation%20is%20the,steps%20required%20to%20complete%20it.&text=A%20task%20can%20be%20handled,complexity%20and%20scalability%20over%20time.
 
 
 
@@ -1583,7 +1749,9 @@ Interview Review from the internet (Shopee)
 		white board interview use : https://codebunk.com/b/7661100151143/
 		https://beginnersbook.com/2017/09/java-program-to-reverse-words-in-a-string/#:~:text=Example%3A%20Program%20to%20reverse%20every,using%20a%20reverse%20for%20loop.
 
+shopee web binar tech talk :
 
+		https://seagroup.zoom.us/webinar/register/tJYsde6rqDouHdDnAGS-ea5EhmKz-7irJpUR/success?user_id=MJZLQUETRg-uPHy0M1FfGA&timezone_id=Asia%2FJakarta
 New English Vocabulary :
 
 1.Discrete = berlainan
@@ -1599,6 +1767,9 @@ New English Vocabulary :
 11.Oblivious = Terlupa
 12.Examine = Memeriksa,Menguji,Membahas
 13.Descend = Turun,Menuruni
+14.Disruption =Gangguan
+15.Descending = Menurun
+16.Menaiki = Naik
 
 
 
@@ -1608,6 +1779,8 @@ english teacher : https://www.italki.com/teacher/3245298#readmore
 
 Intellij hot key : https://www.jetbrains.com/help/rider/Keymaps_Comparison_Mac.html#top
 
+
+backend engineer interview tips :		https://www.thinkful.com/projects/backend-technical-questions-620/
 
 =====Java Notes======
 
