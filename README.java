@@ -1719,12 +1719,69 @@ Notes Linear Probing :
 		is not going to be your dats structure of choice
 
 
+=============Prioriy Queues===============
+		the idea of prioriy queues is ,when we take an item off the queue we always want the highest priority item first
+		so if the value in the nodes indicate the priority then a max heap is an ideal data structure for this
+		because the value with highest priority is always at the root of the heap and so when you want to remove
+		the highest priority item from a max heap , you just remove the root and that can be done in constant time
+
+		-now since the heaps are usually implemented as arrays that just means that we are alaways removing
+		the item at position zero,and then once we have removed the highest priority item and we fix the heap
+		that means that the next priority itemis now at the root
+
+
+		priority queue is abstract data type thats commmonly implemented as a max heap
+
+		the common operation are insert with priority,remove the highest priority item and thats called poll and
+		peek(which will return the item with the highest priority )
+
+		poll and remove do the same thing they both remove the highest priority item
+
+		the difference between remove and poll when you pass it a value and remove in fact you dont
+		if you call remove without a value or you call the poll ,it always remove the root
+		if you pass it specific value then it does not remove the root instead removes that value
+
+
+		time complexity for heap sort is :
+		O of n log n
+		the reason for that is we swap in elements
+		we go to the loop n times
+		and then on each iteration of the loop we have to fix heapify above
+		and as we have seen before that can take log n time
+
+		so if you have a heap and you want to sort it ,Heap sort can be decent sort out algorithm
+		its also an in place algorithm,we dont use any extra memory
+
+		keep in mind that once you have sorted the heap its no longer heap
+		and so you would not wanna sort
+
+
+
+		=======================Sets=================
+		sets are an abstract data type because they really apply to any data structure
+		all a set is ,is a data set does not contain any duplicate
+		and so if something is a set it cannot contains duplicate values
+
+
+
+=======Heap Sort ====================
+		Heap sort is a comparison based sorting technique based on binary heap data structure.
+		it is similiar to selection sort where we first find the maximum element and
+		place maximum element at the end
+
+		Heap sort :
+		1.We know the root has the largest value
+		2.Swap root with last element in the array
+		3.Heapify the tree but exclude the last node
+		4.After heapify ,second largest element is at the root
+		5.Rinse and Repeat
 
 
 
 
 
-=============Big O notation==================
+
+		=============Big O notation==================
 		Big O notation introduction to Big O notation and time complexity
 		time it takes to run your function
 		grows as the size of the input(to your function)

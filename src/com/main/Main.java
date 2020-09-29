@@ -1,11 +1,117 @@
 package com.main;
 
+import javax.management.ObjectName;
 import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        int[] inputArr = {3, 7, 6, 9, 1, 8, 10, 4, 2, 5};
+        System.out.println(minimumSwap2(inputArr));
+    }
+
+
+    /**
+     * Simple implementation of Array 2 dimension sum hour glass like example in bellow
+     * 123
+     * 2
+     * 123
+     *
+     * @param arr
+     * @return
+     */
+    public static int hourglassSum(int[][] arr) {
+
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < arr.length - 2; i++) {
+            for (int j = 0; j < arr[i].length - 2; j++) {
+
+                int top = arr[i][j] + arr[i][j + 1] + arr[i][j + 2];
+                int mid = arr[i + 1][j + 1];
+                int bottom = arr[i + 2][j] + arr[i + 2][j + 1] + arr[i + 2][j + 2];
+
+                int sum = top + mid + bottom;
+
+                if (sum >= max) {
+                    max = sum;
+                }
+            }
+        }
+        return max;
+    }
+
+
+    /**
+     * simple method rotate Array to :
+     * 51234 when the input 4
+     *
+     * @param a
+     * @param b
+     * @return
+     */
+    public static int[] rorateArrLeft(int[] a, int b) {
+
+        int first;
+        int j;
+
+        for (int i = 0; i < b; i++) {
+            first = a[0];
+
+            for (j = 0; j < a.length - 1; j++) {
+                a[j] = a[j + 1];
+            }
+            a[j] = first;
+        }
+
+        return a;
+    }
+
+    public static void heapSort() {
+        Heap heap = new Heap(10);
+        heap.insert(80);
+        heap.insert(75);
+        heap.insert(60);
+        heap.insert(68);
+        heap.insert(55);
+        heap.insert(40);
+        heap.insert(52);
+        heap.insert(67);
+
+        heap.printHeap();
+        heap.sort();
+        heap.printHeap();
+    }
+
+
+    public static void priorityQueue() {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        pq.add(25);
+        pq.add(-22);
+        pq.add(1343);
+        pq.add(54);
+        pq.add(0);
+        pq.add(-3492);
+        pq.add(429);
+
+        /* System.out.println(pq.peek());
+        System.out.println(pq.remove());
+        System.out.println(pq.peek());
+        //poll and remove do the same thing they both remove the highest priority item
+        System.out.println(pq.poll());
+        System.out.println(pq.peek());
+        pq.add(-1);
+        System.out.println(pq.peek());*/
+
+        Object[] ints = pq.toArray();
+        for (Object num : ints) {
+            System.out.println(num);
+        }
+    }
+
+
+    public static void heap() {
         Heap heap = new Heap(10);
 
         heap.insert(80);
@@ -23,8 +129,6 @@ public class Main {
         heap.printHeap();
 
         System.out.println(heap.peek());
-
-
     }
 
 
@@ -1248,6 +1352,56 @@ public class Main {
     }
 
 
+    /**
+     * the result on hackerank less than expected
+     *
+     * @param arr
+     * @return
+     */
+    static int minimumSwaps1(int[] arr) {
+        int countSwap = 0;
+        for (int i = arr.length - 1; i > 0; i--) {
+
+            int maxNum = 0;
+            int j;
+            for (j = 1; j <= i; j++) {
+                if (arr[j] > arr[maxNum]) {
+                    maxNum = j;
+                }
+            }
+
+            if (arr[i] != arr[maxNum]) {
+                int temp = arr[i];
+                arr[i] = arr[maxNum];
+                arr[maxNum] = temp;
+                countSwap++;
+            }
+        }
+        return countSwap;
+    }
+
+
+    // 1 3 5 2 4 6 7
+    public static int minimumSwap2(int[] arr) {
+
+        int countSwap = 0;
+        int i = 0;
+
+        while (i < arr.length) {
+            while (arr[i] != i + 1) {
+                int temp = arr[arr[i] - 1];
+                arr[arr[i] - 1] = arr[i];
+                arr[i] = temp;
+                countSwap++;
+            }
+            i++;
+        }
+
+
+        return countSwap;
+    }
+
+
     private static void insertionSortsAscending() {
         int[] intArray = {20, 35, -15, 7, 55, 1, -22};
 
@@ -1284,7 +1438,7 @@ public class Main {
 
     }
 
-    private static void selectionShortAscending() {
+    public static void selectionShortAscending() {
         int[] intArray = {20, 35, -15, 7, 55, 1, -22};
 
         for (int lastSortedIdex = intArray.length - 1; lastSortedIdex > 0; lastSortedIdex--) {
