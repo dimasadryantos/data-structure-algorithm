@@ -1796,6 +1796,147 @@ Notes Linear Probing :
 		https://medium.com/@StueyGK/algorithm-time-complexity-and-big-o-notation-51502e612b4d#:~:text=Big%20O%20notation%20is%20the,steps%20required%20to%20complete%20it.&text=A%20task%20can%20be%20handled,complexity%20and%20scalability%20over%20time.
 
 
+=======================Clients and Server======================
+
+		1.Clients are the typical web users internet-conected device (For exaple your computer connected to wifi)
+		and web accessing in software available on those device.
+
+		2.Servers are computer that store webpages,sites or apps
+
+		3.TCP/IP , Transmission Control Protocol and Internet Protocol are comunication protocols that
+		defines how data should travel accross the internet
+
+		4.DNS , Domain Name Servers are like an address book for websites
+
+		4.HTTP , Hyper Text Transfer Protocol is an Application protocol that defines a language
+		for clients and servers to speak to each other.
+			-Component files : A website is made up of many different files
+				1.Codes File Websites are built primary from HTML,CSS and Java Script
+				2.Assets ,images,videos,music
+
+
+		What happens exacly ?
+		Browser goes to the DNS server - Browser send HTTP request to Server - approve send the client 200 OK
+
+
+==================Local Cache==========
+
+		what is local cache ?
+		-Local cache is memory caching system that run in application instance memory
+
+		why local cache ?
+		1.Faster performance
+		2.Reduce data store load(redis / database)
+		3.Easy to implement
+
+		when to use ?
+		1.Space usage in local cache needs to be controllable or even constant
+		2.Data in local cache not going to updated intensively
+		3.High traffic system
+
+
+=========Bloom Filter===================
+
+		to understand bloom filters you first have to understand hashing
+
+		a hash is like finger print for data ,a hash function is any function that can be used
+		to map data to a finger print ,which you can use to index or compare or indentify the data
+
+
+		Characteristic of hashing ?
+		-Most Hash functions are one way operations
+		-same input must always hash to the same output
+
+		what is bloom filter ?
+		-Bloom filter is probabilistic data structure
+
+		Bloom filter can answer variations very quickly on the yes/no question ,
+		is this item in the set ?,like i have seen this item before?
+
+		there are two important caveats though
+		-very rarely it will say yes when the answer is actually no,or we called it false
+		-Positive (although it will never say no,when the answer is actualy yes)
+		-you also cant remove an item from a bloom filter
+
+		why bloom filter ?
+		it is space efficient and space constant(and O(K) for adding)
+		it requires very little space relative to the size of the items you need to store and check (hash function properties)
+
+
+		when to use ?
+		-can acceptt a couple of false positives from time to time
+		-dont need to remove items daily
+		-need minimum space
+
+===============Redis==================
+what is redis ?
+
+		REmote Dictionary SErver
+		Redis is an in-memory data sturcture project implementing a distributed
+		redis suport abstract data structure such as string ,list,map ,sets
+
+===============SOLID Principles==============
+
+		SOLID Principles is coding standard that all developer should have clear concept for developing software
+		properly to avoid bad design.
+
+		1.Single Responsibility Principle
+		the idea if each class has a single responsibility it will easier to maintain
+
+		-Robert C Martin : A Class Should have Only One Reason To Change
+
+		-Any Change would involve modifying onlu one class (Perubahan hanya di perbolehkan satu class)
+
+		2.Open / Closed Principle
+
+
+		-Robert C Martin points out that of all principles of object oriented design ,the open closed principle is the most important
+
+		-Bertand Meyer : Software entities (Clasess,modules,functions etc) should be open for extension but closed for modification
+
+		-changing the existing code would mean we would introduce errors and we need to repeat all the test we have
+
+
+==========Shopee========
+-Shopee is singaporean e-comerce platform headquartered under sea-group(previously known as garena)
+		founded in 2015,shopee first launched in singapore 2015 and since expanded its reach to Malaysia,Thailand,Taiwan,Indonesia,philiphine,vietnam brazil
+		founded by forest li
+
+
+
+
+========================Micro Services===========================
+		what is Micro Services ?
+		Micro service is an architectural tyle that structures an application as a collection of services.
+
+		the benefit using micro services ?
+		1.Highly maintainable and testable
+		2.Independenly Deploy able
+		3.Organized around business capabilities
+		4.Owned by small team
+
+		Should microservices talk to each other ?
+		recomended microservices do synchrounus communication with each other.
+
+		how microservices communicate with each other using rest templace ?
+		the CLIENT make rest call to interact with other services
+		1.the client sends request to the server and waits for a response from the service(mostly JSON over HTTP)
+
+		How do you secure microservices ?
+		1.use OAUTH for user identity and access control
+		2.get containers out of the public network
+		3.dont write you own crypto code
+
+		what are the type of micro services ?
+		-stateless
+		-data centric
+		-aggregator
+
+
+
+
+
+
 
 
 Interview Review from the internet (Shopee)
@@ -1826,7 +1967,13 @@ New English Vocabulary :
 13.Descend = Turun,Menuruni
 14.Disruption =Gangguan
 15.Descending = Menurun
-16.Menaiki = Naik
+16.Ascending = Naik
+17.Adjacent = berdekatan
+18.Violating = Melanggal
+19.Transmitting = Mengirimkan
+
+
+
 
 
 
@@ -1856,15 +2003,35 @@ from the stack
 				String hello ="Hello";
 				char c=hello.charAt(0);
 				resutl : H
+-in short list when sorting in ASCENDING order ,a comparator function return
+*-1  if a < b
+* 0  if a ==b
+* 1  if a > b
+
+
+Codelity lesson solution : https://github.com/ghanan94/codility-lesson-solutions
+
+
+==============Data base Relationship================
+
+
+1. One to one = one record in a table is associated with one and only record in another table
+example : one person can only have one passport
+
+2. One to Many = one record in a table can be associated with one or more records in another table
+example : each customer can have many orders
+
+3.Many to Many = Multiple records in a table associated with multiple records in another table
+example : custumer can purchase various products products can be purchase by many customer
 
 
 
+// Integer.MAX_VALUE / 10 = 214748364
+//Integer.Min_VALUE / 10 = 214748364
 
-
-
-
-
-
+//214 748 3641
+//Math.pow(2,31) = 2.14748364 7 E9
+//-Math.pow(2,31) = -2.14748364 8 E9
 
 
 

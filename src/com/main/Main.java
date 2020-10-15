@@ -1,14 +1,885 @@
 package com.main;
 
-import javax.management.ObjectName;
+
 import java.util.*;
 
 public class Main {
 
+
     public static void main(String[] args) {
 
-        int[] inputArr = {3, 7, 6, 9, 1, 8, 10, 4, 2, 5};
-        System.out.println(minimumSwap2(inputArr));
+
+
+    }
+
+
+
+
+
+
+
+    public static int sum67(int[] input) {
+
+        int sum = 0;
+        for (int i = 0; i < input.length; i++) {
+
+            if (input[i] == 6) {
+                int j = i;
+                //   int nullNum = 0;
+
+                while (input[j] != 7) {
+                    input[j] = 0;
+                    //nullNum = j;
+                    j++;
+                }
+                input[j] = 0;
+            } else {
+                sum += input[i];
+            }
+
+        }
+
+        return sum;
+    }
+
+    public static int sum13(int[] input) {
+
+        int sum = 0;
+
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] != 13) {
+                sum += input[i];
+            }
+
+            if (i > 0 && input[i - 1] == 13) {
+                sum -= input[i];
+            }
+        }
+
+        return sum;
+    }
+
+
+    public static int bigDiff(int[] input) {
+        int min = input[0];
+        int max = input[0];
+
+        for (int i = 1; i <= input.length - 1; i++) {
+            min = Math.min(min, input[i]);
+            max = Math.max(max, input[i]);
+        }
+
+        return max - min;
+    }
+
+
+    /**
+     * Method type : Array of Integer
+     * <p>
+     * [[1]],[[1,1]]
+     *
+     * @param numrows = 2
+     * @return
+     */
+    public static List<List<Integer>> pascalTriangle(int numrows) {
+        List<List<Integer>> result = new ArrayList();
+
+
+        for (int i = 1; i <= numrows; i++) {
+
+            List<Integer> rows = new ArrayList<>();
+
+
+            for (int j = 0; j < i; j++) {
+
+                if (j == 0 || j == i - 1) {
+                    rows.add(1);
+                } else {
+                    rows.add(result.get(i - 2).get(j) + result.get(i - 2).get(j - 1));
+
+                }
+            }
+            result.add(rows);
+            System.out.println(result);
+        }
+
+
+        //[[1]],[[1,1]],[[1,2,1]]
+
+        return result;
+    }
+
+
+    public static int removeDuplicateArr(int[] inputArr) {
+
+        //0,0, 1,1 ,1, 2,2 ,3,3 ,4
+        int count = 1;
+        for (int i = 0; i < inputArr.length - 1; i++) {
+
+            if (inputArr[i] != inputArr[i + 1]) {
+                inputArr[count] = inputArr[i + 1];
+                count++;
+            }
+
+        }
+        return count;
+    }
+
+
+    /**
+     * @param input Roman string
+     * @return
+     */
+    private static int romanToInt(String input) {
+
+        Map<Character, Integer> roman = new HashMap<>();
+        roman.put('I', 1);
+        roman.put('V', 5);
+        roman.put('X', 10);
+        roman.put('L', 50);
+        roman.put('C', 100);
+        roman.put('D', 500);
+        roman.put('M', 1000);
+
+        int result = 0;
+
+        for (int i = 0; i < input.length() - 1; i++) {
+
+            if (roman.get(input.charAt(i)) < roman.get(input.charAt(i + 1))) {
+                result -= roman.get(input.charAt(i));
+            } else {
+                result += roman.get(input.charAt(i));
+            }
+
+        }
+        result += roman.get(input.charAt(input.length() - 1));
+
+        System.out.println("result === " + result);
+
+        return result;
+    }
+
+
+    /**
+     * codeleet solition version
+     *
+     * @param x
+     * @return
+     */
+    public static int reverseInt2(int x) {
+        boolean isNegative = false;
+        if (x < 0) {
+            isNegative = true;
+            x *= -1;
+        }
+
+        long reversed = 0;
+        while (x > 0) {
+            reversed = (reversed * 10) + (x % 10);
+            x /= 10;
+        }
+
+        if (reversed > Integer.MAX_VALUE) {
+            return 0;
+        }
+        return (int) (isNegative ? reversed * -1 : reversed);
+    }
+
+    /**
+     * try explore validation
+     *
+     * @return
+     */
+    public static int reverseInt3(int input) {
+        int rev = 0;
+
+        while (input != 0) {
+            int pop = input % 10;
+            input /= 10;
+
+            if (rev > Math.pow(2, 31) - 1 || pop > Math.pow(2, 31) - 1) {
+                return 0;
+            }
+
+            if (rev < -Math.pow(2, 31) || pop < -Math.pow(2, 31)) {
+                return 0;
+            }
+            rev = rev * 10 + pop;
+        }
+
+        return rev;
+    }
+
+
+    public static int reverseInt(int x) {
+
+        int result = 0;
+
+        if (x == 0) {
+            return result;
+        }
+
+        boolean isNegative = x < 0;
+        int input = x;
+
+        if (isNegative) {
+            input = x * -1;
+        }
+
+        String value = String.valueOf(input);
+        int length = value.length();
+        int[] temp = new int[length];
+        int j = 0;
+
+        for (int i = 0; i < length; i++) {
+            int number = Integer.parseInt(String.valueOf(value.charAt(i)));
+            if (number != 0) {
+                temp[j] = number;
+                j++;
+            }
+        }
+
+        StringBuilder sb = new StringBuilder(length);
+        for (int k = temp.length; k > 0; k--) {
+            if (temp[k - 1] != 0) {
+                sb.append(temp[k - 1]);
+            }
+        }
+
+        System.out.println(Integer.parseInt(String.valueOf(sb)));
+
+
+        if (isNegative) {
+            return Integer.parseInt(String.valueOf(sb)) * -1;
+        } else {
+            return Integer.parseInt(String.valueOf(sb));
+        }
+
+    }
+
+    /**
+     * System.out.println(largestNumber(268));
+     * System.out.println(largestNumber(670));
+     * System.out.println(largestNumber(0));
+     * System.out.println(largestNumber(-999));
+     * System.out.println(largestNumber(-945));
+     * System.out.println(largestNumber(-439));
+     *
+     * @param num
+     * @return
+     */
+    private static int largestNumber(int num) {
+        boolean isNegative = num < 0;
+        String resStr = "";
+        if (!isNegative) {
+            String temp = String.valueOf(num);
+            for (int i = 0; i < temp.length(); i++) {
+                int n = Integer.parseInt(String.valueOf(temp.charAt(i)));
+                if (5 > n) {
+                    resStr = temp.substring(0, i) + "5" + temp.substring(i);
+                    break;
+                }
+            }
+            if (resStr.length() == 0) {
+                resStr += "5";
+            }
+        } else {
+            String temp = String.valueOf(num * -1);
+            for (int i = 0; i < temp.length(); i++) {
+                int n = Integer.parseInt(String.valueOf(temp.charAt(i)));
+                if (5 < n) {
+                    resStr = temp.substring(0, i) + "5" + temp.substring(i);
+                    break;
+                }
+            }
+
+        }
+
+        return isNegative == true ? Integer.parseInt(resStr) * -1 : Integer.parseInt(resStr);
+    }
+
+
+    public static int isAesthetic(int[] input) {
+
+        int length = input.length;
+        int count = 0;
+        int result;
+
+        if (length == 0) {
+            return -1;
+        } else {
+            for (int i = 1; i <= length - 2; i++) {
+
+                if (input[i] < input[i - 1] && input[i] < input[i + 1]) {
+                    count++;
+                }
+
+                if (input[i] > input[i - 1] && input[i] > input[i + 1]) {
+                    count++;
+                }
+            }
+
+
+            if (count == 0) {
+                result = -1;
+            } else if (length - count == 2) {
+                result = 0;
+            } else {
+                result = length - count;
+            }
+        }
+
+        return result;
+    }
+
+
+    /**
+     * two sum using map
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int[] twoSum(int[] nums, int target) {
+        int[] result = new int[]{0, 1};
+
+        if (nums.length == 2)
+            return result;
+
+        Map<Integer, Integer> numbers = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int remainder = target - nums[i];
+            if (numbers.containsKey(remainder)) {
+                result = new int[]{numbers.get(remainder), i};
+                break;
+            }
+            numbers.put(nums[i], i);
+        }
+
+        return result;
+    }
+
+
+    public static int frog(int x, int[] A) {
+        boolean[] bitMap = new boolean[x + 1];
+        for (int i = 0; i < A.length; i++) {
+            if (!bitMap[A[i]]) {
+                bitMap[A[i]] = true;
+                x--;
+                if (x == 0) return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * @param x = 10
+     * @param y = 85
+     * @param d = 30
+     * @return
+     */
+    public static int frogJump(int x, int y, int d) {
+
+
+        int count = 0;
+        while (x < y) {
+            x += d;
+            count++;
+        }
+
+        return count;
+
+    }
+
+    public static int frogJump2(int x, int y, int d) {
+        if ((y - x) % d == 0) {
+            return (y - x) / d;
+        } else {
+            return (y - x) / d + 1;
+        }
+
+    }
+
+    //1, 2, 5, 8, 10
+    public static int findTriangular(int[] input) {
+
+        int length = input.length;
+
+        if (length == 0) {
+            return 0;
+        }
+
+        if (length < 3) {
+            return 0;
+        }
+
+
+        shellSort(input);
+
+        for (int i = 0; i < length - 2; i++) {
+            if (input[i] > input[i + 2] - input[i + 1]) {
+                return 1;
+            }
+            // {1, 2, 5, 8, 10, 20}
+           /* if (input[i] + input[i + 1] > input[i + 2] && input[i + 1] + input[i + 2] > input[i] && input[i + 2] + input[i] > input[i + 1]) {
+                return 1;
+            }*/
+        }
+
+
+        return 0;
+    }
+
+
+    public static int[] twoSumArr(int[] inputArr, int target) {
+
+        //2,3,5,3
+        int i;
+        int j;
+        int sum = 0;
+        int[] temp = new int[2];
+
+        for (i = 0; i < inputArr.length; i++) {
+            for (j = i + 1; j < inputArr.length; j++) {
+                sum = inputArr[i] + inputArr[j];
+                if (sum == target) {
+                    temp = new int[]{i, j};
+                    break;
+                }
+            }
+            if (target == 0) {
+                break;
+            } else if (target == sum) {
+                break;
+            }
+        }
+
+
+        return temp;
+    }
+
+
+    public static int multiplyArr(int[] input) {
+        Arrays.sort(input);
+        int length = input.length;
+
+        int max1 = input[length - 1] * input[length - 2] * input[length - 3];
+        int max2 = input[0] * input[1] * input[length - 1];
+
+        int max = Math.max(max1, max2);
+
+        return max;
+    }
+
+
+    public static int distictArray2(int[] input) {
+        if (input.length == 0) {
+            return 0;
+        }
+        if (input.length == 1) {
+            return 1;
+        }
+        Arrays.parallelSort(input);
+        int count = 1;
+        int lastElement = input[0];
+        for (int i = 1; i < input.length; i++) {
+            if (input[i] != lastElement) {
+                count++;
+                lastElement = input[i];
+            }
+        }
+        return count;
+    }
+
+
+    /**
+     * select distict arr
+     * <p>
+     * how to move array to new
+     * <p>
+     * create new array with length of input :
+     * int [] temp = new int[input.length];
+     * if need track index create new : int count
+     * <p>
+     * move array : temp[count] = input[i];
+     *
+     * @param input
+     * @return
+     */
+    public static int selectDistictArr(int[] input) {
+
+        int[] temp = new int[input.length];
+        Arrays.parallelSort(input);
+        int count = 0;
+        int last = input[input.length - 1];
+        for (int i = 0; i < input.length - 1; i++) {
+            if (input[i] != input[i + 1]) {
+                temp[count] = input[i];
+                count++;
+            }
+        }
+        temp[count] = last;
+        return count + 1;
+    }
+
+    public static int findPairValue2(int[] input) {
+        if (input.length == 0) {
+            return 0;
+        }
+        if (input.length == 1) {
+            return 1;
+        }
+        Arrays.parallelSort(input);
+        for (int i = 0; i < input.length - 2; i += 2) {
+            if (input[i] != input[i + 1]) {
+                return input[i];
+            }
+        }
+        return input[input.length - 1];
+    }
+
+    public static int findPairValue(int[] input) {
+
+        Arrays.sort(input);
+
+        for (int i = 0; i < input.length; i++) {
+            boolean isDifferentValue = true;
+
+            for (int j = 0; j < input.length; j++) {
+                if (input[i] == input[j] && i != j) {
+                    isDifferentValue = false;
+                    break;
+                }
+            }
+            if (isDifferentValue) {
+                return input[i];
+            }
+        }
+        return 0;
+    }
+
+
+    public static int[] rotateRight(int[] inputArr, int rotate) {
+
+        for (int i = 0; i < rotate; i++) {
+
+            int last = inputArr[inputArr.length - 1];
+            int j;
+            for (j = inputArr.length - 1; j > 0; j--) {
+                inputArr[j] = inputArr[j - 1];
+            }
+
+            inputArr[j] = last;
+
+        }
+        return inputArr;
+    }
+
+
+    public static int findLargestBinary(int input) {
+        String bin = Integer.toBinaryString(input);
+        int[] table = new int[bin.length()];
+
+        for (int i = 0; i < bin.length(); i++) {
+            int number = Integer.parseInt(bin.substring(i, i + 1));
+            table[i] = number;
+        }
+
+        int resu = 0;
+        int res = 0;
+
+        for (int j = 0; j < table.length; j++) {
+            if (table[j] == 1) {
+                if (resu > res) {
+                    res = resu;
+                }
+                resu = 0;
+            } else {
+                resu++;
+            }
+
+        }
+        return res;
+    }
+
+
+    //
+
+    /**
+     * hackerank quiz
+     * Rotate left using List and number swap
+     * output :2,3,4,5,1
+     *
+     * @param swap
+     * @param inputArr
+     * @return
+     */
+    public static List<Integer> leftRotate(int swap, List<Integer> inputArr) {
+        for (int i = 0; i < swap; i++) {
+            int first = inputArr.get(0);
+            inputArr.remove(0);
+            inputArr.add(first);
+        }
+        return inputArr;
+    }
+
+
+    public static String middle(String input) {
+        int position;
+        int length;
+
+        if (input.length() % 2 == 0) {
+            position = input.length() / 2 - 1;
+            length = 2;
+        } else {
+            position = input.length() / 2;
+            length = 1;
+        }
+        return input.substring(position + length);
+    }
+
+
+    //case2
+    //two times three is not four
+    //two times two is four
+    /* String[] input = {"two", "times", "times", "is", "not", "four"};
+        String[] input2 = {"two", "times", "two", "is", "four", "times"};
+        checkMagazine2(input, input2);*/
+    /*ive got a lovely bunch of coconuts
+    ive got some coconuts*/
+    public static void checkMagazine(String[] magazine, String[] note) {
+        Map<String, Integer> magazineWords = new HashMap<>();
+
+        for (String word : magazine) {
+            if (magazineWords.containsKey(word)) {
+                int count = magazineWords.get(word);
+                count++;
+                magazineWords.put(word, count);
+            } else {
+                magazineWords.put(word, 1);
+            }
+        }
+
+        for (String word : note) {
+            if (magazineWords.containsKey(word)) {
+                int count = magazineWords.get(word);
+                if (count <= 0) {
+                    System.out.println("No");
+                    return;
+                }
+                count--;
+                magazineWords.put(word, count);
+            } else {
+                System.out.println("No");
+                return;
+            }
+        }
+        System.out.println("Yes");
+    }
+
+
+    public static void checkMagazine2(String[] magazine, String[] note) {
+
+        Map<String, Integer> magazineWord = new HashMap<>();
+
+        for (int i = magazine.length - 1; i >= 0; i--) {
+            if (magazineWord.containsKey(magazine[i])) {
+                magazineWord.put(magazine[i], magazineWord.get(magazine[i]) + 1);
+            } else {
+                magazineWord.put(magazine[i], 1);
+            }
+        }
+
+        for (int j = note.length - 1; j > 0; j--) {
+            if (magazineWord.containsKey(note[j])) {
+                magazineWord.put(note[j], magazineWord.get(note[j]) - 1);
+                if (magazineWord.get(note[j]) < 0) {
+                    System.out.println("No");
+                    return;
+                }
+            } else {
+                System.out.println("No");
+            }
+        }
+        System.out.println("Yes");
+
+    }
+
+
+    /**
+     * 1
+     * 2
+     * fizz
+     * 3
+     * 4
+     * buzz
+     * 6
+     * 7
+     * 8
+     * 9
+     * 10
+     * 11
+     * 12
+     * 13
+     * 14
+     * 15
+     *
+     * @param
+     */
+    private static void fizzBuzz(int x) {
+        for (int i = 1; i <= x; i++) {
+            if (i % 15 == 0) {
+                System.out.println("FizzBuzz");
+            } else if (i % 5 == 0) {
+                System.out.println("Buzz");
+            } else if (i % 3 == 0 && i == 3) {
+                System.out.println("Fizz");
+            } else {
+                System.out.println(i);
+            }
+        }
+    }
+
+
+    private static int alternateChar(String input) {
+        int count = 0;
+
+        for (int i = 0; i < input.length() - 1; i++) {
+            if (input.charAt(i) == input.charAt(i + 1)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+
+    /**
+     * Method to count deleted value to shape an annagram
+     * input :
+     * abcde
+     * dbsss
+     *
+     * @param str1
+     * @param str2
+     * @return
+     */
+    public static int shapeAnnagram(String str1, String str2) {
+
+        int[] count1 = new int[26];
+        int[] count2 = new int[26];
+
+
+        for (int i = 0; i < str1.length(); i++) {
+            count1[str1.charAt(i) - 'a']++;
+        }
+
+        for (int j = 0; j < str2.length(); j++) {
+            count2[str2.charAt(j) - 'a']++;
+        }
+
+        int result = 0;
+        for (int k = 0; k < 26; k++) {
+            result += Math.abs(count1[k] - count2[k]);
+        }
+
+        return result;
+    }
+
+
+    /**
+     * method to check annagram return true or false
+     *
+     * @param input1
+     * @param input2
+     * @return
+     */
+    public static boolean checkAnagram(char[] input1, char[] input2) {
+
+        int input1Length = input1.length;
+        int input2Length = input2.length;
+
+
+        if (input1Length != input2Length) {
+            return false;
+        }
+
+        Arrays.sort(input1);
+        Arrays.sort(input2);
+
+        for (int i = 0; i < input1Length; i++) {
+            if (input1[i] != input2[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    public static void hackerankComparator() {
+        ArrayList<Player> players = new ArrayList<>();
+
+        players.add(new Player("amy", 100));
+        players.add(new Player("david", 100));
+        players.add(new Player("heraldo", 50));
+        players.add(new Player("aakansa", 75));
+        players.add(new Player("aleksa", 150));
+
+
+        Collections.sort(players, new SortByName());
+
+        for (int i = 0; i < players.size(); i++) {
+            System.out.println(players.get(i));
+        }
+    }
+
+
+    public static void countBubbleSortSwap() {
+        int[] input = {3, 2, 1};
+        int countSwap = 0;
+
+        for (int i = input.length - 1; i > 0; i--) {
+
+            for (int j = 0; j < i; j++) {
+                if (input[j] > input[j + 1]) {
+                    int temp = input[j + 1];
+                    input[j + 1] = input[j];
+                    input[j] = temp;
+                    countSwap++;
+                }
+
+            }
+
+        }
+        System.out.println("Array is sorted in " + countSwap + " swaps.");
+        System.out.println("First Element: " + input[0]);
+        System.out.println("Last Element: " + input[input.length - 1]);
+    }
+
+    /**
+     * byte : -128 to 127
+     * short : -32,768 to 32,767
+     * int : -2,147,483,648 to 2,147,483,647
+     * long : -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+     *
+     * @param x
+     */
+    public static void dataType(long x) {
+
+        if (x >= -128 && x <= 127) {
+            System.out.println("* byte");
+        }
+        if (x >= -Math.pow(2, 15) && x <= Math.pow(2, 15) - 1) {
+            System.out.println("* short");
+        }
+        if (x >= -Math.pow(2, 31) && x <= Math.pow(2, 31) - 1) {
+            System.out.println("* Integer");
+        }
+        if (x >= -Math.pow(2, 63) && x <= Math.pow(2, 63)) {
+            System.out.println("* long");
+        }
     }
 
 
@@ -138,22 +1009,25 @@ public class Main {
         tree.insert(25);
         tree.insert(20);
         tree.insert(15);
-        tree.insert(27);
-        tree.insert(28);
-        tree.insert(30);
-        tree.insert(29);
-        tree.insert(26);
         tree.insert(22);
+        tree.insert(27);
+        tree.insert(26);
+        tree.insert(30);
         tree.insert(32);
-        tree.insert(17);
+        tree.insert(29);
 
 
+
+       /* tree.traverseInOrder();
+        System.out.println();*/
+
+     /*   tree.delete(25);
         tree.traverseInOrder();
-        System.out.println();
+        System.out.println();*/
 
-        tree.delete(25);
-        tree.traverseInOrder();
-        System.out.println();
+        //  tree.traversePreOrder();
+
+        tree.traversePostOrder();
 
        /* System.out.println(tree.get(22));
         System.out.println(tree.get(32));
@@ -895,15 +1769,14 @@ public class Main {
 
         EmployeeLinkedList list = new EmployeeLinkedList();
 
-        list.addFront(janeJones);
-        list.addFront(johnDoe);
-        list.addFront(marrySmith);
-        list.addFront(mikeWilson);
+        list.addToEnd(janeJones);
+        list.addToEnd(johnDoe);
+        list.addToEnd(marrySmith);
 
         list.printList();
         System.out.print(list.getSize());
 
-        Employee billEnd = new Employee("Bill", "End", 78);
+        /*Employee billEnd = new Employee("Bill", "End", 78);
         list.addToEnd(billEnd);
 
         list.printList();
@@ -911,12 +1784,12 @@ public class Main {
 
         list.removeFromFront();
         list.printList();
-        System.out.println(list.getSize());
+        System.out.println(list.getSize());*/
 
 
-        list.removeFromEnd();
+        /*list.removeFromEnd();
         list.printList();
-        System.out.println(list.getSize());
+        System.out.println(list.getSize());*/
     }
 
 
@@ -1332,8 +2205,8 @@ public class Main {
     /**
      * Shell sort is variation to optimise Insertion sort with reduce the shifting
      */
-    private static void shellSort() {
-        int[] intArray = {20, 35, -15, 7, 55, 1, -22};
+    private static void shellSort(int[] intArray) {
+        //int[] intArray = {20, 35, -15, 7, 55, 1, -22};
         for (int gobs = intArray.length / 2; gobs > 0; gobs /= 2) {
             for (int i = gobs; i < intArray.length; i++) {
 
@@ -1439,7 +2312,8 @@ public class Main {
     }
 
     public static void selectionShortAscending() {
-        int[] intArray = {20, 35, -15, 7, 55, 1, -22};
+        int[] intArray = {10, 2, 5, 1, 8, 20};
+        //10,2,5,1,8,20
 
         for (int lastSortedIdex = intArray.length - 1; lastSortedIdex > 0; lastSortedIdex--) {
 
@@ -1451,6 +2325,7 @@ public class Main {
             }
             swap(intArray, largest, lastSortedIdex);
         }
+
 
         for (int i = 0; i < intArray.length; i++) {
             System.out.println(intArray[i]);
@@ -1510,9 +2385,9 @@ public class Main {
     /**
      * bubble sorting small to bigger
      */
-    private static void bubbleSortAscending() {
+    private static void bubbleSortAscending(int[] arrayInt) {
 
-        int[] arrayInt = {20, 35, -15, 7, 55, 1, -22};
+        //   int[] arrayInt = {20, 35, -15, 7, 55, 1, -22};
 
         for (int unsortList = arrayInt.length - 1; unsortList > 0; unsortList--) {
 

@@ -17,6 +17,8 @@ public class EmployeeLinkedList {
         }
 
         head = node;
+        System.out.println("head = " + head);
+
         size++;
     }
 
