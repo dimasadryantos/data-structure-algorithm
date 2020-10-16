@@ -8,14 +8,47 @@ public class Main {
 
     public static void main(String[] args) {
 
+        int[] input = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
 
+        maxSubArray(input);
 
     }
 
 
+    public static int findSumArrRecursive(int[] arr, int length) {
+        if (length <= 0) {
+            return 0;
+        }
+        int recursive = findSumArrRecursive(arr, length - 1);
+        int sum = recursive + arr[length - 1];
+        return sum;
+    }
 
 
+    /**
+     * leetCode
+     *
+     * find contiguous subarray ,which has he largest number
+     *
+     * {-2, 1, -3, 4, -1, 2, 1, -5, 4}
+     *
+     * @return
+     */
+    public static int maxSubArray(int[] nums) {
+        int sum = Integer.MIN_VALUE;
+        int prevSum = Integer.MIN_VALUE;
 
+        for (int item : nums) {
+            if (prevSum < 0) {
+                prevSum = item;
+            } else {
+                prevSum += item;
+            }
+            sum = Math.max(sum, prevSum);
+        }
+
+        return sum;
+    }
 
 
     public static int sum67(int[] input) {
