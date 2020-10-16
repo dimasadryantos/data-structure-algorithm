@@ -8,10 +8,57 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int[] input = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        int [] input ={1, 2, 1, 3, 4};
 
-        maxSubArray(input);
+        isEverywhere(input,1);
+    }
 
+
+    /**
+     * codebat practice
+     * @param nums
+     * @param val
+     * @return
+     */
+    public static  boolean isEverywhere(int[] nums, int val) {
+        for(int i = 0 ; i < nums.length -1; i++){
+            if(nums[i] != val && nums[i+1] != val){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+    /**
+     * leet code plus one at the last array
+     * 123 to 124
+     * return 0,1 if input 9
+     *
+     * @param digits
+     * @return
+     */
+    public static int[] plusOne(int[] digits) {
+        int i ;
+        for( i = digits.length -1 ;i >= 0 ; i--){
+            if(digits[i] == 9){
+                digits[i]=0;
+            }else {
+                digits[i]++;
+                return digits;
+            }
+        }
+
+        int [] result = new int[digits.length+1];
+        if(i == -1 && digits[i+1] == 0){
+            result[0]= 1;
+            for(int j = 1 ; j < result.length ;j++){
+                result[j] = digits[j-1];
+            }
+        }
+
+        return result;
     }
 
 
@@ -27,9 +74,9 @@ public class Main {
 
     /**
      * leetCode
-     *
+     * <p>
      * find contiguous subarray ,which has he largest number
-     *
+     * <p>
      * {-2, 1, -3, 4, -1, 2, 1, -5, 4}
      *
      * @return
