@@ -8,27 +8,45 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int [] input ={1, 2, 1, 3, 4};
 
-        isEverywhere(input,1);
     }
 
+    /**
+     * codeleet
+     * Move Zero to the end by copy to the array
+     * ex : 0,1,0,3,12
+     *
+     * @param nums
+     */
+    public static void moveZeroes(int[] nums) {
+
+        int tracker = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[tracker++] = nums[i];
+            }
+        }
+
+        while (tracker < nums.length) {
+            nums[tracker++] = 0;
+        }
+    }
 
     /**
      * codebat practice
+     *
      * @param nums
      * @param val
      * @return
      */
-    public static  boolean isEverywhere(int[] nums, int val) {
-        for(int i = 0 ; i < nums.length -1; i++){
-            if(nums[i] != val && nums[i+1] != val){
+    public static boolean isEverywhere(int[] nums, int val) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] != val && nums[i + 1] != val) {
                 return false;
             }
         }
         return true;
     }
-
 
 
     /**
@@ -40,21 +58,21 @@ public class Main {
      * @return
      */
     public static int[] plusOne(int[] digits) {
-        int i ;
-        for( i = digits.length -1 ;i >= 0 ; i--){
-            if(digits[i] == 9){
-                digits[i]=0;
-            }else {
+        int i;
+        for (i = digits.length - 1; i >= 0; i--) {
+            if (digits[i] == 9) {
+                digits[i] = 0;
+            } else {
                 digits[i]++;
                 return digits;
             }
         }
 
-        int [] result = new int[digits.length+1];
-        if(i == -1 && digits[i+1] == 0){
-            result[0]= 1;
-            for(int j = 1 ; j < result.length ;j++){
-                result[j] = digits[j-1];
+        int[] result = new int[digits.length + 1];
+        if (i == -1 && digits[i + 1] == 0) {
+            result[0] = 1;
+            for (int j = 1; j < result.length; j++) {
+                result[j] = digits[j - 1];
             }
         }
 
