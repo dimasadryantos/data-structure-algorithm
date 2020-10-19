@@ -2034,6 +2034,10 @@ example : custumer can purchase various products products can be purchase by man
 //-Math.pow(2,31) = -2.14748364 8 E9
 
 
+Design scallable backend https://medium.com/@helloansh/designing-scalable-backend-infrastructures-from-scratch-af80f5767ccc
+
+tokped :		https://www.tokopedia.com/careers/job/senior-software-engineer-for-technology-in-indonesia/
+
 
 
 

@@ -12,6 +12,90 @@ public class Main {
     }
 
     /**
+     * codeleet mergerArray using for loop
+     * input : {4,5,6,0,0,0} = m=3
+     * input : {1,2,3} = n=3
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public static void mergeArr2(int[] nums1, int m, int[] nums2, int n) {
+
+        //handle if input ={0}
+        if (m == 0) {
+            for (int i = 0; i < nums2.length; i++) {
+                nums1[i] = nums2[i];
+            }
+        return;
+        }
+
+        int totalLength = m + n - 1;
+        m = m - 1;
+        n = n - 1;
+
+        for (int i = 0; i < nums1.length; i++) {
+            if (n == -1) {
+                return;
+            }
+            if (m == -1) {
+                nums1[totalLength] = nums2[n];
+                n--;
+            } else if (nums1[m] > nums2[n]) {
+                nums1[totalLength] = nums1[m];
+                m--;
+            } else {
+                nums1[totalLength] = nums2[n];
+                n--;
+            }
+            totalLength--;//2
+        }
+
+    }
+
+
+    /**
+     * codeleet mergerArray using for loop
+     * input : {4,5,6,0,0,0} = m=3
+     * input : {1,2,3} = n=3
+     *
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public static void mergeArr(int[] nums1, int m, int[] nums2, int n) {
+
+        if (m == 0) {
+            for (int i = 0; i < nums2.length; i++) {
+                nums1[i] = nums2[i];
+            }
+            return;
+        }
+
+        int replaceIndex = m + n - 1;
+        m = m - 1;
+        n = n - 1;
+
+        while (replaceIndex >= 0) {
+            if (n == -1) {
+                break;
+            } else if (m == -1) {
+                nums1[replaceIndex] = nums2[n];
+                n--;
+            } else if (nums1[m] > nums2[n]) {
+                nums1[replaceIndex] = nums1[m];
+                m--;
+            } else {
+                nums1[replaceIndex] = nums2[n];
+                n--;
+            }
+            replaceIndex--;
+        }
+    }
+
+    /**
      * codeleet
      * Move Zero to the end by copy to the array
      * ex : 0,1,0,3,12
@@ -26,7 +110,6 @@ public class Main {
                 nums[tracker++] = nums[i];
             }
         }
-
         while (tracker < nums.length) {
             nums[tracker++] = 0;
         }
