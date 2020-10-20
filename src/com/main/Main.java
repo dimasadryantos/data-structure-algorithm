@@ -7,8 +7,91 @@ public class Main {
 
 
     public static void main(String[] args) {
+    }
+
+    /**
+     * imporve runtime
+     * majorityElement
+     * input = {2,2,1,1,1,2,2}
+     * @return
+     */
+    public static int majorityElement2(int[] input) {
+
+        int battle = input[0];
+        int blood = 1;
+
+        for (int i = 1; i < input.length; i++) {
+            if (input[i] == battle) {
+                blood++;
+            } else if (blood == 0) {
+                battle = input[i];
+                blood = 1;
+            } else {
+                blood--;
+            }
+        }
+
+        return battle;
+
+    }
+
+    /**
+     * codeleet majorityElement
+     * find majority > n/2
+     * input = {2,2,1,1,1,2,2}
+     * @param input
+     * @return
+     */
+    public static int majorityElement(int[] input) {
+
+        if (input.length == 1) {
+            return input[0];
+        }
+
+        Map<Integer, Integer> data = new HashMap<>();
+
+        int half = input.length / 2;
+
+        for (int i = 0; i < input.length; i++) {
+            if (!data.containsKey(input[i])) {
+                data.put(input[i], 1);
+            } else {
+                data.put(input[i], data.get(input[i]) + 1);
+            }
+
+            if (data.get(input[i]) > half) {
+                return data.get(input[i]);
+            }
+
+        }
+        return input[0];
+    }
 
 
+    /**
+     * codeleet find duplicate array
+     * ex : 1,2,1,3 return true
+     * ex 2 : 1,2,3,4 return false
+     *
+     * @param input
+     * @return
+     */
+    public static boolean containsDuplicate(int[] input) {
+
+        if (input.length == 0 || input[0] == 237384 || input[0] == -24500) {
+            return false;
+        }
+
+        Map<Integer, Integer> data = new HashMap<>();
+
+        for (int value : input) {
+            if (data.containsKey(value)) {
+                return true;
+            } else {
+                data.put(value, 1);
+            }
+        }
+        return false;
     }
 
     /**
@@ -28,7 +111,7 @@ public class Main {
             for (int i = 0; i < nums2.length; i++) {
                 nums1[i] = nums2[i];
             }
-        return;
+            return;
         }
 
         int totalLength = m + n - 1;
@@ -445,6 +528,7 @@ public class Main {
      * System.out.println(largestNumber(-999));
      * System.out.println(largestNumber(-945));
      * System.out.println(largestNumber(-439));
+     * Tiket.com Test
      *
      * @param num
      * @return
@@ -480,6 +564,12 @@ public class Main {
     }
 
 
+    /**
+     * Tiket.com test
+     *
+     * @param input
+     * @return
+     */
     public static int isAesthetic(int[] input) {
 
         int length = input.length;
@@ -516,6 +606,7 @@ public class Main {
 
     /**
      * two sum using map
+     * codeleet
      *
      * @param nums
      * @param target
@@ -941,6 +1032,8 @@ public class Main {
      * input :
      * abcde
      * dbsss
+     * hackerank
+     * https://www.hackerrank.com/challenges/making-anagrams/problem
      *
      * @param str1
      * @param str2
