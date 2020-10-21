@@ -7,12 +7,33 @@ public class Main {
 
 
     public static void main(String[] args) {
+
+    }
+
+
+    /**
+     * codeleet find missing Number improve 0ms
+     * {3, 0, 1}
+     * {9,6,4,2,3,5,7,0,1}
+     *
+     * @param input
+     * @return
+     */
+    public static int missingNumber(int[] input) {
+        int arrSum = 0;
+        int fullSum = 0;
+        for (int i = 0; i < input.length; i++) {
+            arrSum += input[i];
+            fullSum += i + 1;
+        }
+        return fullSum - arrSum;
     }
 
     /**
      * imporve runtime
      * majorityElement
      * input = {2,2,1,1,1,2,2}
+     *
      * @return
      */
     public static int majorityElement2(int[] input) {
@@ -39,6 +60,7 @@ public class Main {
      * codeleet majorityElement
      * find majority > n/2
      * input = {2,2,1,1,1,2,2}
+     *
      * @param input
      * @return
      */

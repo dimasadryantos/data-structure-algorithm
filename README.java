@@ -1889,12 +1889,22 @@ what is redis ?
 
 		2.Open / Closed Principle
 
+		*Open for extension : this means that the behavior of a software module say a class can be extended to make it behave
+		in new and different ways
+
+		*Closed for modification ,when the business requirement change then the entity can be extend not modified
 
 		-Robert C Martin points out that of all principles of object oriented design ,the open closed principle is the most important
 
 		-Bertand Meyer : Software entities (Clasess,modules,functions etc) should be open for extension but closed for modification
 
 		-changing the existing code would mean we would introduce errors and we need to repeat all the test we have
+
+		3.Liskov Substitution
+
+		Liskov Substitution is object of super class shall be replaceable with objects of its subclasses
+
+
 
 
 ==========Shopee========
