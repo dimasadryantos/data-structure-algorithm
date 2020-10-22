@@ -8,6 +8,56 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+    }
+
+
+    /**
+     * Three sum codeleet
+     *
+     * @param nums input :
+     *             <p>
+     *             int[] nums = {-1, 0, 1, 2, -1, -4};
+     *             int[] duplicate = {0, 0, 0, 0};
+     *             int[] nullValue = {};
+     *             int[] lengthOne = {0};
+     *             int[] caseDuplicate = {-2, 0, 0, 2, 2};
+     * @return
+     */
+    public static List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i == 0 || (i > 0 && nums[i] != nums[i - 1])) {
+
+                int low = i + 1;
+                int high = nums.length - 1;
+                int sum = 0 - nums[i];
+
+                while (low < high) {
+                    if (nums[low] + nums[high] == sum) {
+                        result.add(Arrays.asList(nums[i], nums[low], nums[high]));
+                        //increase low pointer to 1
+                        while (low < high && nums[low] == nums[low + 1]) {
+                            low++;
+                        }
+                        //decrease high pointer to -1
+                        while (low < high && nums[high] == nums[high - 1]) {
+                            high--;
+                        }
+                        low++;
+                        high--;
+                    } else if (nums[low] + nums[high] > sum) {
+                        high--;
+                    } else {
+                        low++;
+                    }
+                }
+            }
+        }
+        return result;
     }
 
 
@@ -362,6 +412,7 @@ public class Main {
     /**
      * Method type : Array of Integer
      * <p>
+     * LeetCode count passcalTriangle
      * [[1]],[[1,1]]
      *
      * @param numrows = 2
