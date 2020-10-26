@@ -2049,7 +2049,10 @@ Design scallable backend https://medium.com/@helloansh/designing-scalable-backen
 tokped :		https://www.tokopedia.com/careers/job/senior-software-engineer-for-technology-in-indonesia/
 
 
+=====LeetCode=====
 
+Most Common Problem LeetCode :
+		https://www.teamblind.com/post/New-Year-Gift---Curated-List-of-Top-100-LeetCode-Questions-to-Save-Your-Time-OaM1orEU
 
 
 

@@ -6,9 +6,333 @@ import java.util.*;
 public class Main {
 
 
+    private HashMap<Character, Character> mappings;
+
     public static void main(String[] args) {
+        int[] input = {7, 1, 5, 3, 6, 4};
+        System.out.println(maxProfit2(input));
+    }
 
 
+    /**
+     * leetCode maxProfit 0ms solution
+     * 121. Best Time to Buy and Sell Stock
+     * @return
+     */
+    public static int maxProfit2(int[] profit) {
+        int maxProfit = 0;
+        int minimum = profit[0];
+        for (int i = 1; i < profit.length; i++) {
+            if (profit[i] > minimum) {
+                int substract = profit[i] - minimum;
+                if (substract > maxProfit) {
+                    maxProfit = substract;
+                }
+            } else {
+                minimum = profit[i];
+            }
+        }
+        return maxProfit;
+    }
+
+    /**
+     * int[] input = {7, 1, 5, 3, 6, 4};
+     * leetCode 1ms solution
+     *
+     * @param prices
+     * @return
+     */
+    public static int maxProfit(int[] prices) {
+
+        if (prices.length == 0) {
+            return 0;
+        }
+        int maxProfit = 0;
+        int minimum = prices[0];
+
+        for (int i = 1; i < prices.length; i++) {
+            minimum = Math.min(minimum, prices[i]);
+            maxProfit = Math.max(maxProfit, prices[i] - minimum);
+        }
+        return maxProfit;
+    }
+
+    /**
+     * Check is palindrome with different way
+     * leetCode
+     * <p>
+     * String input = "A man, a plan, a canal: Panama";
+     * String input2 = "0P";
+     *
+     * @param s
+     * @return
+     */
+    public static boolean isPalinDromes(String s) {
+        s = (s.replaceAll("[^a-zA-Z0-9]", "")).toLowerCase();
+        Stack<Character> st = new Stack<Character>();
+        for (int i = 0; i < s.length(); i++)
+            st.add(s.charAt(i));
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != st.pop())
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * Check Palindrome using stack and queues
+     * String input = "A man, a plan, a canal: Panama";
+     * String input2 = "0P";
+     * leetCode
+     *
+     * @param input
+     * @return
+     */
+    public static boolean isPalindrome(String input) {
+        Stack<Character> stacks = new Stack();
+        Queue<Character> queues = new LinkedList<>();
+        String inputLowerCase = input.toLowerCase();
+
+
+        if (input.equals("")) {
+            return true;
+        }
+        for (int i = 0; i < inputLowerCase.length(); i++) {
+            char chars = inputLowerCase.charAt(i);
+            if ((chars >= 'a' && chars <= 'z') || (chars >= '0' && chars <= '9')) {
+                stacks.push(chars);
+                queues.add(chars);
+            }
+        }
+        return checkPalindrome(stacks, queues);
+    }
+
+
+    private static boolean checkPalindrome(Stack<Character> stacks, Queue<Character> queues) {
+
+        if (stacks.size() == 1) {
+            return false;
+        }
+
+        while (!stacks.isEmpty()) {
+            if (!stacks.pop().equals(queues.remove())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public static boolean validParentheses(String input) {
+        Stack<Character> stack = new Stack<>();
+        Map<Character, Character> mapping = new HashMap<>();
+        mapping.put('}', '{');
+        mapping.put(')', '(');
+        mapping.put(']', ']');
+
+        //{[[]{}]}()()
+
+        for (int i = 0; i < input.length(); i++) {
+            char toChar = input.charAt(i);
+
+            if (mapping.containsKey(toChar)) {
+                char topElement = stack.isEmpty() ? '#' : stack.pop();
+
+                if (topElement != mapping.get(toChar)) {
+                    return false;
+                }
+            } else {
+                stack.push(toChar);
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    /**
+     * example reverseString using substring
+     *
+     * @param input
+     * @return
+     */
+    public static String reverseString(String input) {
+        if (input.isEmpty()) {
+            System.out.println("String in now Empty");
+            return input;
+        }
+        System.out.println("String to be passed in Recursive Function: " + input.substring(1));
+        return reverseString(input.substring(1));
+    }
+
+
+    /**
+     * 1, 3, 1, 3, 1, 2
+     * <p>
+     * Given an array of ints, return true if the value 3 appears in the array exactly 3 times,
+     * and no 3's are next to each other.
+     * codebat
+     * @param input
+     * @return
+     */
+    public static boolean haveThree(int[] input) {
+
+        int count = 0;
+        boolean isThree = false;
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] != 3) {
+                isThree = false;
+            }
+
+            if (input[i] == 3 && isThree == true) {
+                return false;
+            }
+
+            if (input[i] == 3 && isThree == false) {
+                isThree = true;
+                count++;
+            }
+
+        }
+
+        if (count == 3) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+    /**
+     * counting swap if swap bigger than 2 return "chaostic"
+     * https://www.hackerrank.com/challenges/new-year-chaos
+     * input :
+     * int[] input = {2, 1, 5, 3, 4};
+     * int[] input2 = {2, 5, 1, 3, 4};
+     * int[] input3 = {5, 1, 2, 3, 7, 8, 6, 4};
+     * int[] input4 = {1, 2, 5, 3, 7, 8, 6, 4};
+     *
+     * @param input
+     */
+    public static void minimumBriber(int[] input) {
+        int swapCount = 0;
+        for (int i = input.length - 1; i >= 0; i--) {
+
+            if (input[i] != i + 1) {
+                if ((i - 1 >= 0) && input[i - 1] == (i + 1)) {
+                    swapCount++;
+                    swap1(input, i, i - 1);
+                } else if (((i - 2) >= 0) && input[i - 2] == (i + 1)) {
+                    swapCount += 2;
+                    swap1(input, i - 2, i - 1);
+                    swap1(input, i - 1, i);
+
+                } else {
+                    System.out.println("chaos");
+                    return;
+                }
+
+            }
+
+        }
+        System.out.println(swapCount);
+    }
+
+    /**
+     * minimumBriber hackerank my approach
+     * int[] input = {2, 1, 5, 3, 4};
+     * int[] input2 = {2, 5, 1, 3, 4};
+     *
+     * @param input
+     */
+    public static void minimumBriber1(int[] input) {
+
+        for (int j = 0; j < input.length - 1; j++) {
+            if ((input[j] - input[j + 1]) > 2) {
+                System.out.println("caos");
+            }
+        }
+
+        int numSwap = 0;
+        int countSwap = 0;
+        for (int i = input.length - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (input[j] > input[j + 1]) {
+                    swap1(input, j, j + 1);
+                }
+            }
+
+        }
+    }
+
+    public static void swap1(int[] input, int i, int j) {
+        int temp = input[i];
+        input[i] = input[j];
+        input[j] = temp;
+    }
+
+
+    /**
+     * improvisation leetcode longestCommonPrefix
+     * <p>
+     * String[] strs = {"flower", "flow", "flight"};
+     * String[] strs1 = {"dog", "rececar", "car"};
+     *
+     * @param input
+     * @return
+     */
+    public static String longestCommonPrefix2(String[] input) {
+        if (input.length == 0) {
+            return "";
+        }
+
+        String prefix = "";
+
+        for (int i = 0; i < input[0].length(); i++) {
+            char char1 = input[0].charAt(i);
+            int j = 0;
+            while (j < input.length) {
+
+                if (i >= input[j].length()) {
+                    return prefix;
+                }
+                if (char1 != input[j].charAt(i)) {
+                    return prefix;
+                }
+                j++;
+            }
+            prefix = input[0].substring(0, i + 1);
+        }
+        return prefix;
+    }
+
+
+    /**
+     * my approach leetcode longestCommonPrefix
+     * String[] strs = {"flower", "flow", "flight"};
+     * String[] strs1 = {"dog", "rececar", "car"};
+     *
+     * @param strs
+     * @return
+     */
+    public static String longestCommonPrefix(String[] strs) {
+
+        StringBuilder sb = null;
+        for (int i = 0; i < strs.length - 1; i++) {
+            sb = new StringBuilder(2);
+            int j = 0;
+            while (j < 2) {
+                char charValue = strs[i].charAt(j);
+                char charValue2 = strs[i + 1].charAt(j);
+
+                if (charValue == charValue2) {
+                    sb.append(charValue);
+                }
+                j++;
+            }
+        }
+
+        String result = sb.toString();
+        return result;
     }
 
 
