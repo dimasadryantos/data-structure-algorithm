@@ -2057,6 +2057,16 @@ Most Common Problem LeetCode :
 
 
 
+		//Shopee ID
+		Minimum Qualifications
+		Passionate about coding and programming, innovation, and solving challenging problems
+		Bachelor's or higher degree Computer Science or related fields
+		Hands-on experiences in Web Service frameworks and technologies such as Django, Ruby On Rails, or Node.js
+		Familiar with HTTP protocol
+		Familiar with performance tuning of Web Server, massive concurrency handling, and caching mechanisms
+		In-depth understanding of data structures and other computer science fundamentals
+		Familiar with Linux development environments
+		Knowledge in web security
 
 
 

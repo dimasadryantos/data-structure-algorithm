@@ -6,17 +6,172 @@ import java.util.*;
 public class Main {
 
 
-    private HashMap<Character, Character> mappings;
-
     public static void main(String[] args) {
-        int[] input = {7, 1, 5, 3, 6, 4};
-        System.out.println(maxProfit2(input));
+
+        int[] input = {1, 2, 3, 4};
+        productExceptSelf3(input);
+    }
+
+    /**
+     * int[] input = {2, 4, 1, 2};
+     * codebat print number behind 4
+     *
+     * @param nums
+     * @return
+     */
+    private static int[] post4(int[] nums) {
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] == 4) {
+                int[] result = new int[nums.length - i - 1];
+                for (int j = 0; j < result.length; j++) {
+                    result[j] = nums[i + j + 1];
+                }
+                return result;
+            }
+        }
+        int[] zeroArray = new int[0];
+        return zeroArray;
     }
 
 
     /**
+     * 0ms solution
+     * leetCode product of array except it self
+     * example :
+     * input = {1,2,3,4}
+     * out = {24,12,8,6}
+     */
+    public static int[] productExceptSelf3(int[] input) {
+        int length = input.length;
+        int[] result = new int[length];
+        result[0] = 1;
+        for (int i = 1; i < length; i++) {
+            result[i] = input[i - 1] * result[i - 1];
+        }
+        int checker = 1;
+        for (int j = input.length - 1; j >= 0; j--) {
+            result[j] = result[j] * checker;
+            checker = checker * input[j];
+        }
+        return result;
+    }
+
+
+    /**
+     * 1ms solution
+     * leetCode product of array except it self
+     * example
+     * input = {1,2,3,4}
+     * out = {24,12,8,6}
+     *
+     * @param input
+     * @return
+     */
+    public static int[] productExceptSelf2(int[] input) {
+        int length = input.length;
+
+        int[] leftProduct = new int[length];
+        int[] rightProduct = new int[length];
+        int[] outpurArray = new int[length];
+
+        leftProduct[0] = 1;
+        rightProduct[length - 1] = 1;
+
+        for (int i = 1; i < length; i++) {
+            leftProduct[i] = input[i - 1] * leftProduct[i - 1];
+        }
+
+        for (int j = length - 2; j >= 0; j--) {
+            rightProduct[j] = input[j + 1] * rightProduct[j + 1];
+        }
+
+        for (int k = 0; k < length; k++) {
+            outpurArray[k] = leftProduct[k] * rightProduct[k];
+        }
+
+        for (int i = 0; i < outpurArray.length; i++) {
+            System.out.println(outpurArray[i]);
+        }
+        return outpurArray;
+    }
+
+    /**
+     * my approach multiply execept it self
+     * example
+     * input = {1,2,3,4}
+     * out = {24,12,8,6}
+     *
+     * @param input
+     * @return
+     */
+    public static int[] productExceptSelf(int[] input) {
+        int multiply = 1;
+        int[] result = new int[input.length];
+
+        if (input.length == 1) {
+            return result;
+        }
+
+        for (int i = 0; i < input.length; i++) {
+            for (int j = 0; j < input.length; j++) {
+                if (i != j) {
+                    multiply *= input[j];
+                }
+            }
+            result[i] = multiply;
+            multiply = 1;
+        }
+
+        for (int i = 0; i < result.length; i++) {
+            System.out.println(result[i]);
+        }
+        return result;
+    }
+
+
+    public static int[] fizzArray(int start, int end) {
+
+
+        int[] tempArray = new int[end - start];
+        int index = 0;
+        for (int i = start; i < end; i++) {
+            tempArray[index++] = i;
+        }
+
+
+        for (int j = 0; j < tempArray.length; j++) {
+            System.out.println(tempArray[j]);
+        }
+
+
+        return tempArray;
+    }
+
+
+    /**
+     * samakan index awal dan akhir dengan arr.length - len
+     * codebat
+     * int[] input = {5, 6, 45, 99, 13, 5, 6};
+     * int[] input2 = {1, 2, 5, 2, 1};
+     *
+     * @param arr
+     * @param len
+     * @return
+     */
+    public static boolean sameEnds(int[] arr, int len) {
+        for (int i = 0; i < len; i++) {
+            if (arr[i] != arr[arr.length - len + i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * leetCode maxProfit 0ms solution
      * 121. Best Time to Buy and Sell Stock
+     *
      * @return
      */
     public static int maxProfit2(int[] profit) {
@@ -170,6 +325,7 @@ public class Main {
      * Given an array of ints, return true if the value 3 appears in the array exactly 3 times,
      * and no 3's are next to each other.
      * codebat
+     *
      * @param input
      * @return
      */
