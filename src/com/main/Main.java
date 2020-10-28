@@ -8,8 +8,29 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int[] input = {1, 2, 3, 4};
-        productExceptSelf3(input);
+        int[] input = {2, 10, 3, 4, 20, 5};
+        isTen(input);
+    }
+
+
+    /**
+     * IsTen and twenty codebat
+     * change element after 10 to 10 and after 20 to 20
+     *
+     * int[] input = {2, 10, 3, 4, 20, 5};
+     * to int[] input = {2, 10, 10, 10, 20, 20};
+     * @param input
+     * @return
+     */
+    public static int[] isTen(int[] input) {
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] % 10 == 0) {
+                for (int j = i + 1; j < input.length && !(input[j] % 10 == 0); j++) {
+                    input[j] = input[i];
+                }
+            }
+        }
+        return input;
     }
 
     /**
