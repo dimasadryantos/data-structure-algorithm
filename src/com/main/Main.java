@@ -8,17 +8,127 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int[] input = {2, 10, 3, 4, 20, 5};
-        isTen(input);
+
+    }
+
+    /**
+     * leetCode search with target
+     * <p>
+     * int[] input = {4, 5, 6, 7, 0, 1, 2};
+     * int[] input2 = {1};
+     * findNumberBinarySearch(input, 3);
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public static int findNumberBinarySearch(int[] nums, int target) {
+        if (nums.length == 0) {
+            return -1;
+        }
+
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            int midPoint = (left + right) / 2;
+            if (nums[midPoint] > nums[right]) {
+                left = midPoint + 1;
+            } else {
+                right = midPoint;
+            }
+        }
+
+        int start = left;
+        left = 0;
+        right = nums.length - 1;
+        if (target >= nums[start] && target <= nums[right]) {
+            left = start;
+        } else {
+            right = start;
+        }
+
+        while (left <= right) {
+            int midPoint = (left + right) / 2;
+            if (nums[midPoint] == target) {
+                return midPoint;
+            } else if (nums[midPoint] < target) {
+                left = midPoint + 1;
+            } else {
+                right = midPoint - 1;
+            }
+        }
+        return -1;
+    }
+
+
+    /**
+     * Codebat :Given a string, return true if it ends in "ly".
+     * input : "oddly"
+     *
+     * @return
+     */
+    public static boolean endsLY(String input) {
+        int length = input.length();
+        String LY = "ly";
+        if (input.length() < 2) {
+            return false;
+        }
+        return LY.equals(input.substring(length - 2, length));
+    }
+
+    /**
+     * get middle angka genap codebat challeng
+     *
+     * @param input
+     * @return
+     */
+    public static String middleTwo(String input) {
+        int mid = input.length() / 2;
+        return input.substring(mid - 1, mid + 1);
+    }
+
+    /**
+     * multiply contigious arr return bigest
+     * int[] input = {2, 3, -2, 4};
+     * int[] input2 = {-3, -1, -1};
+     * int[] input3 = {0, 2};
+     * int[] input4 = {-4, -3};
+     * int[] input5 = {-4, -3, -2};
+     * int[] input6 = {-2, 3, -4};
+     * int[] input7 = {2, 3, 1, 4};
+     *
+     * @param input
+     * @return
+     */
+    public static int maxProduct(int[] input) {
+
+        long result = Integer.MIN_VALUE;
+        long findMax = Integer.MIN_VALUE;
+        long findMin = Integer.MAX_VALUE;
+
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] > 0) {
+                findMax = Math.max(input[i], findMax * input[i]);
+                findMin = Math.min(input[i], findMin * input[i]);
+            } else {
+                long temp = findMax;
+                findMax = Math.max(input[i], findMin * input[i]);
+                findMin = Math.min(input[i], temp * input[i]);
+            }
+            result = Math.max(result, findMax);
+        }
+
+        return (int) result;
     }
 
 
     /**
      * IsTen and twenty codebat
      * change element after 10 to 10 and after 20 to 20
-     *
+     * <p>
      * int[] input = {2, 10, 3, 4, 20, 5};
      * to int[] input = {2, 10, 10, 10, 20, 20};
+     *
      * @param input
      * @return
      */
@@ -2051,9 +2161,34 @@ public class Main {
 
     }
 
+    /**
+     * leetCode Problem find minimum with binary search
+     * int[] input = {3, 4, 5, 1, 2};
+     * int[] input2 = {4, 5, 6, 7, 0, 1, 2};
+     *
+     * @param input
+     * @return
+     */
+    public static int findMinBinarySearch(int[] input) {
+        int low = 0;
+        int high = input.length - 1;
+        while (low < high) {
+            int mid = (high + low) / 2;
+            if (input[mid] > input[high]) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return input[low];
+    }
+
 
     /**
-     * Binary Search Using Iterative
+     * Basic Binary Search Using Iterative
+     * int[] input = {-22, -15, 1, 7, 22, 35};
+     * int[] input2 = {1};
+     * iterativeBinarySearch(input2, 0);
      *
      * @param input
      * @param value

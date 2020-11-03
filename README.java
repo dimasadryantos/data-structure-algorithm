@@ -2070,6 +2070,19 @@ Most Common Problem LeetCode :
 
 
 
+		In charge of:
+		- Helping to enhance and validate logic on new feature such as installment and financial revenue calculation
+		- Mentoring to the other colleague
+		- Creating new Restful API for Create, Read, Update, Delete (CRUD) to Database
+		- Creating GraphQL function to integrate with Backend Restful API or GRPC Server
+		- Enhancement and Bug Fixing on the existing Backend services
+		- Integrate backend servicecs to publish message to message queueing (NSQ)
+		- Developing backend services for new product as requested by Business or Product Team
+		- Integrating backend services with Partner API
+		- Day to day operations task such as resolving customer complaints by checking on Backend system
+
+
+
 
 
 
