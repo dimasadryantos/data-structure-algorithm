@@ -9,6 +9,56 @@ public class Main {
     public static void main(String[] args) {
 
 
+
+
+    }
+
+
+    /**
+     * leetCode Container with most water
+     * time complexity O(1)
+     *   int[] input = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+     *   int[] input2 = {4, 3, 2, 1, 4};
+     *
+     * @return
+     */
+    public static int maxArea2(int[] height) {
+        int i = 0;
+        int j = height.length - 1;
+        int max = 0;
+        while (i < j) {
+            int area = (j - i) * Math.min(height[i], height[j]);
+            if (max < area) {
+                max = area;
+            }
+            if (height[i] < height[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return max;
+    }
+
+    /**
+     * leetCode Container with most water (Brute force solution)
+     * time complexity O(n2)
+     *
+     * int[] input = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+     * int[] input2 = {4, 3, 2, 1, 4};
+     *
+     * @param height
+     * @return
+     */
+    public static int maxArea(int[] height) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < height.length; i++) {
+            for (int j = i + 1; j < height.length; j++) {
+                int min = Math.min(height[i], height[j]);
+                max = Math.max(max, min * (j - i));
+            }
+        }
+        return max;
     }
 
     /**
