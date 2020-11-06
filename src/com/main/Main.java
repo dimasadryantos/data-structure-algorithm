@@ -9,16 +9,89 @@ public class Main {
     public static void main(String[] args) {
 
 
+    }
+
+    /**
+     * Longest Substring Without Repeating Chars
+     * LeetCode
+     * 6ms
+     * Time Complexity O(n)
+     * String input = "abcabcbb";
+     * String input2 = "pwwkew";
+     * String input3 = "";
+     * @param input
+     * @return
+     */
+    public static int lengthOfLongestSubstring2(String input) {
+
+        int i = 0;
+        int j = 0;
+        int max = 0;
+
+        HashSet<Character> set = new HashSet<>();
+        //abcabcbb
+        //pwwkew
+        while (j < input.length()) {
+            Character chars = input.charAt(j);
+            if (!set.contains(chars)) {
+                set.add(chars);
+                j++;
+                max = Math.max(max, set.size());
+            } else {
+                set.remove(input.charAt(i));
+                i++;
+            }
+        }
+        return max;
+    }
 
 
+    /**
+     * Brute Force Solution Longest Substring Without Repeating Chars
+     * leetCode
+     * Time Complexity O(n3)
+     * String input = "abcabcbb";
+     * String input2 = "";
+     * String input3  ="au";
+     *
+     * @param input
+     * @return
+     */
+    public static int lengthOfLongestSubstring(String input) {
+        //abcabcbb
+        //pwwkew
+        int length = input.length();
+        int result = 0;
+
+        for (int i = 0; i < length; i++) {
+            for (int j = i + 1; j <= length; j++) {
+                if (allUnique(input, i, j)) {
+                    result = Math.max(result, j - i);
+                }
+            }
+        }
+        return result;
+    }
+
+    public static boolean allUnique(String s, int start, int end) {
+        Set<Character> set = new HashSet<>();
+        for (int i = start; i < end; i++) {
+            Character ch = s.charAt(i);
+            if (set.contains(ch)) {
+                return false;
+            } else {
+                set.add(ch);
+            }
+        }
+        return true;
     }
 
 
     /**
      * leetCode Container with most water
      * time complexity O(1)
-     *   int[] input = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-     *   int[] input2 = {4, 3, 2, 1, 4};
+     * int[] input = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+     * int[] input2 = {4, 3, 2, 1, 4};
      *
      * @return
      */
@@ -43,7 +116,7 @@ public class Main {
     /**
      * leetCode Container with most water (Brute force solution)
      * time complexity O(n2)
-     *
+     * <p>
      * int[] input = {1, 8, 6, 2, 5, 4, 8, 3, 7};
      * int[] input2 = {4, 3, 2, 1, 4};
      *
