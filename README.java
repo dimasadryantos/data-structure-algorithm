@@ -2083,6 +2083,40 @@ Most Common Problem LeetCode :
 
 
 
+		Developing backend services for new product as requested by Business or Product Team
+		Day to day operations task such as resolving customer complaints by checking on Backend system
+		Creating new controller service for Create, Read, Update, Delete (CRUD) to Database
+		Enhancement and Bug Fixing on the existing Backend services
+
+
+
+	    Developing new user-facing features using React.js
+		Building reusable components
+		Consuming rest API from backend in JSON format
+		Implementing the front end web application based on the UI/UX design
+		Ensuring the web application is compatible across different browser platform
+		Participating in requirements, design and code review
+
+
+
+		Dear HR Manager,
+
+		This letter is to express my interest in your posting on LinkedIn for an BackEnd Engineer Java/Golang
+		With a Bachelor’s degree in Information System, and hands-on experience using Java languages to create and implement software applications, I am confident I will be an asset to your organization
+		I’ve attached a copy of my resume that details my projects and experience in software development
+
+		Thank you for your time and consideration. I look forward to speaking with you about this opportunity.
+
+		Sincerely,
+		Dimas Adryanto S
+
+
+
+
+	blog java interview question : https://intellipaat.com/blog/interview-question/cassandra-interview-questions/#4
+
+		fullstackresume.com/blog/backend-developer-resume-sample
+
 
 
 

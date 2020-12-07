@@ -14,6 +14,12 @@ public class Employee {
     }
 
 
+    public void mailCheck(){
+        System.out.println("Emp class");
+    }
+
+
+
     public String getFirstName() {
         return firstName;
     }

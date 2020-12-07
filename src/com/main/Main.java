@@ -1,7 +1,10 @@
 package com.main;
 
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -9,6 +12,1525 @@ public class Main {
     public static void main(String[] args) {
 
 
+        int input = 1041;
+
+        String toBinary = Integer.toBinaryString(input);
+        int maxZero = 0;
+        int zero = 0;
+        for (int i = 0; i < toBinary.length(); i++) {
+            char chars = toBinary.charAt(i);
+            if (chars == '1') {
+                maxZero = Math.max(maxZero, zero);
+                zero = 0;
+            } else {
+                zero++;
+            }
+        }
+        System.out.println(maxZero);
+
+    }
+
+
+    /**
+     * @return
+     */
+    public static int[] findPairsOf2(int[] arr, int target) {
+
+        Map<Integer, Integer> dataMap = new HashMap<>();
+        int[] result = new int[]{0, 1};
+
+        if (arr.length == 2) {
+            return result;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            int reminder = target - arr[i];
+            if (dataMap.containsKey(reminder)) {
+                result = new int[]{dataMap.get(reminder), i};
+                break;
+            } else {
+                dataMap.put(arr[i], i);
+            }
+        }
+
+
+        return result;
+    }
+
+    /**
+     * Print Prime number with adding more 2 hashset
+     * with O(n2) Time Complexity
+     * O(1) Space Complexity
+     * //2,3
+     *
+     * @param input
+     */
+    public static void printPrimes(int input) {
+        int counter;
+        for (int i = 2; i <= input * 2; i++) {
+            counter = 0;
+            if (i > 2 && i % 2 == 0) {
+                counter++;
+            }
+            if (counter == 0) {
+                System.out.println(i);
+            }
+
+        }
+
+    }
+
+    /**
+     * Advotics find pairs of integer based on sum of K
+     * Time Complexity O(n)
+     * Space Complexity O(n) using HashSet
+     *
+     * @param randomInt
+     * @param k
+     */
+    static void getPairs(int randomInt[], int k) {
+       /*
+        int randomInt[] = {1, 4, 45, 6, 10, 8};
+        int k = 16;
+        */
+
+        int length = randomInt.length;
+        HashSet<Integer> dataMap = new HashSet<>();
+        for (int i = 0; i < length; ++i) {
+            int temp = k - randomInt[i];
+            if (dataMap.contains(temp)) {
+                System.out.println("Pair Of K " + "(" + randomInt[i] + ", " + temp + ")");
+            }
+            dataMap.add(randomInt[i]);
+        }
+    }
+
+
+
+
+
+   /* public static boolean isPalindrome(String input) {
+
+
+        String inputToLower = input.toLowerCase();
+
+        for (int i = 0; i < inputToLower.length(); i++) {
+            char chars = inputToLower.charAt(i);
+            if (chars >= 'a' && chars <= 'z') {
+
+            }
+        }
+
+
+    }*/
+
+
+    public static int lengthOfList(int[] nums) {
+        return lengthOfList(nums, Integer.MIN_VALUE, 0);
+    }
+
+
+    public static int lengthOfList(int[] nums, int prev, int current) {
+        //current=0;
+        //{0,1,0,3,2,3}
+        //Integer.MIN_VALUE
+
+        if (current == nums.length) {
+            return 0;
+        }
+
+        int taken = 0;
+        if (nums[current] > prev) {
+            taken = 1 + lengthOfList(nums, nums[current], current + 1);
+        }
+
+        int notTaken = lengthOfList(nums, prev, current + 1);
+
+        return Math.max(taken, notTaken);
+    }
+
+
+    /**
+     * Hackerank Common Child = find subsequence string
+     * String input10 = "TERRACED";
+     * String input9 = "CRATERED";
+     * <p>
+     * String input3 = "SHINCHAN";
+     * String input4 = "NOHARAAA";
+     * <p>
+     * String input5 = "ABCDEF";
+     * String input6 = "FBDAMN";
+     *
+     * @param str1
+     * @param str2
+     * @return
+     */
+    public static int commonChild2(String str1, String str2) {
+        int length = str1.length();
+        char[] input1 = str1.toCharArray();
+        char[] input2 = str2.toCharArray();
+        int[] memo = new int[length + 1];
+
+        for (int i = 1; i <= length; i++) {
+            int prev = 0;
+            for (int j = 1; j <= length; j++) {
+
+                int temp = memo[j];
+
+                if (input1[i - 1] == input2[j - 1]) {
+                    memo[j] = prev + 1;
+                } else {
+                    memo[j] = Math.max(memo[j], memo[j - 1]);
+                }
+                prev = temp;
+            }
+        }
+        return memo[length];
+    }
+
+
+    public static int commonChild(String str1, String str2) {
+
+        int inputLength = str1.length();
+        Map<Character, Integer> words = new HashMap<>();
+
+        int count = 0;
+        int countMax = 0;
+
+        for (int i = 0; i < inputLength; i++) {
+            char chars = str1.charAt(i);
+            words.put(chars, words.getOrDefault(chars, 0) + 1);
+        }
+
+        for (int j = 0; j < inputLength; j++) {
+            char chars = str2.charAt(j);
+            if (words.containsKey(chars)) {
+                // words.put(chars, words.get(chars) - 1);
+                count++;
+            }
+        }
+
+        if (count > 3) {
+            count /= 2;
+        }
+        return count;
+    }
+
+
+    /**
+     * hackerank count minus values contigious
+     * time complexity O(N2)
+     *
+     * @return
+     */
+    public static int countMinus(int[] arrays) {
+        int count = 0;
+        for (int i = 0; i < arrays.length; i++) {
+            int sum = 0;
+            for (int j = i; j < arrays.length; j++) {
+                sum = arrays[j] + sum;
+                if (sum < 0) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public static void javaStringTokens(String input) {
+
+        if (input.trim().isEmpty()) {
+            System.out.println(0);
+            return;
+        }
+
+        String regex = "[!?,._'@\\s]+";
+        String[] splits = input.split(regex);
+
+        int length = splits.length;
+        System.out.println(length);
+        for (int i = 0; i < length; i++) {
+            System.out.println(splits[i]);
+        }
+    }
+
+
+    public static boolean anagramImprove(String A, String B) {
+        if (A.length() != B.length()) {
+            return false;
+        }
+        char[] inputA = A.toLowerCase().toCharArray();
+        char[] inputB = B.toLowerCase().toCharArray();
+        Arrays.sort(inputA);
+        Arrays.sort(inputB);
+
+        for (int i = 0; i < inputA.length; i++) {
+            if (inputA[i] != inputB[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean compareAnagram(String A, String B) {
+
+        int[] alphabetA = new int[26];
+        int[] alphabetB = new int[26];
+        String inputA = A.toLowerCase();
+        String inputB = B.toLowerCase();
+
+        for (int i = 0; i < inputA.length(); i++) {
+            char chars = inputA.charAt(i);
+            alphabetA[chars - 'a']++;
+        }
+
+        for (int j = 0; j < inputB.length(); j++) {
+            char chars = inputB.charAt(j);
+            alphabetB[chars - 'a']++;
+        }
+
+        int result = 0;
+        for (int i = 0; i < 26; i++) {
+            result += Math.abs(alphabetA[i] - alphabetB[i]);
+        }
+
+        if (result > 0) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+
+    /**
+     * find palindrome without data structure
+     * <p>
+     * String input1 = "madam";
+     */
+    public static boolean isPalindromeNew(String A) {
+        String B = A;
+        //A = madam
+        //B = madam
+        int length = A.length() - 1;
+        boolean isPalindrome = false;
+        int i = 0;
+        while (length > i) {
+            char charsA = A.charAt(i);
+            char charsB = B.charAt(length);
+
+            if (charsA == charsB) {
+                isPalindrome = true;
+            } else {
+                isPalindrome = false;
+            }
+            length--;
+            i++;
+        }
+        if (isPalindrome) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Hackerank Java Substring Comparisons
+     * <p>
+     * String input = "welcometojava";
+     *
+     * @param input
+     * @param k
+     * @return
+     */
+    public static String getSmallestAndLargest(String input, int k) {
+        String current = input.substring(0, k);
+        String smallest = current;
+        String largest = current;
+
+        for (int i = 1; i <= input.length() - k; i++) {
+            current = input.substring(i, i + k);
+
+            if (current.compareTo(largest) > 0) {
+                largest = current;
+            }
+
+            if (current.compareTo(smallest) < 0) {
+                smallest = current;
+            }
+        }
+
+        return smallest + "\n" + largest;
+    }
+
+
+    /**
+     * Hackerank Practice Sherlock and the Valid String
+     * String input2 = "abcdefghhgfedecba";
+     * String input1 = "aabbcd";
+     * String input3 = "xxxaabbccrry";
+     * <p>
+     * Output : "Yes / No"
+     *
+     * @param input
+     * @return
+     */
+    public static String isValid(String input) {
+        //aabbcd
+        //abcdefghhgfedecba
+
+        int length = input.length();
+        int[] charsArr = new int[26];
+
+        for (int i = 0; i < length; i++) {
+            char chars = input.charAt(i);
+            if (chars >= 'a' && chars <= 'z') {
+                charsArr[chars - 'a']++;
+            }
+        }
+        Arrays.sort(charsArr);
+
+        int start = 0;
+        while (charsArr[start] == 0) {
+            start++;
+        }
+        int letterLength = charsArr.length;
+        int min = 0;
+
+        if (charsArr[start] == charsArr[letterLength - 1]) {
+            return "YES";
+        } else {
+            for (int i = start; i < letterLength - 1; i++) {
+                while ((letterLength - 1) > i) {
+                    min += Math.abs(charsArr[i] - charsArr[letterLength - 1]);
+                    letterLength--;
+                    i++;
+                }
+            }
+        }
+
+
+        if (min == 1 || min == (charsArr[letterLength - 1] - 1)) {
+            return "YES";
+        } else {
+            return "NO";
+        }
+    }
+
+
+    /**
+     * leetcode Min Cost Climbing Stairs second approach
+     * int[] input1 = {10, 15, 20};
+     * int[] input = {0, 1, 2, 2};
+     * int[] input3 = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+     *
+     * @param cost
+     * @return
+     */
+    public static int minCostClimbingStairs1(int[] cost) {
+        for (int i = 2; i < cost.length; i++) {
+            cost[i] = Math.min(cost[i - 1], cost[i - 2]);
+        }
+        return Math.min(cost[cost.length - 1], cost[cost.length - 2]);
+    }
+
+    /**
+     * leetcode Min Cost Climbing Stairs
+     * int[] input1 = {10, 15, 20};
+     * int [] input = {0,1,2,2};
+     * int[] input3 = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+     *
+     * @param cost
+     * @return
+     */
+    public static int minCostClimbingStairs(int[] cost) {
+        //10,15,20
+        int min;
+        int[] stairs = new int[cost.length];
+        stairs[0] = cost[0];
+        stairs[1] = cost[1];
+        int sum;
+        for (int i = 2; i < cost.length; i++) {
+            sum = cost[i] + Math.min(stairs[i - 1], stairs[i - 2]);
+            stairs[i] = sum;
+        }
+        min = Math.min(stairs[stairs.length - 1], stairs[stairs.length - 2]);
+        return min;
+    }
+
+    /**
+     * Codebat modify fizzbuzz use array
+     * time complexity O(n)
+     * space complexity O(1)
+     * fizzBuzz(1, 4);
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    public static String[] fizzBuzz(int start, int end) {
+        String[] data = new String[end - 1];
+        int index = 0;
+        for (int i = start; i < end; i++) {
+            if (i % 15 == 0) {
+                data[index++] = "FizzBuzz";
+            } else if (i % 5 == 0) {
+                data[index++] = "Buzz";
+            } else if (i % 3 == 0) {
+                data[index++] = "Fizz";
+            } else {
+                data[index++] = String.valueOf(i);
+            }
+        }
+        return data;
+    }
+
+
+    /**
+     * codebat move even to front odd to end
+     * int[] input = {1, 0, 1, 0, 0, 1, 1};
+     * int[] input2 = {3, 3, 2};
+     * Time complexity O(n2)
+     * Space Complexity O(1)
+     *
+     * @param input
+     * @return
+     */
+    public static int[] evenOddNoArr(int[] input) {
+        //2,3,3
+        //0,0,0,1,1,1,1
+        for (int i = 0; i < input.length; i++) {
+            for (int j = 0; j < input.length - 1; j++) {
+                if (input[j] % 2 == 1 && input[j] != input[j + 1]) {
+                    int temp = input[j + 1];
+                    input[j + 1] = input[j];
+                    input[j] = temp;
+                }
+            }
+        }
+        return input;
+    }
+
+    /**
+     * codebat move even to front odd to end
+     * int[] input = {1, 0, 1, 0, 0, 1, 1};
+     * int[] input2 = {2, 2, 2};
+     * Time Complexity O(n)
+     * Space Complexity O(n)
+     *
+     * @param input
+     * @return
+     */
+    public static int[] evenOdd(int[] input) {
+        //1, 0, 1, 0, 0, 1, 1
+        int[] numbers = new int[input.length];
+        int putLast = input.length - 1;
+        int checker = 0;
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] % 2 == 0) {
+                numbers[checker++] = input[i];
+            } else {
+                numbers[putLast--] = input[i];
+            }
+        }
+        return numbers;
+    }
+
+
+    public static int climbStairsButtomUp(int n) {
+        int[] memo = new int[n + 1];
+        memo[1] = 1;
+        memo[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            memo[i] = memo[i - 1] + memo[i - 2];
+        }
+        return memo[n];
+    }
+
+
+    public static int climbStairs(int n) {
+        int[] memo = new int[n + 1];
+        return climbStairs2(n, memo);
+    }
+
+    /**
+     * leetcode
+     *
+     * @param n
+     * @param memo
+     * @return
+     */
+    public static int climbStairs2(int n, int[] memo) {
+        if (memo[n] != 0) {
+            return memo[n];
+        }
+
+        if (n == 0) {
+            return 1;
+        } else if (n == 1) {
+            return 1;
+        }
+        int recursive = climbStairs2(n - 1, memo);
+        int recursive2 = climbStairs2(n - 2, memo);
+        int sum = recursive + recursive2;
+        memo[n] = sum;
+        return sum;
+
+    }
+
+
+    public static int countX(String str) {
+        int count = 1;
+        if (str.equals("")) {
+            return 0;
+        }
+
+        if (str.charAt(0) == 'x') {
+            int recurSive = countX(str.substring(1));
+            return count + recurSive;
+        } else {
+            int recurSive2 = countX(str.substring(1));
+            return recurSive2;
+        }
+    }
+
+
+    public static int powerN(int base, int n) {
+        if (n == 0) {
+            return 1;
+        }
+        int result = powerN(base, n - 1);
+        int power = base * result;
+        return power;
+    }
+
+
+    public static int bunnyEarss(int bunnies) {
+        if (bunnies == 0) {
+            return 0;
+        } else if (bunnies == 1) {
+            return 1;
+        }
+        int result = 2 * bunnyEarss(bunnies - 1);
+        return result;
+    }
+
+    /**
+     * @param n
+     * @return
+     */
+    public static int factorialCodebat(int n) {
+        //faktorial 3 = 3 * 2 * 1 = 6
+        if (n == 1) {
+            return 1;
+        }
+        int result = n * factorialCodebat(n - 1);
+        return result;
+    }
+
+
+    public static int sumRecursive(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        int nums = sumRecursive(n - 1);
+        int sums = nums + 2;
+        return sums;
+    }
+
+    /**
+     * CS Dojo
+     * fibonaci with Memoaized solution this perform better than usual
+     * recursive fibonaci because we save to the array and not compute unnecesary tree
+     * Time Complexity O(n)
+     *
+     * @param n
+     * @param memo
+     * @return
+     */
+    public static int fibonaciCodeBat(int n, int[] memo) {
+        //1, 1, 2, 3, 5, 8, 13, 21
+        int result = 0;
+        if (memo[n] != 0) {
+            return memo[n];
+        }
+        if (n == 1 || n == 2) {
+            return 1;
+        } else {
+            int fib1 = fibonaciCodeBat(n - 1, memo);
+            int fib2 = fibonaciCodeBat(n - 2, memo);
+            result = fib1 + fib2;
+            memo[n] = result;
+        }
+        return result;
+    }
+
+    /**
+     * CS Dojo
+     * Dynamic programming Bottom-up approach
+     * Time Complexity O(N) Better than usual recursive
+     *
+     * @param n
+     * @return
+     */
+    public static int fibonaciBU(int n) {
+        //1, 1, 2, 3, 5, 8, 13, 21
+        if (n == 1 || n == 2) {
+            return 1;
+        }
+        int[] tempArr = new int[n + 1];
+        tempArr[1] = 1;
+        tempArr[2] = 1;
+
+        for (int i = 3; i <= n; i++) {
+            tempArr[i] = tempArr[i - 1] + tempArr[i - 2];
+        }
+        return tempArr[n];
+    }
+
+    public static int singleNumber4(int[] input) {
+        Arrays.sort(input);
+        //1,1,2,2,4
+        for (int i = 0; i < input.length - 1; i++) {
+            if (input[i] != input[i + 1]) {
+                return input[i];
+            } else {
+                i++;
+            }
+        }
+        return input[input.length - 1];
+    }
+
+
+    public static int singleNumber3(int[] input) {
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < input.length; i++) {
+            if (set.contains(input[i])) {
+                set.remove(input[i]);
+            } else {
+                set.add(input[i]);
+            }
+        }
+
+        for (int x : set) {
+            return x;
+        }
+        return input[0];
+    }
+
+
+    public static int singleNumber2(int[] input) {
+        int count = 0;
+        for (int values : input) {
+            count ^= values;
+        }
+        return count;
+    }
+
+    /**
+     * int[] nums1 = {4, 1, 2, 1, 2};
+     * int[] nums = {2, 2, 1};
+     *
+     * @param input
+     * @return
+     */
+    public static int singleNumber(int[] input) {
+        //2,2,1
+        //4,1,2,1,2
+        int length = input.length;
+        int result = 0;
+
+        Map<Integer, Integer> dataMap = new HashMap<>();
+        for (int i = 0; i < length; i++) {
+            dataMap.put(input[i], dataMap.getOrDefault(input[i], 0) + 1);
+        }
+
+        for (int i = 0; i < length; i++) {
+            if (dataMap.get(input[i]) == 1) {
+                result = input[i];
+                break;
+            }
+        }
+
+        return result;
+    }
+
+
+    /**
+     * LeetCode First Unique Character in a String
+     * 2n approach 7ms
+     * String input = "leetcode";
+     * String input2 = "loveleetcode";
+     *
+     * @param input
+     * @return
+     */
+    public static int firstUniqueChar1(String input) {
+        int length = input.length();
+        int[] alphabet = new int[26];
+
+        for (int i = 0; i < length; i++) {
+            char chars = input.charAt(i);
+            alphabet[chars - 'a']++;
+        }
+
+        for (int j = 0; j < length; j++) {
+            char chars = input.charAt(j);
+            if (alphabet[chars - 'a'] == 1) {
+                return j;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * LeetCode First Unique Character in a String
+     * String input = "leetcode";
+     * String input2 = "loveleetcode";
+     *
+     * @return
+     */
+    public static int firstUniqueChar(String input) {
+        //loveleetcode
+
+        Map<Character, Integer> valuesMap = new HashMap<>();
+        for (int i = 0; i < input.length(); i++) {
+            char chars = input.charAt(i);
+            valuesMap.put(chars, valuesMap.getOrDefault(chars, 0) + 1);
+        }
+
+        for (int j = 0; j < input.length(); j++) {
+            if (valuesMap.get(input.charAt(j)) == 2) {
+                return j;
+            }
+        }
+        return -1;
+    }
+
+
+    /**
+     * HackerRank Problem Return Day from date
+     *
+     * @param day
+     * @param month
+     * @param year
+     * @return
+     */
+    public static String dateParse(int day, int month, int year) {
+        String getDay = "";
+        try {
+            String dateStr = String.valueOf(month).concat(" ").concat(String.valueOf(day)).concat(" ").concat(String.valueOf(year));
+            String format = "MM dd yyyy";
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            Date date = sdf.parse(dateStr);
+            getDay = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date);
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return getDay.toUpperCase();
+    }
+
+    /**
+     * Hackerank Sharelock And Anagram
+     * find pair anagram and count
+     * String input  = "abba";
+     *
+     * @param input
+     * @return
+     */
+    public static int sherlockAndAnagrams(String input) {
+        int length = input.length();
+        Map<String, Integer> valuesMap = new HashMap<>();
+
+        for (int i = 0; i < length; i++) {
+            for (int j = i; j < length; j++) {
+                char[] chars = input.substring(i, j + 1).toCharArray();
+                Arrays.sort(chars);
+                String key = String.copyValueOf(chars);
+
+                if (!valuesMap.containsKey(key)) {
+                    valuesMap.put(key, 1);
+                } else {
+                    valuesMap.put(key, valuesMap.get(key) + 1);
+                }
+            }
+        }
+        return countPairAnagrams(valuesMap);
+    }
+
+    /**
+     * Method to count annagram paired using COMBINATION formula
+     *
+     * @param valuesMap
+     * @return
+     */
+    public static int countPairAnagrams(Map<String, Integer> valuesMap) {
+        int countPairAnagrams = 0;
+        for (String key : valuesMap.keySet()) {
+            int values = valuesMap.get(key);
+            countPairAnagrams += (values * (values - 1)) / 2;
+        }
+        return countPairAnagrams;
+    }
+
+
+    /**
+     * Codebat problem move zero to front 3rd approach best solution
+     * <p>
+     * time complexity O(n)
+     * space complexity O(1)
+     * <p>
+     * int[] input1 = {0, 0, 1, 1};
+     * int[] input2 = {0, 1, 1, 0, 1};
+     * int[] input = {0, -3, 0, -3};
+     * int[] input4 = {9, 9, 0, 9, 0, 9};
+     *
+     * @param input
+     * @return
+     */
+    public static int[] zeroFron3rd(int[] input) {
+        int count = 0;
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] == 0) {
+                input[i] = input[count];
+                input[count] = 0;
+                count++;
+            }
+        }
+        return input;
+    }
+
+    /**
+     * Codebat problem move zero to front 2nd approach
+     * <p>
+     * int[] input1 = {0, 0, 1, 1};
+     * int[] input2 = {0, 1, 1, 0, 1};
+     * int[] input3 = {0, -3, 0, -3};
+     * int[] input = {9, 9, 0, 9, 0, 9};
+     * <p>
+     * time compexity O(n)
+     * space complexity (On2)
+     *
+     * @param input
+     * @return
+     */
+    public int[] zeroFront2nd(int[] input) {
+        if (input.length == 0) {
+            return input;
+        }
+
+        int[] temp = new int[input.length];
+
+        int index = 0;
+        for (int values : input) {
+            if (values == 0) {
+                temp[index++] = values;
+            }
+        }
+
+        for (int values : input) {
+            if (values != 0) {
+                temp[index++] = values;
+            }
+        }
+        return input;
+    }
+
+
+    /**
+     * Codebat problem move zero to front
+     * <p>
+     * int[] input1 = {0, 0, 1, 1};
+     * int[] input2 = {0, 1, 1, 0, 1};
+     * int[] input3 = {0, -3, 0, -3};
+     * int[] input = {9, 9, 0, 9, 0, 9};
+     * time complexity O(n2)
+     * space complexity O(1)
+     *
+     * @param nums
+     * @return
+     */
+    public int[] zeroFront(int[] nums) {
+        if (nums.length == 0) {
+            return nums;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < nums.length - 1; j++) {
+                if (nums[j] != 0 && nums[j] != nums[j + 1]) {
+                    int temp = nums[j + 1];
+                    nums[j + 1] = nums[j];
+                    nums[j] = temp;
+                }
+            }
+        }
+        return nums;
+    }
+
+
+    /**
+     * Hackerank find common substring improve nick white approach
+     * String input1 = "hello";
+     * String input2 = "world";
+     * <p>
+     * String input = "hi";
+     * String input3 = "world";
+     *
+     * @param input1
+     * @param input2
+     * @return
+     */
+    public static HashSet twoStrings(String input1, String input2) {
+        HashSet<Character> set1 = new HashSet<>();
+        HashSet<Character> set2 = new HashSet<>();
+        char chars;
+        for (int i = 0; i < input1.length(); i++) {
+            chars = input1.charAt(i);
+            set1.add(chars);
+        }
+
+        for (int j = 0; j < input2.length(); j++) {
+            chars = input2.charAt(j);
+            set2.add(chars);
+        }
+        set1.retainAll(set2);
+
+        /*if (!set1.isEmpty()) {
+            return "YES";
+        } else {
+            return "NO";
+        }*/
+        return set1;
+    }
+
+
+    /**
+     * Hackerank find common substring first approach
+     * <p>
+     * String input1 = "hello";
+     * String input2 = "world";
+     * String input = "hi";
+     * String input3 = "world";
+     *
+     * @param input1
+     * @param input2
+     * @return
+     */
+    static String twoStrings1(String input1, String input2) {
+
+        Map<Character, Integer> valuesMap = new HashMap<>();
+        for (int i = 0; i < input1.length(); i++) {
+            char chars = input1.charAt(i);
+            if (!valuesMap.containsKey(chars)) {
+                valuesMap.put(chars, 1);
+            } else {
+                valuesMap.put(chars, valuesMap.get(chars) + 1);
+            }
+        }
+
+        boolean isCommon = false;
+        for (int j = 0; j < input2.length(); j++) {
+            char chars = input2.charAt(j);
+            if (valuesMap.containsKey(chars)) {
+                valuesMap.put(chars, valuesMap.get(chars) - 1);
+                isCommon = true;
+            }
+        }
+
+        if (isCommon) {
+            return "YES";
+        } else {
+            return "NO";
+        }
+    }
+
+
+    /**
+     * just reminder hackerank of check magazine problem
+     * <p>
+     * String[] magazine1 = {"give", "me", "one", "grand", "today", "night"};
+     * String[] note1 = {"give", "one", "grand", "today"};
+     * String[] magazine = {"two", "times", "three", "is", "not", "four"};
+     * String[] note = {"two", "times", "two", "is", "four"};
+     * Time Complexity : O(n)
+     *
+     * @param magazine
+     * @param note
+     */
+    public static void checkMagazinee(String[] magazine, String[] note) {
+        Map<String, Integer> valuesMap = new HashMap<>();
+        for (String values : magazine) {
+            if (!valuesMap.containsKey(values)) {
+                valuesMap.put(values, 1);
+            } else {
+                valuesMap.put(values, valuesMap.get(values) + 1);
+            }
+        }
+
+        for (int i = 0; i < note.length; i++) {
+            if (valuesMap.containsKey(note[i])) {
+                valuesMap.put(note[i], valuesMap.get(note[i]) - 1);
+            } else {
+                System.out.println("No");
+                return;
+            }
+            if (valuesMap.get(note[i]) == -1) {
+                System.out.println("NO");
+                return;
+            }
+        }
+        System.out.println("Yes");
+    }
+
+    /**
+     * codebat problem replace zero with right bigest odd values
+     * int[] nums1 = {7, 0, 1, 0, 0, 7};
+     * int[] nums = {0, 5, 0, 3};
+     *
+     * @param nums
+     * @return
+     */
+    public static int[] zeroMax(int[] nums) {
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                for (int j = i + 1; j < nums.length; j++) {
+                    if (nums[j] % 2 == 1) {
+                        max = Math.max(max, nums[j]);
+                    }
+                }
+                nums[i] = max;
+                max = 0;
+            }
+        }
+        return nums;
+    }
+
+    /**
+     * codebat problem replace 10 with zero and move to the last array
+     * int[] input1 = {1, 2, 10, 10};
+     * int[] input = {10, 2, 10};
+     * int[] input3 = {1, 99, 10};
+     *
+     * @param nums
+     * @return
+     */
+    static int[] withoutTen(int[] nums) {
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            if (nums[i] == 10) {
+                for (int j = i; j < len - 1; j++) {
+                    nums[j] = nums[j + 1];
+                }
+                nums[len - 1] = 0;
+                i--;
+            }
+        }
+        return nums;
+    }
+
+    /**
+     * leet code count palindrome
+     * String input = "abc";
+     * String input2 = "aaa";
+     *
+     * @param input
+     * @return
+     */
+    public static int countSubstringPalindrome(String input) {
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            count += countPalindrome(input, i, i);
+            count += countPalindrome(input, i, i + 1);
+        }
+        return count;
+    }
+
+    public static int countPalindrome(String input, int left, int right) {
+        int count = 0;
+        while (left >= 0 && right < input.length() && input.charAt(left) == input.charAt(right)) {
+            left--;
+            right++;
+            count++;
+        }
+        return count;
+    }
+
+    /**
+     * Hackerank special string final approach
+     * <p>
+     * String input6 = "aaaa";
+     * String input7 = "asasd";
+     * <p>
+     * <p>
+     * time complexity O(N2)
+     * memory O(1)
+     *
+     * @param input
+     * @return
+     */
+    public static long specialString2(String input) {
+        long result = input.length();
+        for (int i = 0; i < input.length(); i++) {
+
+            int count = 0;
+            while (i + 1 < input.length() && input.charAt(i) == input.charAt(i + 1)) {
+                i++;
+                count++;
+            }
+            result += (count * (count + 1)) / 2;
+            result += countFromMiddle(input, i);
+        }
+        return result;
+    }
+
+
+    public static int countFromMiddle(String input, int i) {
+        int pointer = 1;
+        int count = 0;
+        while (i - pointer >= 0 && i + pointer < input.length()
+                && input.charAt(i - 1) == input.charAt(i + pointer)
+                && input.charAt(i - 1) == input.charAt(i - pointer)) {
+            count++;
+            pointer++;
+        }
+        return count;
+    }
+
+    /**
+     * Hackerank problem count special string
+     * <p> first approach
+     * String input3 = "abcbaba";
+     * return 10
+     * string input = "aaaa";
+     * return 10
+     *
+     * @param length
+     * @param input
+     * @return
+     */
+    public static int specialString(int length, String input) {
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            count += countPalindrome(input, i, i + 1);
+            count += countSpecialString1(input, i);
+        }
+        return count + length;
+    }
+
+
+    public static int countSpecialString1(String input, int i) {
+        int pointer = 1;
+        int count = 0;
+        while (i >= 1 && i + pointer < input.length() && input.charAt(i - 1) == input.charAt(i + pointer)
+                && input.charAt(i - pointer) == input.charAt(i - 1)) {
+            pointer++;
+            count++;
+        }
+        return count;
+    }
+
+
+    public static int countSPecialString(String input, int i) {
+        //abcbaba
+        int count = 0;
+        int pointer = 1;
+        while (i - pointer >= 0 && i + pointer < input.length() && input.charAt(i + pointer) == input.charAt(i - 1)
+                && input.charAt(i - pointer) == input.charAt(i - 1)) {
+            count++;
+            pointer++;
+        }
+
+        return count;
+    }
+
+    /**
+     * codebat problem
+     * int[] input = {1, 2, 3};
+     * int[] input2 = {1, 2, 3, 2, 5, 2};
+     * val 2
+     *
+     * @param nums
+     * @param val
+     * @return
+     */
+    public static int[] notAlone(int[] nums, int val) {
+
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == val && i > 0) {
+                if (nums[i] != nums[i - 1] && nums[i] != nums[i + 1]) {
+                    if (nums[i - 1] > nums[i + 1]) {
+                        nums[i] = nums[i - 1];
+                    } else if (nums[i - 1] < nums[i + 1]) {
+                        nums[i] = nums[i + 1];
+                    }
+                }
+            }
+        }
+
+        return nums;
+
+    }
+
+
+    /**
+     * leetCode Longest Palindrome
+     * <p>
+     * String input = "babad";
+     * String input2 = "cbbd";
+     * String input3 = "racecar";
+     * String input4 = "aabbaa";
+     *
+     * @param s
+     * @return
+     */
+    public static String longestPalindrome(String s) {
+        if (s == null || s.length() < 1) {
+            return "";
+        }
+
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int len1 = expandFromMiddle(s, i, i);
+            int len2 = expandFromMiddle(s, i, i + 1);
+            int len = Math.max(len1, len2);
+            if (len > end - start) {
+                start = i - ((len - 1) / 2);
+                end = i + (len / 2);
+            }
+        }
+        return s.substring(start, end + 1);
+    }
+
+
+    public static int expandFromMiddle(String s, int left, int right) {
+        if (s == null || left > right) {
+            return 0;
+        }
+
+        while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
+    }
+
+
+    /**
+     * leetCode problem Group Anagrams
+     *
+     * @param input
+     * @return String[] input = {"eat", "tea", "tan", "ate", "nat", "bat"};
+     */
+    public static List<List<String>> groupAnagrams(String[] input) {
+
+        if (input.length == 0) return new ArrayList();
+
+        Map<String, List> dataMap = new HashMap<>();
+
+        for (String values : input) {
+            char[] ca = values.toCharArray();
+            Arrays.sort(ca);
+            String key = String.valueOf(ca);
+
+            if (!dataMap.containsKey(key)) {
+                dataMap.put(key, new ArrayList());
+            }
+
+            dataMap.get(key).add(values);
+        }
+
+        return new ArrayList(dataMap.values());
+    }
+
+    /**
+     * LeetCode Valid Anna Gram
+     * <p>
+     * String input1 = "anagram";
+     * String input2 = "nagaram";
+     *
+     * @param input1
+     * @param input2
+     * @return
+     */
+    public static boolean isAnagram2(String input1, String input2) {
+
+        int length1 = input1.length();
+        int length2 = input2.length();
+
+        if (length1 != length2) {
+            return false;
+        }
+
+        int[] stored1 = new int[26];
+        int[] stored2 = new int[26];
+
+        for (int i = 0; i < length1; i++) {
+            char chars = input1.charAt(i);
+            if (chars >= 'a' && chars <= 'z') {
+                stored1[input1.charAt(i) - 'a']++;
+            }
+        }
+
+        for (int j = 0; j < length2; j++) {
+            char chars2 = input2.charAt(j);
+            if (chars2 >= 'a' && chars2 <= 'z') {
+                stored2[input2.charAt(j) - 'a']++;
+            }
+
+        }
+
+        int result = 0;
+        for (int k = 0; k < 26; k++) {
+            result += Math.abs(stored1[k] - stored2[k]);
+        }
+
+        if (result == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * leetCode longest repeating character replacement
+     *
+     * @param s
+     * @param k
+     * @return
+     */
+    public static int characterReplacement(String s, int k) {
+
+        int N = s.length();
+        int window_start = 0;
+        int max_length = 0;
+        int[] char_counts = new int[26];
+        int max_count = 0;
+
+        for (int window_end = 0; window_end < N; window_end++) {
+            char_counts[s.charAt(window_end) - 'A']++;
+            int current_char_count = char_counts[s.charAt(window_end) - 'A'];
+            max_count = Math.max(max_count, current_char_count);
+
+            while (window_end - window_start - max_count + 1 > k) {
+                char_counts[s.charAt(window_start) - 'A']--;
+                window_start++;
+            }
+            max_length = Math.max(max_length, window_end - window_start + 1);
+        }
+        return max_length;
+    }
+
+    /**
+     * leetCode reverse String
+     * char[] input = {'h', 'e', 'l', 'l', 'o'};
+     *
+     * @param input
+     */
+    public static void reverseString(char[] input) {
+        int start = 0;
+        int ends = input.length - 1;
+        while (start < ends) {
+            char temp = input[start];
+            input[start++] = input[ends];
+            input[ends--] = temp;
+        }
+    }
+
+    /**
+     * codebat problem find "hi" and count
+     * String input = "hihi";
+     * String input2 = "ABChi hi";
+     *
+     * @return
+     */
+    public static int countHi(String input) {
+        int count = 0;
+
+        //first approach
+        for (int i = 0; i < input.length() - 1; i++) {
+            if (input.charAt(i) == 'h' && input.charAt(i + 1) == 'i') {
+                count++;
+            }
+        }
+
+        //second approach using substring
+        for (int i = 0; i < input.length() - 1; i++) {
+            if (input.substring(i, i + 2).equals("hi")) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+    /**
+     * codebat problem add more string
+     * input :
+     * The to tthhee
+     *
+     * @param input
+     * @return
+     */
+    public static String addMoreString(String input) {
+        String result = "";
+        for (int i = 0; i < input.length(); i++) {
+            char chars = input.charAt(i);
+            result += chars;
+            result += chars;
+        }
+        return result;
+    }
+
+
+    /**
+     * LeetCode Largest Substring Between Two Equal Characters
+     * Time Complexity if found first and last will be O(n)
+     * run time 4ms
+     * if not will be O(n2)
+     * String input = "abba";
+     * String input2 = "cabbac";
+     * String input3 = "cbzxy";
+     * String input4 = "scayofdzca";
+     *
+     * @param s
+     * @return
+     */
+    public int maxLengthBetweenEqualCharacters(String s) {
+
+        String front = s.substring(0, 1);
+        String last = s.substring(s.length() - 1);
+        int length = s.length();
+        int count = 0;
+        int finalMax = -1;
+
+        int foundFirstMax = 0;
+
+        if (front.equals(last)) {
+            for (int i = 1; i < length - 1; i++) {
+                foundFirstMax++;
+            }
+            return foundFirstMax;
+        } else {
+            for (int i = 0; i < length; i++) {
+                for (int j = i + 1; j < length; j++) {
+                    char charFront = s.charAt(i);
+                    char charLast = s.charAt(j);
+                    if (charFront == charLast) {
+                        count = (j - i) - 1;
+                        finalMax = Math.max(finalMax, count);
+                    }
+
+                }
+
+            }
+
+        }
+        return finalMax;
     }
 
     /**
@@ -19,6 +1541,7 @@ public class Main {
      * String input = "abcabcbb";
      * String input2 = "pwwkew";
      * String input3 = "";
+     *
      * @param input
      * @return
      */
@@ -502,13 +2025,12 @@ public class Main {
         Queue<Character> queues = new LinkedList<>();
         String inputLowerCase = input.toLowerCase();
 
-
         if (input.equals("")) {
             return true;
         }
         for (int i = 0; i < inputLowerCase.length(); i++) {
             char chars = inputLowerCase.charAt(i);
-            if ((chars >= 'a' && chars <= 'z') || (chars >= '0' && chars <= '9')) {
+            if (chars >= 'a' && chars <= 'z') {
                 stacks.push(chars);
                 queues.add(chars);
             }
@@ -1397,7 +2919,6 @@ public class Main {
                 }
             }
 
-
             if (count == 0) {
                 result = -1;
             } else if (length - count == 2) {
@@ -1414,6 +2935,9 @@ public class Main {
     /**
      * two sum using map
      * codeleet
+     * <p>
+     * nums = [2,7,11,15]
+     * target = 9
      *
      * @param nums
      * @param target
@@ -1426,7 +2950,6 @@ public class Main {
             return result;
 
         Map<Integer, Integer> numbers = new HashMap<>();
-
         for (int i = 0; i < nums.length; i++) {
             int remainder = target - nums[i];
             if (numbers.containsKey(remainder)) {
@@ -1435,7 +2958,6 @@ public class Main {
             }
             numbers.put(nums[i], i);
         }
-
         return result;
     }
 
@@ -2213,7 +3735,7 @@ public class Main {
     }
 
 
-    // 0,1,1,2,3,5,8,13,21
+    // 1,1,2,3,5,8,13,21
     public static int fibonacci(int n) {
         if (n == 0) {
             return 0;
@@ -2223,8 +3745,9 @@ public class Main {
 
         int intFib = fibonacci(n - 1);
         int intFib2 = fibonacci(n - 2);
-        System.out.println("Fib = " + n);
-        return intFib + intFib2;
+        int result = intFib + intFib2;
+        //  System.out.println("Fib = " + n);
+        return result;
     }
 
     // 0,1,1,2,3,5,8,13,21
