@@ -1989,6 +1989,11 @@ New English Vocabulary :
 
 
 english teacher : https://www.italki.com/teacher/3245298#readmore
+		https://www.italki.com/teacher/5588048/english
+		https://www.italki.com/teacher/5327884/english
+		https://www.italki.com/teacher/6723564/english
+		https://www.italki.com/teacher/2429896/english
+
 
 
 Intellij hot key : https://www.jetbrains.com/help/rider/Keymaps_Comparison_Mac.html#top
@@ -2046,7 +2051,6 @@ example : custumer can purchase various products products can be purchase by man
 
 Design scallable backend https://medium.com/@helloansh/designing-scalable-backend-infrastructures-from-scratch-af80f5767ccc
 
-tokped :		https://www.tokopedia.com/careers/job/senior-software-engineer-for-technology-in-indonesia/
 
 
 =====LeetCode=====
@@ -2116,6 +2120,43 @@ Most Common Problem LeetCode :
 	blog java interview question : https://intellipaat.com/blog/interview-question/cassandra-interview-questions/#4
 
 		fullstackresume.com/blog/backend-developer-resume-sample
+
+git : https://gitlab.com/dimasadriyantos
+
+
+==============Study Road Map 09 dec 2020===================
+
+1.Coding Practice
+-Array
+-String
+-Math
+-Logical thinking
+
+2.Data Base
+-Design Database
+-Remembering Query join
+
+
+3.Design Pattern
+*Target Understand concept and how to explain !
+1.Creational Design Pattern
+2.Structural Design Pattern
+3.Behavioral Design Pattern
+
+
+4.Object Oriented Programming
+*Target understand concecpt and how to explain !
+1.Inheritance
+2.Polimorpism
+3.Encapsulation
+4.Abstraction
+
+
+5.Spring Framework
+*Target Understand Basic and how to explain !
+
+6.Explore System Design Technologies
+
 
 
 

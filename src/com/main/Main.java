@@ -1,6 +1,8 @@
 package com.main;
 
 
+import org.omg.CORBA.portable.ApplicationException;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -8,11 +10,160 @@ import java.util.*;
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ApplicationException {
+
+    }
+
+    /**
+     * int[] input = {2, 1, 3};
+     * int[] input1 = {1, 2, 3, 4};
+     * Codelity easy , check permutation using HashSet
+     *
+     * @param inputArr
+     * @return
+     */
+    public static int permutation(int[] inputArr) {
+        return checkPermutation(inputArr) ? 1 : 0;
+    }
+
+    public static boolean checkPermutation(int[] inputArr) {
+        HashSet<Integer> setA = new HashSet<>();
+        HashSet<Integer> setB = new HashSet<>();
+
+        int counter = 1;
+        for (int values : inputArr) {
+            setA.add(counter);
+            setB.add(values);
+            counter++;
+        }
+        setA.removeAll(setB);
+        System.out.println(setA);
+        return setA.isEmpty();
+    }
+
+    /**
+     * Codelity Medium
+     *
+     * @param N
+     * @param A
+     * @return
+     */
+    public static int[] countArray(int N, int[] A) {
+        int[] counter = new int[N];
+        int largest = 0;
+        int updated = 0;
+
+        for (int values : A) {
+            int current = values - 1;
+            if (values <= N) {
+                if (counter[current] < updated) {
+                    counter[current] = updated + 1;
+                } else {
+                    counter[current]++;
+                }
+
+                if (counter[current] > largest) {
+                    largest = counter[current];
+                }
+
+            } else {
+                updated = largest;
+            }
+        }
+
+        for (int i = 0; i < counter.length; i++) {
+            if (counter[i] > updated) {
+                counter[i] = updated;
+            }
+        }
+        return counter;
+    }
 
 
-        int input = 1041;
+    public static int[] solution3(int N, int[] A) {
 
+        int[] counter = new int[N];
+        int largest = 0;
+        int updated = 0;
+        for (int values : A) {
+            int current = values - 1;
+            if (values <= N) {
+                if (counter[current] < updated) {
+                    counter[current] = updated + 1;
+                } else {
+                    counter[current]++;
+                }
+
+                if (counter[current] > largest) {
+                    largest = counter[current];
+                }
+
+            } else {
+                updated = largest;
+            }
+        }
+
+        return counter;
+
+    }
+
+
+    /**
+     * Codelity practice
+     * int[] A = {-1000, 1000};
+     * int[] B = {3, 1, 2, 4, 3};
+     *
+     * @param A
+     * @return
+     */
+    public static int sumLeftRight(int[] A) {
+        int total = 0;
+
+
+        for (int values : A) {
+            total += values;
+        }
+
+        int result = Integer.MAX_VALUE;
+        int left = 0;
+        for (int i = 0; i < A.length - 1; i++) {
+            left += A[i];
+            total = total - A[i];
+            int absValue = Math.abs(left - total);
+            if (absValue < result) {
+                result = absValue;
+            }
+        }
+
+        return result;
+    }
+
+
+    /**
+     * Codelity : find unpaired value
+     * input = 9,3,9,3,9,7,9
+     *
+     * @param A
+     * @return
+     */
+    public int findUnpairValue(int[] A) {
+        HashSet<Integer> dataSet = new HashSet<>();
+        for (int keyValues : A) {
+            if (!dataSet.contains(keyValues)) {
+                dataSet.add(keyValues);
+            } else {
+                dataSet.remove(keyValues);
+            }
+        }
+        int result = 0;
+        for (int value : dataSet) {
+            result = value;
+        }
+        return result;
+    }
+
+
+    public static void countBinaryGasp(int input) {
         String toBinary = Integer.toBinaryString(input);
         int maxZero = 0;
         int zero = 0;
@@ -26,7 +177,6 @@ public class Main {
             }
         }
         System.out.println(maxZero);
-
     }
 
 
@@ -2980,16 +3130,12 @@ public class Main {
      * @return
      */
     public static int frogJump(int x, int y, int d) {
-
-
         int count = 0;
         while (x < y) {
             x += d;
             count++;
         }
-
         return count;
-
     }
 
     public static int frogJump2(int x, int y, int d) {
@@ -2998,7 +3144,6 @@ public class Main {
         } else {
             return (y - x) / d + 1;
         }
-
     }
 
     //1, 2, 5, 8, 10
@@ -4326,7 +4471,7 @@ public class Main {
         list.addFront(marrySmith);
         list.addFront(mikeWilson);
 
-        list.addBefore(billEnd, mikeWilson);
+        //  list.addBefore(billEnd, mikeWilson);
         list.printList();
     }
 
