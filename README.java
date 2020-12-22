@@ -2157,6 +2157,10 @@ git : https://gitlab.com/dimasadriyantos
 
 6.Explore System Design Technologies
 
+		https://app.cloudcraft.co/signup
+
+		https://www.byte-by-byte.com/strings/
+
 
 
 

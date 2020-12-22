@@ -10,9 +10,232 @@ import java.util.*;
 public class Main {
 
 
-    public static void main(String[] args) throws ApplicationException {
+    public static void main(String[] args){
+        System.out.println("test");
+
 
     }
+
+
+
+
+
+    public static int majorityElement4(int[] nums) {
+        //BEST:
+        int count = 0;
+        int res = 0;
+        for (int i : nums) {
+            if (count == 0) {
+                res = i;
+            }
+            count += (res == i) ? 1 : -1;
+        }
+
+        return res;
+    }
+
+
+    public static int majorityElements(int[] nums) {
+
+        Map<Integer,Integer> numbersMap = new HashMap();
+
+        for(int values : nums){
+            numbersMap.put(values,numbersMap.getOrDefault(values,0)+1);
+        }
+
+        int result=0;
+        int biggest = 0;
+        for(int values : numbersMap.keySet()){
+            if(numbersMap.get(values) > biggest){
+                result = values;
+                biggest = numbersMap.get(values);
+            }
+        }
+
+        return result;
+
+    }
+
+
+    public static void moveZeroes2(int[] nums) {
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[index++] = nums[i];
+            }
+        }
+        for (int j = index; j < nums.length; j++) {
+            nums[index++] = 0;
+        }
+    }
+
+
+    static long substrCount(int target, String input) {
+        int length = input.length();
+        int result = length;
+        //aaaa
+        for (int i = 0; i < length; i++) {
+            int counter = 0;
+            while (i + 1 < length && input.charAt(i) == input.charAt(i + 1)) {
+                i++;
+                counter++;
+            }
+            result += (counter * (counter + 1) / 2);
+            result += countMiddle(input, i);
+        }
+        return result;
+    }
+
+    // abcbbabba
+    public static int countMiddle(String input, int i) {
+        int pointer = 1;
+        int counter = 0;
+        while (i - pointer >= 0 && i + pointer < input.length()
+                && input.charAt(i - 1) == input.charAt(i + pointer)
+                && input.charAt(i - 1) == input.charAt(i - pointer)) {
+            pointer++;
+            counter++;
+        }
+        return counter;
+    }
+
+
+    static String isValid2(String input) {
+
+        int length = input.length();
+
+        if (length == 1) {
+            return "YES";
+        }
+
+        int[] words = new int[26];
+        for (int i = 0; i < length; i++) {
+            char chars = input.charAt(i);
+            if (chars >= 'a' && chars <= 'z') {
+                words[chars - 'a']++;
+            }
+        }
+
+        Arrays.sort(words);
+
+        int start = 0;
+        while (words[start] == 0) {
+            start++;
+        }
+
+        int alphabetLength = words.length;
+        int deletion = 0;
+
+        if (words[start] == words[alphabetLength - 1]) {
+            return "YES";
+        } else {
+            for (int i = start; i < 26; i++) {
+                if (i > alphabetLength) {
+                    break;
+                } else {
+                    deletion += Math.abs(words[i] - words[alphabetLength - 1]);
+                    alphabetLength--;
+                }
+            }
+        }
+
+        if (deletion == 1 || deletion == words[alphabetLength] - 1) {
+            return "YES";
+        } else {
+            return "NO";
+        }
+    }
+
+
+    static void minimumBribes(int[] input) {
+
+        int length = input.length;
+        int countSwap = 0;
+
+        for (int i = length - 1; i > 0; i--) {
+
+            if (input[i] != i + 1) {
+                if (((i - 2) >= 0) && (input[i - 2] == i + 1)) {
+                    countSwap += 2;
+                    swaps(input, i - 2, i - 1);
+                    swaps(input, i - 1, i);
+                } else if (((i - 1) >= 0) && (input[i - 1] == i + 1)) {
+                    countSwap++;
+                    swaps(input, i - 1, i);
+                } else {
+                    System.out.println("Too Chaotic");
+                }
+            }
+        }
+        System.out.println(countSwap);
+    }
+
+    //2, 1, 5, 3, 4
+    private static void swaps(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    /**
+     * int[] input = {4, 3, 1, 2};
+     * int[] input2 = {1, 3, 5, 2, 4, 6, 7};
+     * int[] arr = {7, 1, 3, 2, 4, 5, 6};
+     * int[] input4 = {2, 3, 4, 1, 5};
+     * Hackerank Minimum SWAP
+     *
+     * @param arr
+     * @return
+     */
+    static int minimumSwaps5(int[] arr) {
+        int countSwap = 0;
+        int counter = 1;
+        int length = arr.length;
+
+        for (int i = 0; i < length; i++) {
+            if (arr[i] != counter) {
+                for (int j = 0; j < length; j++) {
+                    if (arr[j] == counter) {
+                        int temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                        counter++;
+                        countSwap++;
+                        break;
+                    }
+                }
+            } else {
+                if (counter != length) {
+                    counter++;
+                }
+            }
+        }
+        return countSwap;
+    }
+
+    /**
+     * Allianz codelity test
+     *
+     * @param n
+     * @return
+     */
+    public static String generateTheString(int n) {
+        if (n <= 0) {
+            return "";
+        }
+
+        StringBuilder strBuilder = new StringBuilder(n);
+        if (n % 2 == 0) {
+            strBuilder.append('a');
+            n--;
+        }
+        while (n > 0) {
+            strBuilder.append('b');
+            n--;
+        }
+        return strBuilder.toString();
+    }
+
 
     /**
      * int[] input = {2, 1, 3};
@@ -1323,7 +1546,6 @@ public class Main {
     public static long specialString2(String input) {
         long result = input.length();
         for (int i = 0; i < input.length(); i++) {
-
             int count = 0;
             while (i + 1 < input.length() && input.charAt(i) == input.charAt(i + 1)) {
                 i++;
@@ -1337,6 +1559,8 @@ public class Main {
 
 
     public static int countFromMiddle(String input, int i) {
+        //asasd
+        //aaaa
         int pointer = 1;
         int count = 0;
         while (i - pointer >= 0 && i + pointer < input.length()
@@ -2296,6 +2520,7 @@ public class Main {
      */
     public static void minimumBriber(int[] input) {
         int swapCount = 0;
+        //2, 5, 1, 3, 4
         for (int i = input.length - 1; i >= 0; i--) {
 
             if (input[i] != i + 1) {
@@ -4992,6 +5217,7 @@ public class Main {
                 intArray[j] = newElement;
             }
         }
+
         for (int i = 0; i < intArray.length; i++) {
             System.out.println(intArray[i]);
         }
@@ -5027,7 +5253,7 @@ public class Main {
     }
 
 
-    // 1 3 5 2 4 6 7
+    // 1 5 3 2 4 6 7
     public static int minimumSwap2(int[] arr) {
 
         int countSwap = 0;
@@ -5042,8 +5268,6 @@ public class Main {
             }
             i++;
         }
-
-
         return countSwap;
     }
 
