@@ -1,6 +1,6 @@
 package com.main;
 
-import org.omg.CORBA.portable.ApplicationException;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ public class TheBoss extends MoneyCounter implements EmployeeForm {
     }
 
     @Override
-    public Map<String, String> employeeData(String data) throws ApplicationException {
+    public Map<String, String> employeeData(String data) {
         Map<String, String> map = new HashMap<>();
         map.put("dimas", "adr");
         System.out.println("FROM INTERFACE");

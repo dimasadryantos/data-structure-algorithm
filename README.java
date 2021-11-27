@@ -2162,6 +2162,33 @@ git : https://gitlab.com/dimasadriyantos
 		https://www.byte-by-byte.com/strings/
 
 
+		ERD DESIGN ONLINE : https://app.diagrams.net/
 
+
+=====Database=====
+https://stackoverflow.com/questions/7296846/how-to-implement-one-to-one-one-to-many-and-many-to-many-relationships-while-de
+
+
+
+hands-on-microserivice-with-spring-boot-and-spring-cloud
+
+
+
+
+		https://bezkoder.com/spring-boot-controlleradvice-exceptionhandler/
+
+		https://bezkoder.com/spring-boot-jpa-crud-rest-api/
+
+		https://medium.com/the-resonant-web/spring-boot-2-0-project-structure-and-best-practices-part-2-7137bdcba7d3
+
+		https://medium.com/stackavenue/why-to-use-service-layer-in-spring-mvc-5f4fc52643c0
+
+
+
+Kubernates Cetefied : https://www.tigera.io/lp/calico-academy-completion
+
+
+
+https://medium.com/swlh/how-to-study-for-data-structures-and-algorithms-interviews-at-faang-65043e00b5df
 
 

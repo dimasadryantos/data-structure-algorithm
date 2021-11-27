@@ -1,23 +1,1707 @@
 package com.main;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 
-import org.omg.CORBA.portable.ApplicationException;
-
+import java.io.FileReader;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+import java.util.Stack;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Main {
 
 
-    public static void main(String[] args){
-        System.out.println("test");
+    public static void main(String[] args) throws ParseException, IOException, CsvException {
+
+
+        List<ClientProduct> products = Arrays.asList(new ClientProduct("DR", 2), new ClientProduct("DR", 2),
+                new ClientProduct("BOX", 4), new ClientProduct("BOX", 2));
+
+
+        //  csvReader();
+
+       /* String[] path = input.split("/");
+
+        for (String s : path) {
+            System.out.println(s);
+        }
+
+        System.out.println(path[path.length - 1]);*/
+
+
+/*        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter2 = new SimpleDateFormat("MM-yyyy");
+        Date date = formatter.parse(input);*/
+        //    System.out.println(formatter2.format(date) + "/" + input);
+
+
+   /*     List<Recommend> location = Arrays.asList(new Recommend(202109020, "A"), new Recommend(202108020, "B"));
+        location.sort(Comparator.comparing(Recommend::getLokiIndex));
+
+        location.forEach(System.out::println);
+
+        List<String> dictionary = Arrays.asList("heater", "cold", "clod", "reheat", "docl");
+        List<String> query = Arrays.asList("codl", "heater", "abcd");
+
+        System.out.println(stringAnagram(dictionary, query));*/
+
+
+        //   int[] nums1 = {1, 2, 2, 1};
+        //    int[] nums2 = {2, 2};
 
 
     }
 
 
+    private static void joiningStringComma() {
 
+        List<String> data = Arrays.asList("dimas a");
+
+        String separated = String.join(",", data);
+
+        System.out.println(separated);
+
+
+    }
+
+
+    /**
+     * int[] nums1 = {1, 2, 2, 1};
+     * int[] nums2 = {2, 2};
+     * nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public static int[] intersection(int[] nums1, int[] nums2) {
+        Set<Integer> dataSet1 = new HashSet<>();
+        Set<Integer> dataSet2 = new HashSet<>();
+
+        for (int value : nums1) {
+            dataSet1.add(value);
+        }
+
+        for (int value : nums2) {
+            if (dataSet1.contains(value)) {
+                dataSet2.add(value);
+            }
+        }
+
+        int[] result = new int[dataSet2.size()];
+
+        int index = 0;
+        for (int value : dataSet2) {
+            result[index++] = value;
+        }
+
+        return result;
+    }
+
+
+    private static boolean isPalindromeInteger(int input) {
+        String converter = Integer.toString(input);
+
+        int index = converter.length() - 1;
+        for (int i = 0; i < converter.length(); i++) {
+            if (converter.charAt(i) != converter.charAt(index)) {
+                return false;
+            }
+            index--;
+        }
+        return true;
+    }
+
+
+    private static boolean isIsomorphic(String input1, String input2) {
+        Set<Character> data = new HashSet<>();
+        Set<Character> data2 = new HashSet<>();
+
+        for (int i = 0; i < input1.length(); i++) {
+            char chars = input1.charAt(i);
+            data.add(chars);
+        }
+
+        for (int i = 0; i < input2.length(); i++) {
+            char chars = input2.charAt(i);
+            data2.add(chars);
+        }
+
+        if (data.size() == data2.size()) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static class ClientProduct {
+        public ClientProduct(String uom, int quantity) {
+            this.uom = uom;
+            this.quantity = quantity;
+        }
+
+        String uom;
+        int quantity;
+
+        public String getUom() {
+            return uom;
+        }
+
+        public void setUom(String uom) {
+            this.uom = uom;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+    }
+
+
+    private static int finalValueAfterOperations(String[] operations) {
+        int initialValue = 0;
+        for (int i = 0; i < operations.length; i++) {
+            if (operations[i].equals("--X") || operations[i].equals("X--")) {
+                initialValue -= 1;
+            } else if (operations[i].equals("X++") || operations[i].equals("++X")) {
+                initialValue += 1;
+            }
+        }
+        System.out.println(initialValue);
+        return initialValue;
+    }
+
+
+    private static int[] twoSumNew(int[] nums, int target) {
+        Map<Integer, Integer> dataNums = new HashMap<>();
+        int[] result = new int[0];
+
+        for (int i = 0; i < nums.length; i++) {
+            int numKey = target - nums[i];
+
+            if (dataNums.containsKey(nums[i])) {
+                result = new int[]{dataNums.get(nums[i]), i};
+            } else {
+                dataNums.put(numKey, i);
+            }
+        }
+        return result;
+    }
+
+    public static int searchInsert(int[] nums, int target) {
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target || nums[i] > target)
+                return i;
+        }
+        return nums.length;
+    }
+
+
+    public static void csvReader() throws IOException, CsvException {
+        String fileName = "/Users/dimasdz/Documents/java-data-structure/src/FGO-000009-2937-MCP-DPL-100003.csv";
+
+        CSVReader reader = new CSVReader(new FileReader(fileName));
+        List<String[]> result = reader.readAll();
+
+        List<String> sn = new ArrayList<>();
+        loopCsv(result, sn);
+
+        List<List<String>> constructed = new ArrayList<>();
+        constructed.add(sn);
+
+        System.out.println(constructed);
+
+
+    }
+
+    private static void loopCsv(List<String[]> result, List<String> serialNumbers) {
+        result.forEach(line -> construct(line, serialNumbers));
+    }
+
+    private static void construct(String[] line, List<String> serialNumbers) {
+        serialNumbers.add(line[0].trim());
+    }
+
+
+    public static class Recommend {
+
+        String name;
+        long lokiIndex;
+
+        public Recommend(long lokiIndex, String name) {
+            this.lokiIndex = lokiIndex;
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public long getLokiIndex() {
+            return lokiIndex;
+        }
+
+        public void setLokiIndex(long lokiIndex) {
+            this.lokiIndex = lokiIndex;
+        }
+
+        @Override
+        public String toString() {
+            return "Recommend{" +
+                    "name='" + name + '\'' +
+                    ", lokiIndex=" + lokiIndex +
+                    '}';
+        }
+    }
+
+    public static class Shoes {
+
+        public Shoes(String productCode, String productId, int quantity) {
+            this.productCode = productCode;
+            this.productId = productId;
+            this.quantity = quantity;
+        }
+
+        String productCode;
+        String productId;
+        int quantity;
+
+        public String getProductCode() {
+            return productCode;
+        }
+
+        public void setProductCode(String productCode) {
+            this.productCode = productCode;
+        }
+
+        public String getProductId() {
+            return productId;
+        }
+
+        public void setProductId(String productId) {
+            this.productId = productId;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+    }
+
+
+    public static class Bag {
+        public Bag(String productCode, String productId, int quantity) {
+            this.productCode = productCode;
+            this.productId = productId;
+            this.quantity = quantity;
+        }
+
+        public String getProductCode() {
+            return productCode;
+        }
+
+        public void setProductCode(String productCode) {
+            this.productCode = productCode;
+        }
+
+        public String getProductId() {
+            return productId;
+        }
+
+        public void setProductId(String productId) {
+            this.productId = productId;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        String productCode;
+        String productId;
+        int quantity;
+    }
+
+
+    private void sumJava8() {
+        // Integer quantity = persons.stream().map(Person::getAge).mapToInt(Integer::intValue).sum();
+    }
+
+    public static List<Integer> stringAnagram(List<String> dictionary, List<String> query) {
+        List<Integer> result = new ArrayList<>();
+        for (String queryValues : query) {
+            int count = 0;
+            for (String dictionaryValues : dictionary) {
+                if (queryValues.length() == dictionaryValues.length()) {
+                    char[] queries = queryValues.toCharArray();
+                    char[] dictionaries = dictionaryValues.toCharArray();
+                    Arrays.sort(dictionaries);
+                    Arrays.sort(queries);
+                    if (String.valueOf(queries).equals(String.valueOf(dictionaries))) {
+                        count++;
+                    }
+                }
+            }
+            result.add(count);
+        }
+        return result;
+    }
+
+    public static int filledOrders(List<Integer> order, int k) {
+
+
+        int count = 0;
+
+        Collections.sort(order);
+
+        for (int ord : order) {
+            if (ord <= k) {
+
+                count++;
+                k = k - ord;
+
+            }
+        }
+
+        return count;
+    }
+
+
+    public static boolean anagramImprove(String A, String B) {
+        if (A.length() != B.length()) {
+            return false;
+        }
+        char[] inputA = A.toLowerCase().toCharArray();
+        char[] inputB = B.toLowerCase().toCharArray();
+        Arrays.sort(inputA);
+        Arrays.sort(inputB);
+
+        for (int i = 0; i < inputA.length; i++) {
+            if (inputA[i] != inputB[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    /**
+     * Method to count deleted value to shape an annagram
+     * input :
+     * abcde
+     * dbsss
+     * hackerank
+     * https://www.hackerrank.com/challenges/making-anagrams/problem
+     *
+     * @param str1
+     * @param str2
+     * @return
+     */
+    public static int shapeAnnagram(String str1, String str2) {
+
+        int[] count1 = new int[26];
+        int[] count2 = new int[26];
+
+
+        for (int i = 0; i < str1.length(); i++) {
+            count1[str1.charAt(i) - 'a']++;
+        }
+
+        for (int j = 0; j < str2.length(); j++) {
+            count2[str2.charAt(j) - 'a']++;
+        }
+
+        int result = 0;
+        for (int k = 0; k < 26; k++) {
+            result += Math.abs(count1[k] - count2[k]);
+        }
+
+        return result;
+    }
+
+    static String isBalanced(String input) {
+
+        Stack<Character> stack = new Stack<>();
+        Map<Character, Character> mapper = new HashMap<>();
+        mapper.put('}', '{');
+        mapper.put(')', '(');
+
+        String result = "false";
+
+        for (int i = 0; i < input.length(); i++) {
+            char chars = input.charAt(i);
+
+            //stack = ({(
+            //pop = (
+            if (mapper.containsKey(chars)) {
+                char topElement = stack.isEmpty() ? '#' : stack.pop();
+                if (topElement == mapper.get(chars)) {
+                    result = "true";
+                } else {
+                    result = "false";
+                }
+
+            } else {
+                stack.push(chars);
+            }
+
+        }
+
+        if (stack.size() == 1 && input.length() < 2) {
+            return "false";
+        }
+
+        return result;
+    }
+
+
+    public static boolean validParentheses(String input) {
+        Stack<Character> stack = new Stack<>();
+        Map<Character, Character> mapping = new HashMap<>();
+        mapping.put('}', '{');
+        mapping.put(')', '(');
+        mapping.put(']', '[');
+
+        //stack = {
+        // pop = {
+        for (int i = 0; i < input.length(); i++) {
+            char toChar = input.charAt(i);
+
+            if (mapping.containsKey(toChar)) {
+                char topElement = stack.isEmpty() ? '#' : stack.pop();
+
+                if (topElement != mapping.get(toChar)) {
+                    return false;
+                }
+            } else {
+            }
+        }
+        return stack.isEmpty();
+    }
+
+
+    /**
+     * Get object value and sum
+     */
+    public static void java8Improve() {
+
+/*        List<Person> persons = Arrays.asList(
+                new Person("mkyong", 100),
+                new Person("jack", 100)
+        );
+        int quantity = persons.stream().map(Person::getAge).mapToInt(Integer::intValue).sum();
+        System.out.println("Integer = " + quantity);*/
+    }
+
+
+    public static List<Integer> printPrime(int x) {
+        List<Integer> numbers = new ArrayList<Integer>();
+        int i = 2;
+        while (numbers.size() != x) {
+            if (i == 2) {
+                numbers.add(i);
+            } else if (i % 2 == 1) {
+                numbers.add(i);
+            }
+            i++;
+        }
+        return numbers;
+    }
+
+    public static List<List<Integer>> pairOfSumUpInteger(int[] arr, int k) {
+        List<List<Integer>> allPairs = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[i] + arr[j] == k) {
+                    List<Integer> result = new ArrayList<>();
+                    result.add(arr[i]);
+                    result.add(arr[j]);
+                    allPairs.add(result);
+                }
+            }
+        }
+        return allPairs;
+    }
+
+
+    public static boolean isPalindromex(String token) {
+        String reverse = "";
+        int length = token.length();
+        for (int i = length - 1; i >= 0; i--) {
+            reverse = reverse + token.charAt(i);
+        }
+        if (token.equals(reverse)) {
+            return true;
+        }
+        return false;
+    }
+
+    private void java8FilterGetReturn(List<Person> persons) {
+        String name = persons.stream()
+                .filter(x -> "jack".equals(x.getName()))
+                .map(Person::getName)                        //convert stream to String
+                .findAny()
+                .orElse("");
+
+        System.out.println(name);
+    }
+
+
+    private SerialNumberCurrentState getSN(String serialNumberCN) {
+        SerialNumberCurrentState serialNumbers = new SerialNumberCurrentState("abc-123");
+        serialNumbers.setSerialNumberCs(serialNumberCN);
+        return serialNumbers;
+    }
+
+
+    public class SerialNumberCurrentState {
+
+        private String serialNumberCs;
+
+
+        public SerialNumberCurrentState(String serialNumberCs) {
+            this.serialNumberCs = serialNumberCs;
+        }
+
+        public String getSerialNumberCs() {
+            return serialNumberCs;
+        }
+
+        public void setSerialNumberCs(String serialNumberCs) {
+            this.serialNumberCs = serialNumberCs;
+        }
+
+
+    }
+
+    public static List<Character> splitToListOfChar(String str) {
+        List<Character> result;
+        String defaultDta = "Y,N";
+
+        if (str != null) {
+            result = str.chars()
+                    .mapToObj(item -> (char) item).filter(item -> item != ',')
+                    .collect(Collectors.toList());
+        } else {
+            result = defaultDta.chars()
+                    .mapToObj(item -> (char) item).filter(item -> item != ',')
+                    .collect(Collectors.toList());
+        }
+        return result;
+    }
+
+
+    public static String truncateSentence(String s, int k) {
+
+        char[] str = s.toCharArray();
+        int count = 0;
+        StringBuilder builder = new StringBuilder();
+
+        for (char values : str) {
+            builder.append(values);
+            if (values == ' ') {
+                count++;
+            }
+            if (count == k) {
+                break;
+            }
+        }
+
+        builder.append(k - 1);
+        return builder.toString();
+    }
+
+
+    public static String reverseLatters(String input) {
+        int pointer1 = 0;
+        int pointer2 = input.length() - 1;
+        char[] result = input.toCharArray();
+        while (pointer1 < pointer2) {
+            if (!Character.isLetter(result[pointer1])) {
+                pointer1++;
+            } else if (!Character.isLetter(result[pointer2])) {
+                pointer2--;
+            } else {
+                char temp = result[pointer1];
+                result[pointer1] = result[pointer2];
+                result[pointer2] = temp;
+                pointer1++;
+                pointer2--;
+            }
+        }
+        return String.valueOf(result);
+    }
+
+
+    public static String destCity(List<List<String>> paths) {
+        Set<String> dataPath = new HashSet<>();
+        for (List<String> source : paths) {
+            dataPath.add(source.get(0));
+        }
+
+        for (List<String> values : paths) {
+            if (dataPath.contains(values.get(1))) {
+                return values.get(1);
+            }
+        }
+
+        return "";
+    }
+
+
+    public static int[] shuffle(int[] nums, int n) {
+        int[] shufing = new int[nums.length];
+        int j = 0;
+        for (int i = 0; i < n; i++) {
+            shufing[j++] += nums[i];
+            shufing[j++] += nums[i + n];
+        }
+        return shufing;
+    }
+
+    public static int sumOfUnique(int[] nums) {
+
+        Map<Integer, Integer> data = new HashMap<>();
+
+        int result = 0;
+
+        for (int values : nums) {
+            if (!data.containsKey(values)) {
+                data.put(values, result + values);
+            }
+
+        }
+
+
+        return result;
+
+    }
+
+    public static class ItemsAdjust {
+        String batchId;
+
+        public ItemsAdjust(String batchId, DataStr dataStr) {
+            this.batchId = batchId;
+            this.dataStr = dataStr;
+        }
+
+        DataStr dataStr;
+
+        public DataStr getDataStr() {
+            return dataStr;
+        }
+
+        public void setDataStr(DataStr dataStr) {
+            this.dataStr = dataStr;
+        }
+
+        public ItemsAdjust(String batchId) {
+            this.batchId = batchId;
+        }
+
+        public String getBatchId() {
+            return batchId;
+        }
+
+        public void setBatchId(String batchId) {
+            this.batchId = batchId;
+        }
+    }
+
+
+ /*   public static String getBatchID() {
+        List<ItemsAdjust> dataList = Arrays.asList(new ItemsAdjust("abc123"),
+                new ItemsAdjust("dec1222"));
+
+        String batchId = "";
+        for (ItemsAdjust items : dataList) {
+            batchId = items.getBatchId();
+        }
+        return batchId;
+    }
+
+    public static void produce(String items) {
+        DataStr dataStr = construct(items);
+        System.out.println(dataStr);
+    }
+
+    public static DataStr construct(String items) {
+        DataStr values = new DataStr();
+        values.setData123(items);
+        return values;
+    }*/
+
+
+    public static class DataStr {
+        String data123;
+
+        public DataStr(String s) {
+        }
+
+        public String getData123() {
+            return data123;
+        }
+
+        public void setData123(String data123) {
+            this.data123 = data123;
+        }
+
+        @Override
+        public String toString() {
+            return "DataStr{" +
+                    "data123='" + data123 + '\'' +
+                    '}';
+        }
+    }
+
+
+    public static int strStr(String haystack, String needle) {
+        char[] heystacks = haystack.toCharArray();
+        Map<Character, Integer> data = new HashMap<>();
+        int result = 0;
+        boolean isNeedle = true;
+
+
+        for (int i = 0; i < heystacks.length; i++) {
+            data.put(heystacks[i], i);
+        }
+
+        for (int i = 0; i < needle.length(); i++) {
+            char needles = needle.charAt(i);
+            if (data.containsKey(needles)) {
+                if (result == 0) {
+                    result = data.get(needles);
+                }
+            } else {
+                isNeedle = false;
+                break;
+            }
+
+        }
+
+
+        if (isNeedle) {
+            return result;
+        } else {
+            return -1;
+        }
+
+    }
+
+
+/*    private List<Integer> constructList(List<Data> addedItems) {
+        return addedItems.stream().map(this::sequence).collect(Collectors.toList());
+    }
+
+
+    private int createSeq() {
+        int startIndex = 1;
+        AtomicInteger increment = new AtomicInteger(startIndex);
+        return increment.getAndIncrement();
+    }*/
+
+
+    public static void check() {
+        Data dataItems = new Data(Arrays.asList(new Items(1), new Items(2)));
+        List<Integer> dataList = new ArrayList<>();
+        Items item = new Items(1);
+        item.getIndentiFier().setSeq(9);
+
+
+        for (Items values : dataItems.getItemsList()) {
+            dataList.add(values.getIndentiFier().getSeq());
+        }
+
+
+    }
+
+    public static void onCreate() {
+        Data dataItems = new Data(Arrays.asList(new Items(1), new Items(2)));
+        dataItems.itemsList.stream().map(items -> {
+            Items item = new Items(1);
+            item.setNumber(8);
+            return item;
+        }).collect(Collectors.toList());
+    }
+
+
+    public static class Data {
+
+        public Data(List<Items> itemsList) {
+            this.itemsList = itemsList;
+        }
+
+        List<Items> itemsList;
+
+        public List<Items> getItemsList() {
+            return itemsList;
+        }
+
+        public void setItemsList(List<Items> itemsList) {
+            this.itemsList = itemsList;
+        }
+    }
+
+
+    public static class Items {
+        int number;
+        IdentiFier indentiFier;
+
+        public IdentiFier getIndentiFier() {
+            return indentiFier;
+        }
+
+        public void setIndentiFier(IdentiFier indentiFier) {
+            this.indentiFier = indentiFier;
+        }
+
+        public Items(int number) {
+            this.number = number;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+        public void setNumber(int number) {
+            this.number = number;
+        }
+    }
+
+    public static class IdentiFier {
+        int seq;
+
+
+        public IdentiFier(int seq) {
+            this.seq = 1;
+        }
+
+        public int getSeq() {
+            return seq;
+        }
+
+        public void setSeq(int seq) {
+            this.seq = seq;
+        }
+    }
+
+
+    /**
+     * java 8
+     * Loop and add List to New List
+     */
+  /*  public static void loopAndAddToNewList() {
+        List<Data> edited = Arrays.asList(
+                new Data(1, "EDITED"),
+                new Data(3, "EDITED"));
+
+        List<Data> deleted = Arrays.asList(
+                new Data(4, "DELETED"),
+                new Data(2, "DELETED"));
+
+        List<Integer> sequences = new ArrayList<>();
+
+        List<Data> sort = Stream
+                .concat(edited.stream(), deleted.stream())
+                .sorted(Comparator.comparingInt(Data::getSeq))
+                .collect(Collectors.toList());
+
+        //old fashiom
+        for (Data values : sort) {
+            sequences.add(values.getSeq());
+        }
+        //new fashion java 8
+        sort.stream().map(Data::getSeq).forEach(sequences::add);
+    }*/
+
+
+    /**
+     * java 8
+     * Print example using java 8 forEach
+     */
+    public static void forEachPrintExample() {
+        List<Integer> editedItems = Arrays.asList(1, 3);
+        editedItems.forEach(x -> System.out.println(x));
+    }
+
+    /**
+     * java 8
+     * Concat three List using Stream.of & flatMap
+     * Sorting Collections
+     * Concat three list using Arrays.asList();
+     */
+   /* public static void concatThreeList() {
+        List<Integer> addedItems = Arrays.asList(5, 6);
+        List<Integer> editedItems = Arrays.asList(1, 3);
+        List<Integer> deleted = Arrays.asList(2);
+
+        List<Integer> construct = Stream.of(editedItems, deleted, addedItems).
+                flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        Collections.sort(construct);
+
+        List<Data> addedList = Arrays.asList(new Data(0, "A"), new Data(0, "B"), new Data(0, "C"));
+    }*/
+
+    /**
+     * java 8
+     * Concat list using Stream
+     */
+    public static void concatListExample() {
+        List<Integer> addedItems = Arrays.asList(5, 6);
+        List<Integer> editedItems = Arrays.asList(1, 3);
+        List<Integer> deleted = Arrays.asList(2);
+
+        List<Integer> editedAndAddedItems = (List<Integer>) Stream.concat(editedItems.stream(), addedItems.stream());
+    }
+
+
+    public static class Person {
+
+        private String name;
+        private BigDecimal age;
+
+        public Person(String name, BigDecimal age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public BigDecimal getAge() {
+            return age;
+        }
+
+        public void setAge(BigDecimal age) {
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+
+        //gettersm setters, toString
+    }
+
+
+    public static void leetCode2() {
+        HashMap<String, Integer> map
+                = new HashMap<>();
+        map.put("a", 10000);
+        map.put("b", 55000);
+        map.put("c", 44300);
+        map.put("e", 53200);
+
+        System.out.println("ORIGINAL HashMap:\n "
+                + map.toString());
+
+        // put a new value which is not mapped
+        // before in map
+        map.putIfAbsent("d", 77633);
+        map.putIfAbsent("d", 888);
+        System.out.println("New HashMap:\n "
+                + map);
+    }
+
+
+    public static void leetCode() {
+        String input = "ab";
+        String[] inputStr = {"ad", "bd", "aaab", "baa", "badab"};
+        int counter = 0;
+
+        Map<Character, Integer> dataMap = new HashMap<>();
+        for (int i = 0; i < input.length(); i++) {
+            char chars = input.charAt(i);
+            dataMap.put(chars, dataMap.getOrDefault(chars, 0) + 1);
+        }
+
+
+        for (int i = 0; i < inputStr.length; i++) {
+            String str = inputStr[i];
+            boolean consisten = true;
+
+            for (int j = 0; j < str.length(); j++) {
+                char chars = str.charAt(j);
+                if (!dataMap.containsKey(chars)) {
+                    consisten = false;
+                    break;
+                }
+            }
+
+            if (consisten) {
+                counter++;
+            }
+
+        }
+    }
+
+
+    public String toLowerCase(String str) {
+
+        StringBuilder builder = new StringBuilder(str.length());
+
+        for (int i = 0; i < str.length(); i++) {
+            char chars = str.charAt(i);
+            if (chars >= 'A' && chars <= 'Z') {
+                builder.append(String.valueOf(chars).toLowerCase());
+            } else {
+                builder.append(chars);
+            }
+        }
+        return builder.toString();
+    }
+
+
+    public static String removeOuterParentheses(String S) {
+        Stack<Character> stack = new Stack<>();
+        StringBuilder builder = new StringBuilder();
+        int counter = 0;
+
+        for (int i = 0; i < S.length(); i++) {
+            char chars = S.charAt(i);
+            if (chars == '(') {
+                stack.push(chars);
+            } else {
+                stack.pop();
+            }
+            if (stack.isEmpty()) {
+                builder.append(S, counter + 1, i);
+                counter = i + 1;
+            }
+        }
+        return builder.toString();
+    }
+
+
+    public static int[] smallerNumbersThanCurrent(int[] nums) {
+        int[] clonedArr = nums.clone();
+
+        Arrays.sort(clonedArr);
+
+        //1,2,2,3,8
+
+        Map<Integer, Integer> numbersMapper = new HashMap<>();
+
+        for (int i = 0; i < clonedArr.length; i++) {
+            numbersMapper.putIfAbsent(clonedArr[i], i);
+        }
+
+        for (int j = 0; j < clonedArr.length; j++) {
+            clonedArr[j] = numbersMapper.get(nums[j]);
+        }
+
+
+        return clonedArr;
+    }
+
+
+    /**
+     * Java 8 Method Reference Feeature
+     * -Method Reference is used to refer method of functional Interface
+     * <p>
+     * Type Of Method Reference :
+     * 1.Reference To Static Method
+     * 2.Reference To Reference Method
+     * 3.Reference To Constructor
+     */
+    public static void methodReferenceJava8() {
+        List<String> dataList = new ArrayList<>();
+        dataList.add("dimas");
+        dataList.add("dosan");
+        dataList.add("chulsan");
+
+        List<String> resultList = new ArrayList();
+
+        dataList.forEach(resultList::add);
+
+        resultList.forEach(resultStr -> System.out.println(resultStr));
+    }
+
+
+    /**
+     * LeetCode Goal Parser Interpretation My Optimize Solution
+     * 0ms
+     * O(1)
+     * <p>
+     * String input = "G()(al)";
+     * String input2 = "G()()()()(al)";
+     *
+     * @param command
+     * @return
+     */
+    public static String interpret2(String command) {
+
+        StringBuilder strBuilder = new StringBuilder();
+
+        for (int i = 0; i < command.length(); i++) {
+            char chars = command.charAt(i);
+
+            if (chars == 'G') {
+                strBuilder.append(chars);
+            } else if (chars == '(' && command.charAt(i + 1) == ')') {
+                strBuilder.append('o');
+                i++;
+            } else {
+                strBuilder.append("al");
+                i += 3;
+            }
+
+        }
+        return strBuilder.toString();
+    }
+
+
+    /**
+     * LeetCode Goal Parser Interpretation My 1st Approach
+     * 1ms
+     * O(1)
+     * <p>
+     * String input = "G()(al)";
+     * String input2 = "G()()()()(al)";
+     *
+     * @param command
+     * @return
+     */
+    public static String interpret(String command) {
+
+        StringBuilder strBuilder = new StringBuilder();
+        int length = command.length();
+
+        for (int i = 0; i < length; i++) {
+            char chars = command.charAt(i);
+
+            if (chars == '(' && i < length && command.charAt(i + 1) == ')') {
+                strBuilder.append('o');
+            } else if ((chars >= 'a' && chars <= 'z') || (chars >= 'A' && chars <= 'Z')) {
+                strBuilder.append(chars);
+            }
+        }
+        return strBuilder.toString();
+    }
+
+
+   /* public static void javaStreamPractice() {
+        List<Person> personList = new ArrayList<>();
+
+        personList.add(new Person("bil gates", 120));
+        personList.add(new Person("zuck", 100));
+        personList.add(new Person("elon musk", 400));
+        personList.add(new Person("ali baba", 300));
+        personList.add(new Person("corn dog", 150));
+
+        *//**
+     * Without java stream()
+     *//*
+        List<Person> newBillioners = new ArrayList<>();
+        for (Person p : personList) {
+            if (p.billion > 100) {
+                newBillioners.add(p);
+            }
+        }
+        // newBillioners.forEach(person -> System.out.println(person.name));
+
+        *//**
+     * With java 8 Stream()
+     *//*
+        List<Person> newBillions = personList.stream()
+                .filter(person -> person.billion > 100)
+                .sorted(Comparator.comparing(person -> person.name))
+                .collect(Collectors.toList());
+
+        newBillions.forEach(person -> System.out.println(person.name));
+    }*/
+
+    /**
+     * java 8 Optional Practice
+     */
+    public static void javaOptionPractice() {
+        Optional<Object> optionalEmpty = Optional.empty();
+        /*System.out.println(optionalEmpty.isPresent());
+        System.out.println(optionalEmpty.isEmpty());*/
+
+        /**
+         *
+         * Optional Of() value tidak bisa Null  (NullPointerException)
+         */
+        Optional<String> optionalOf = Optional.of("Hello");
+       /* System.out.println(optionalOf.isPresent());
+        System.out.println(optionalOf.isEmpty());*/
+
+
+        /**
+         *
+         * Optional ofNullable() values bisa null
+         */
+        Optional<String> optionalOfNullAble = Optional.ofNullable(null);
+
+       /* System.out.println(optionalOfNullAble.isEmpty());
+        System.out.println(optionalOfNullAble.isPresent());*/
+
+        /**
+         *
+         * Default condition jika value dalam Container Object Optional null
+         */
+        String orElse = optionalOfNullAble.orElse("Your values is Null");
+        //System.out.println(orElse);
+
+        /**
+         *
+         * Transform value using map
+         */
+        String transformValuesMap = optionalOfNullAble
+                .map(String::toUpperCase)
+                .orElse("Your values is Null");
+
+
+        System.out.println(transformValuesMap);
+    }
+
+
+    public static int numJewelsInStones(String jewels, String stones) {
+        Map<Character, Integer> jewelMap = new HashMap<>();
+
+        char[] jewel = jewels.toCharArray();
+
+        for (char key : jewel) {
+            jewelMap.put(key, jewelMap.getOrDefault(key, 0) + 1);
+        }
+
+        int counter = 0;
+
+        for (int i = 0; i < stones.length(); i++) {
+            char stone = stones.charAt(i);
+            if (jewelMap.containsKey(stone)) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    /**
+     * leetcode , replace char in string
+     *
+     * @param address
+     * @return
+     */
+    public static String defangIPaddr(String address) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < address.length(); i++) {
+            char chars = address.charAt(i);
+            if (chars == '.') {
+                sb.append("[.]");
+            } else {
+                sb.append(chars);
+            }
+        }
+        return sb.toString();
+    }
+
+
+    public static void lambdaExpression() {
+        List<Integer> dataList = new ArrayList<>();
+        dataList.add(1);
+        dataList.add(3);
+        dataList.add(4);
+
+        dataList.forEach(values -> System.out.println(values));
+    }
+
+    /**
+     * leetcode Squares of a Sorted Array two pointer
+     * Second approach using two pointer
+     * Run Time O(1)
+     * Memory O(n)
+     *
+     * @param nums
+     * @return
+     */
+    public static int[] sortedSquares2(int[] nums) {
+
+        int[] result = new int[nums.length];
+        int pointer1 = 0;
+        int pointer2 = nums.length - 1;
+        int index = nums.length - 1;
+
+        while (pointer1 <= pointer2) {
+
+            int first = nums[pointer1] * nums[pointer1];
+            int sec = nums[pointer2] * nums[pointer2];
+
+            if (first >= sec) {
+                result[index] = first;
+                pointer1++;
+            } else {
+                result[index] = sec;
+                pointer2--;
+            }
+
+            index--;
+        }
+
+
+        for (int values : result) {
+            System.out.println(values);
+        }
+
+        return result;
+
+    }
+
+    /**
+     * leetcode Squares of a Sorted Array , two pointer
+     * My Approach no additional array
+     * Run Time O(1)
+     * Memory O(1)
+     *
+     * @param nums
+     * @return
+     */
+    public static int[] sortedSquares(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = nums[i] * nums[i];
+        }
+        Arrays.sort(nums);
+        return nums;
+    }
+
+
+    /**
+     * leetcode number of identical pairs using two pointers
+     * <p>
+     * Run Time O(n1)
+     * Memory space 0(1)
+     * int [] input = {1,2,3,1,1,3}
+     * int [] input = {1,1,1,1}
+     * int [] input = {1,2,3}
+     *
+     * @param nums
+     * @return
+     */
+    public static int numIdenticalPairs(int[] nums) {
+        int length = nums.length;
+        int counter = 0;
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < length; j++) {
+                if (nums[i] == nums[j]) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
+    }
+
+    /**
+     * leetcode number of identical pairs using HashMap
+     * <p>
+     * Run Time O(n2)
+     * Memory space 0(1)
+     * int [] input = {1,2,3,1,1,3}
+     * int [] input = {1,1,1,1}
+     * int [] input = {1,2,3}
+     *
+     * @param nums
+     * @return
+     */
+    public static int numIdenticalPairs3(int[] nums) {
+        int counter = 0;
+        Map<Integer, Integer> numsMap = new HashMap<>();
+        for (int key : nums) {
+            numsMap.put(key, numsMap.getOrDefault(key, 0) + 1);
+        }
+
+        for (int key : numsMap.keySet()) {
+            int values = numsMap.get(key);
+            if (values > 1) {
+                counter += values * (values - 1) / 2;
+            }
+        }
+
+        return counter;
+    }
+
+    /**
+     * leetcode number of identical pairs using Array
+     * <p>
+     * Run Time O(1)
+     * Memory space 0(1)
+     * int [] input = {1,2,3,1,1,3}
+     * int [] input = {1,1,1,1}
+     * int [] input = {1,2,3}
+     *
+     * @param nums
+     * @return
+     */
+    public static int numIdenticalPairs2(int[] nums) {
+
+        int result = 0;
+        int size = 0;
+
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+            size = Math.max(size, nums[i]);
+        }
+
+        int[] storage = new int[size + 1];
+
+        for (int i = 0; i < length; i++) {
+            result += storage[nums[i]]++;
+        }
+        return result;
+    }
+
+    /**
+     * LeetCode Find All Numbers Disappeared in an Array
+     * int [] input = {4,3,2,7,8,2,3,1};
+     * int [] input2 = {1,1};
+     * int [] input3 = {1,1,2,2};
+     * Linear Time
+     *
+     * @param nums
+     * @return
+     */
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+
+        List<Integer> resultList = new ArrayList<>();
+        HashSet<Integer> set = new HashSet<>();
+
+        Arrays.sort(nums);
+
+        //4,3,2,7,8,2,3,1
+        //1,2,2,3,3,4,,,7,8
+        int length = nums.length;
+
+        int counter = 1;
+        for (int values : nums) {
+            set.add(values);
+        }
+
+        for (int i = 0; i < length; i++) {
+            if (!set.contains(counter)) {
+                resultList.add(counter);
+            }
+            counter++;
+        }
+        return resultList;
+    }
+
+
+    /**
+     * LeetCode
+     * <p>
+     * int[] input = {4, 9, 5};
+     * int[] input2 = {9, 4, 9, 8, 4};
+     * int[] input3 = {1, 2, 2, 1};
+     * int[] input4 = {2, 2};
+     * int[] input5 = {3, 1, 2};
+     * int[] input6 = {1, 1};
+     * intersect(input3, input4);
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public static int[] intersect(int[] nums1, int[] nums2) {
+
+        Map<Integer, Integer> dataMap = new HashMap<>();
+        int lengthNums1 = nums1.length;
+        int lengthNums2 = nums2.length;
+        List<Integer> dataList = new ArrayList();
+
+
+        if (lengthNums1 > lengthNums2) {
+
+            for (int values : nums1) {
+                dataMap.put(values, dataMap.getOrDefault(values, 0) + 1);
+            }
+
+            for (int values : nums2) {
+                if (dataMap.containsKey(values) && dataMap.get(values) != 0) {
+                    dataList.add(values);
+                    dataMap.put(values, dataMap.get(values) - 1);
+                }
+            }
+        } else {
+            for (int values : nums2) {
+                dataMap.put(values, dataMap.getOrDefault(values, 0) + 1);
+            }
+            for (int values : nums1) {
+                if (dataMap.containsKey(values) && dataMap.get(values) != 0) {
+                    dataList.add(values);
+                    dataMap.put(values, dataMap.get(values) - 1);
+                }
+            }
+        }
+
+        int[] resultArr = new int[dataList.size()];
+        int index = 0;
+        for (int values : dataList) {
+            resultArr[index++] = values;
+        }
+
+        return resultArr;
+    }
+
+    /**
+     * Optimize Solution leetCode slowest keypress
+     * 0ms
+     * O(n)
+     *
+     * @param releasesTime
+     * @param keys
+     * @return
+     */
+    public static char slowestKey2(int[] releasesTime, String keys) {
+        int prev = 0;
+        char result = '\0';
+        int counter;
+        int max = 0;
+
+        for (int i = 0; i < releasesTime.length; i++) {
+            counter = releasesTime[i] - prev;
+
+            if (counter >= max) {
+                char expectedChar = keys.charAt(i);
+
+                if (counter > max || expectedChar > result) {
+                    result = expectedChar;
+                }
+                max = counter;
+            }
+            prev = releasesTime[i];
+        }
+        return result;
+    }
+
+    /**
+     * My approach ,leetcode slowest keypress
+     * int[] input = {9, 29, 49, 50};
+     * int[] input2 = {12, 23, 36, 46, 62};
+     * int[] input3 = {2, 4, 10, 16, 25, 26, 28, 33, 75};
+     * String str1 = "cbcd";
+     * String str2 = "spuda";
+     * String str3 = "duxwdgmgw";
+     * slowestKey(input3, str3);
+     *
+     * @param releaseTimes
+     * @param keysPressed
+     * @return
+     */
+    public static char slowestKey(int[] releaseTimes, String keysPressed) {
+        int length = releaseTimes.length;
+        int bigest = releaseTimes[0];
+        Map<Integer, Character> timesMap = new HashMap<>();
+        int index = 0;
+        boolean isDuplicate = false;
+        for (int i = 0; i < length; i++) {
+            if (i > 0) {
+                int count = releaseTimes[i] - releaseTimes[i - 1];
+                if (count > bigest) {
+                    bigest = count;
+                    index = i;
+                    isDuplicate = false;
+                } else if (count == bigest) {
+                    timesMap.put(i, keysPressed.charAt(i));
+                    timesMap.put(index, keysPressed.charAt(index));
+                    isDuplicate = true;
+                }
+            }
+        }
+
+        char result = 0;
+        if (isDuplicate) {
+            for (int key : timesMap.keySet()) {
+                char chars = timesMap.get(key);
+                if (chars > result) {
+                    result = chars;
+                }
+            }
+        } else {
+            result = keysPressed.charAt(index);
+        }
+        System.out.println(result);
+
+        return result;
+    }
+
+
+    public static int[] contigiousSubArray(int[] input) {
+        int length = input.length;
+        int maxValue = Integer.MIN_VALUE;
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < length; i++) {
+            int memo = 0;
+            for (int j = i; j < length; j++) {
+                memo += input[j];
+
+                if (memo > maxValue) {
+                    maxValue = memo;
+                    start = i;
+                    end = j;
+                }
+            }
+        }
+        int[] resultArray = Arrays.copyOfRange(input, start, end);
+        return resultArray;
+    }
+
+    public static boolean containsDuplicate() {
+        int[] input = {1, 2, 1};
+        HashSet<Integer> set = new HashSet();
+
+        for (int value : input) {
+            if (!set.add(value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 
     public static int majorityElement4(int[] nums) {
@@ -37,16 +1721,16 @@ public class Main {
 
     public static int majorityElements(int[] nums) {
 
-        Map<Integer,Integer> numbersMap = new HashMap();
+        Map<Integer, Integer> numbersMap = new HashMap();
 
-        for(int values : nums){
-            numbersMap.put(values,numbersMap.getOrDefault(values,0)+1);
+        for (int values : nums) {
+            numbersMap.put(values, numbersMap.getOrDefault(values, 0) + 1);
         }
 
-        int result=0;
+        int result = 0;
         int biggest = 0;
-        for(int values : numbersMap.keySet()){
-            if(numbersMap.get(values) > biggest){
+        for (int values : numbersMap.keySet()) {
+            if (numbersMap.get(values) > biggest) {
                 result = values;
                 biggest = numbersMap.get(values);
             }
@@ -627,23 +2311,6 @@ public class Main {
     }
 
 
-    public static boolean anagramImprove(String A, String B) {
-        if (A.length() != B.length()) {
-            return false;
-        }
-        char[] inputA = A.toLowerCase().toCharArray();
-        char[] inputB = B.toLowerCase().toCharArray();
-        Arrays.sort(inputA);
-        Arrays.sort(inputB);
-
-        for (int i = 0; i < inputA.length; i++) {
-            if (inputA[i] != inputB[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static boolean compareAnagram(String A, String B) {
 
         int[] alphabetA = new int[26];
@@ -1006,8 +2673,7 @@ public class Main {
             return 0;
         }
         int nums = sumRecursive(n - 1);
-        int sums = nums + 2;
-        return sums;
+        return nums + 2;
     }
 
     /**
@@ -2427,31 +4093,6 @@ public class Main {
     }
 
 
-    public static boolean validParentheses(String input) {
-        Stack<Character> stack = new Stack<>();
-        Map<Character, Character> mapping = new HashMap<>();
-        mapping.put('}', '{');
-        mapping.put(')', '(');
-        mapping.put(']', ']');
-
-        //{[[]{}]}()()
-
-        for (int i = 0; i < input.length(); i++) {
-            char toChar = input.charAt(i);
-
-            if (mapping.containsKey(toChar)) {
-                char topElement = stack.isEmpty() ? '#' : stack.pop();
-
-                if (topElement != mapping.get(toChar)) {
-                    return false;
-                }
-            } else {
-                stack.push(toChar);
-            }
-        }
-        return stack.isEmpty();
-    }
-
     /**
      * example reverseString using substring
      *
@@ -3726,41 +5367,6 @@ public class Main {
 
 
     /**
-     * Method to count deleted value to shape an annagram
-     * input :
-     * abcde
-     * dbsss
-     * hackerank
-     * https://www.hackerrank.com/challenges/making-anagrams/problem
-     *
-     * @param str1
-     * @param str2
-     * @return
-     */
-    public static int shapeAnnagram(String str1, String str2) {
-
-        int[] count1 = new int[26];
-        int[] count2 = new int[26];
-
-
-        for (int i = 0; i < str1.length(); i++) {
-            count1[str1.charAt(i) - 'a']++;
-        }
-
-        for (int j = 0; j < str2.length(); j++) {
-            count2[str2.charAt(j) - 'a']++;
-        }
-
-        int result = 0;
-        for (int k = 0; k < 26; k++) {
-            result += Math.abs(count1[k] - count2[k]);
-        }
-
-        return result;
-    }
-
-
-    /**
      * method to check annagram return true or false
      *
      * @param input1
@@ -4679,6 +6285,62 @@ public class Main {
         list.printList();
         list.insertSorted(four);
         list.printList();
+    }
+
+    //trave
+    public static int minimumGroups(List<Integer> predators) {
+        int max = 1;
+        int arrLen = predators.size();
+        for (int i = 0; i < predators.size(); i++) {
+            int a = i;
+            int counter = 1;
+            while (predators.get(a) > -1 && predators.get(a) < arrLen && counter < arrLen) {
+                a = predators.get(a);
+                counter++;
+            }
+
+            if (counter > max)
+                max = counter;
+        }
+        return max;
+    }
+
+    //trave
+    public static char slowestKey(List<List<Integer>> keyTimes) {
+        int max = keyTimes.get(0).get(1);
+        int key = keyTimes.get(0).get(0);
+        for (int i = 1; i < keyTimes.size(); i++) {
+            int currentComparation = keyTimes.get(i).get(1) - keyTimes.get(i - 1).get(1);
+            if (currentComparation > max) {
+                max = currentComparation;
+                key = keyTimes.get(i).get(0);
+            }
+        }
+        return (char) (97 + key);
+    }
+
+    //trave
+    public static int numberOfWaysForSum(int n, int k) {
+        int[][] a = new int[k + 1][n + 1];
+        for (int i = 1; i <= n; i++) {
+            a[1][i] = 1;
+
+        }
+        for (int i = 1; i <= k; i++) {
+            a[i][0] = 1;
+        }
+        for (int i = 2; i <= k; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (j >= i) {
+                    a[i][j] = a[i][j - i] + a[i - 1][j];
+
+                } else {
+                    a[i][j] = a[i - 1][j];
+                }
+
+            }
+        }
+        return a[k][n];
     }
 
 
